@@ -3,6 +3,9 @@
 Набор скриптов для моддинга LED HEARTS: извлечение ассетов, правка глав,
 замена фонов, кастомные звуки и демо-мод.
 
+> Все команды в этом файле запускаются **только из корня игры**
+> (`./LED HEARTS` — папка с `LED HEARTS.exe`).
+
 ## Установка
 
 ### Вариант 1: ZIP из Releases (без git)
@@ -35,8 +38,6 @@ python -m venv .venv
 ```
 
 ## Быстрый запуск
-
-Все команды ниже выполняются из корня игры (`./LED HEARTS`).
 
 1. Примените демонстрационный мод:
 
@@ -73,7 +74,7 @@ LED HEARTS_Data\resources.assets.bak
 Извлечь все ассеты всех типов:
 
 ```bat
-..\.venv\Scripts\python.exe extract_resources.py
+.venv\Scripts\python.exe modmaker\extract_resources.py
 ```
 
 Данные появятся в `modmaker\extracted`. Внутри будет отдельная папка для
@@ -103,15 +104,15 @@ LED HEARTS_Data\resources.assets.bak
 .venv\Scripts\python.exe modmaker\repack_resources.py --srcdir modmaker\extracted
 ```
 
-Скрипты сами находят корень игры на уровень выше, поэтому расположение
-`modmaker` в корне обязательно, а текущая рабочая папка не важна.
+Скрипты требуют, чтобы папка `modmaker` лежала в корне игры:
+пути вида `modmaker\...` и `LED HEARTS_Data\...` отсчитываются от него.
 
 ## Содержимое
 
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
-- `extract_resources.py` — извлечение TextAsset из `resources.assets`.
-- `repack_resources.py` — запись изменённых TextAsset обратно.
+- `extract_resources.py` — извлечение всех ассетов всех типов.
+- `repack_resources.py` — запись изменённых `TextAsset` обратно.
 - `read_chapter.py` — вывод главы в TXT/Markdown.
 - `mod_start_bg.png` — демонстрационный фон.
 - `mod_demo_jingle.wav` — кастомный звук, загружаемый игрой из корня.
