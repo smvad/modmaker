@@ -1,27 +1,48 @@
 # LED HEARTS Modmaker
 
-Эту папку можно целиком положить в корень игры, рядом с `LED HEARTS.exe`.
+Набор скриптов для моддинга LED HEARTS: извлечение ассетов, правка глав,
+замена фонов, кастомные звуки и демо-мод.
 
-## Быстрый запуск
+## Установка
 
-1. Установите зависимости один раз:
+### Вариант 1: ZIP из Releases (без git)
 
-   ```bat
-   ..\.venv\Scripts\python.exe -m pip install -r requirements.txt
-   ```
-
-   Если `.venv` ещё нет, выполните из корня игры:
+1. Скачайте `modmaker.zip` со страницы
+   [Releases](https://github.com/smvad/modmaker/releases).
+2. Распакуйте архив в корень игры (`./LED HEARTS`, рядом с `LED HEARTS.exe`),
+   чтобы появилась папка `modmaker/`.
+3. Установите зависимости один раз из корня игры:
 
    ```bat
    python -m venv .venv
    .venv\Scripts\python.exe -m pip install -r modmaker\requirements.txt
    ```
 
-2. Примените демонстрационный мод:
+### Вариант 2: git clone
+
+Выполните из корня игры (`./LED HEARTS`):
+
+```bat
+git clone https://github.com/smvad/modmaker.git modmaker
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r modmaker\requirements.txt
+```
+
+Если `.venv` уже создан, достаточно:
+
+```bat
+.venv\Scripts\python.exe -m pip install -r modmaker\requirements.txt
+```
+
+## Быстрый запуск
+
+Все команды ниже выполняются из корня игры (`./LED HEARTS`).
+
+1. Примените демонстрационный мод:
 
    ```bat
-   ..\.venv\Scripts\python.exe mod_demo_apply.py
-   ..\.venv\Scripts\python.exe mod_demo_node.py
+   .venv\Scripts\python.exe modmaker\mod_demo_apply.py
+   .venv\Scripts\python.exe modmaker\mod_demo_node.py
    ```
 
    Первый скрипт заменяет первый фон, добавляет `[MOD]` в первую реплику и
@@ -29,15 +50,16 @@
    демонстрационную цепочку узлов с выборами, переменными, спрайтами, фонами,
    музыкой, SFX, затемнением и кастомным WAV-звуком.
 
-3. Запустите игру обычным способом.
+2. Запустите игру обычным способом.
 
-Можно использовать `run_demo.bat` для применения обоих изменений одной командой.
+Можно использовать `modmaker\run_demo.bat` для применения обоих изменений
+одной командой.
 
 ## Откат
 
 ```bat
-..\.venv\Scripts\python.exe mod_demo_node.py --remove
-..\.venv\Scripts\python.exe mod_demo_apply.py --revert
+.venv\Scripts\python.exe modmaker\mod_demo_node.py --remove
+.venv\Scripts\python.exe modmaker\mod_demo_apply.py --revert
 ```
 
 Для полного возврата исходного файла можно восстановить:
@@ -66,19 +88,19 @@ LED HEARTS_Data\resources.assets.bak
 Сделать человекочитаемый текст главы:
 
 ```bat
-..\.venv\Scripts\python.exe read_chapter.py --input extracted\101_chapter_01.json --format md
+.venv\Scripts\python.exe modmaker\read_chapter.py --input modmaker\extracted\TextAsset\101_chapter_01.json --format md
 ```
 
 Проверить изменения без записи:
 
 ```bat
-..\.venv\Scripts\python.exe repack_resources.py --dry-run
+.venv\Scripts\python.exe modmaker\repack_resources.py --srcdir modmaker\extracted --dry-run
 ```
 
 Записать отредактированные JSON обратно:
 
 ```bat
-..\.venv\Scripts\python.exe repack_resources.py
+.venv\Scripts\python.exe modmaker\repack_resources.py --srcdir modmaker\extracted
 ```
 
 Скрипты сами находят корень игры на уровень выше, поэтому расположение
