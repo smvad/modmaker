@@ -48,13 +48,17 @@ LED HEARTS_Data\resources.assets.bak
 
 ## Извлечение и упаковка
 
-Извлечь все `TextAsset`:
+Извлечь все ассеты всех типов:
 
 ```bat
 ..\.venv\Scripts\python.exe extract_resources.py
 ```
 
-Данные появятся в `modmaker\extracted`.
+Данные появятся в `modmaker\extracted`. Внутри будет отдельная папка для
+каждого типа (`Texture2D`, `Sprite`, `AudioClip`, `TextAsset`, `GameObject`,
+`MonoBehaviour` и т.д.). Каждый объект сохраняется как `.raw` и `.json`;
+текстуры и спрайты дополнительно сохраняются в PNG. `index.json` содержит
+полную карту объектов, `summary.json` — количество объектов по типам.
 
 Сделать человекочитаемый текст главы:
 

@@ -123,6 +123,9 @@ def main() -> int:
     if not srcdir.exists():
         print(f"Не найдена папка: {srcdir}", file=sys.stderr)
         return 1
+    # Новый extract_resources.py раскладывает TextAsset в отдельную папку.
+    # Поддерживаем и старый плоский формат extracted/ для совместимости.
+    scan_dir = srcdir / "TextAsset" if (srcdir / "TextAsset").is_dir() else srcdir
 
     out = pathlib.Path(args.output) if args.output else inp
     if not out.is_absolute():
@@ -132,7 +135,7 @@ def main() -> int:
     # приоритет: сырые <path_id>_*.json/.txt/.bin над *.unity.json
     by_path_id: dict[int, pathlib.Path] = {}
     by_name: dict[str, pathlib.Path] = {}
-    for p in sorted(srcdir.iterdir()):
+    for p in sorted(scan_dir.iterdir()):
         if not p.is_file():
             continue
         if p.name in ("index.json", "objects_list.txt"):
@@ -150,7 +153,7 @@ def main() -> int:
             short = stem.split("-")[0].split("_resources")[0]
             by_name[short] = p
     # запасные unity.json только если нет сырого файла с тем же path_id
-    for p in sorted(srcdir.iterdir()):
+    for p in sorted(scan_dir.iterdir()):
         if not (p.is_file() and p.name.endswith(".unity.json")):
             continue
         m = PREFIX_RE.match(p.name)

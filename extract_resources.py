@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Извлечение данных (TextAsset) из Unity resources.assets (LED HEARTS).
+"""Извлечение всех объектов из Unity resources.assets (LED HEARTS).
 
 Использование:
     python extract_resources.py
@@ -9,15 +9,17 @@
 
 Что делает:
 - Загружает resources.assets через UnityPy.
-- Составляет index.json: path_id -> type / name / size.
-- Каждый TextAsset сохраняет в outdir как:
+- Составляет index.json для всех объектов: path_id -> type / name / files.
+- Создаёт отдельную папку для каждого Unity-типа.
+- Каждый объект сохраняет исходные байты (.raw) и JSON-метаданные (.json).
+- Texture2D и Sprite дополнительно сохраняются как изображения (.png).
+- Каждый TextAsset дополнительно сохраняет содержимое как:
     <path_id>_<m_Name>.bin  (если не текст)
     <path_id>_<m_Name>.json/.txt (если текст, расширение подбирается по содержимому)
   + дублирующий Unity-обёртка JSON: <path_id>_<m_Name>.unity.json  {"m_Name":..., "m_Script":...}
     (такой формат понимает repack_resources.py и старый read_chapter.py)
-- Остальные типы объектов не трогает, но перечисляет в objects_list.txt
-  (MonoBehaviour в Unity 6000 UnityPy часто не может распарсить — это нормально,
-   текстовые данные глав лежат именно в TextAsset и извлекаются корректно).
+- Даже если UnityPy не может декодировать объект, его исходные байты и запись
+  об ошибке сохраняются. Это важно для MonoBehaviour и AudioClip с внешними ресурсами.
 
 Требования:
     pip install UnityPy
@@ -47,6 +49,26 @@ def find_game_root(start: pathlib.Path) -> pathlib.Path:
         if (d / "LED HEARTS_Data" / "resources.assets").exists():
             return d
     return start
+
+
+def safe_name(name: str) -> str:
+    return "".join(c if (c.isalnum() or c in "-_.") else "_" for c in name) or "unnamed"
+
+
+def write_json(path: pathlib.Path, value) -> None:
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        json.dump(value, f, ensure_ascii=False, indent=2, default=repr)
+
+
+def object_name(obj, parsed=None) -> str:
+    if isinstance(parsed, dict):
+        value = parsed.get("m_Name")
+        if isinstance(value, str):
+            return value
+    try:
+        return obj.peek_name() or ""
+    except Exception:
+        return ""
 
 
 def main() -> int:
@@ -80,7 +102,7 @@ def main() -> int:
         print(f"Не найден файл: {inp}", file=sys.stderr)
         return 1
 
-    outdir = pathlib.Path(args.only if False else args.outdir)
+    outdir = pathlib.Path(args.outdir)
     if not outdir.is_absolute():
         outdir = base / outdir
     outdir.mkdir(parents=True, exist_ok=True)
@@ -93,80 +115,83 @@ def main() -> int:
     index = []
     objects_summary = []
     saved = 0
+    errors = 0
 
     for obj in env.objects:
         otype = obj.type.name
-        # Безопасно получить имя, не роняя весь дамп на битых MonoBehaviour (Unity 6000)
-        name = ""
+        type_dir = outdir / otype
+        type_dir.mkdir(parents=True, exist_ok=True)
+        parsed = None
+        error = None
         try:
-            if otype == "TextAsset":
-                d = obj.read()
-                name = d.m_Name
-            else:
-                # peek не всегда работает, поэтому пробуем аккуратно
-                try:
-                    name = obj.peek_name() or ""
-                except Exception:
-                    name = ""
+            parsed = obj.parse_as_dict(check_read=False)
         except Exception as e:
-            objects_summary.append(f"{obj.path_id}\t{otype}\t<read-error: {e}>")
-            index.append({"path_id": obj.path_id, "type": otype,
-                          "name": "", "error": f"read-error: {e}"})
-            continue
-
-        objects_summary.append(f"{obj.path_id}\t{otype}\t{name}")
-
-        if otype != "TextAsset":
-            continue
+            error = f"parse-error: {type(e).__name__}: {e}"
+        name = object_name(obj, parsed)
         if only and name not in only:
             continue
+        stem = f"{obj.path_id}_{safe_name(name)}"
+        entry = {"path_id": obj.path_id, "type": otype, "name": name,
+                 "files": [], "errors": []}
+        if error:
+            entry["errors"].append(error)
 
-        d = obj.read()
-        script = d.m_Script  # str или bytes
-        if isinstance(script, bytes):
-            raw = bytes(script)
+        try:
+            raw = obj.get_raw_data()
+            raw_path = type_dir / f"{stem}.raw"
+            raw_path.write_bytes(raw)
+            entry["files"].append(raw_path.relative_to(outdir).as_posix())
+            entry["raw_size"] = len(raw)
+        except Exception as e:
+            entry["errors"].append(f"raw-error: {type(e).__name__}: {e}")
+
+        if parsed is not None:
+            meta_path = type_dir / f"{stem}.json"
+            write_json(meta_path, parsed)
+            entry["files"].append(meta_path.relative_to(outdir).as_posix())
+
+        # Декодированные изображения полезнее одних Unity raw-байтов.
+        if otype in ("Texture2D", "Sprite"):
             try:
-                text = raw.decode("utf-8-sig")
-                is_text = True
-            except UnicodeDecodeError:
-                is_text = False
-                text = ""
-        else:
-            text = script
-            raw = script.encode("utf-8")
-            is_text = True
+                image = obj.read().image
+                image_path = type_dir / f"{stem}.png"
+                image.save(image_path)
+                entry["files"].append(image_path.relative_to(outdir).as_posix())
+                entry["image_size"] = list(image.size)
+            except Exception as e:
+                entry["errors"].append(f"image-error: {type(e).__name__}: {e}")
 
-        safe_name = "".join(c if (c.isalnum() or c in "-_.") else "_" for c in name) or "unnamed"
-        if is_text:
-            ext = guess_ext(name, text)
-            main_path = outdir / f"{obj.path_id}_{safe_name}{ext}"
-            # newline='' важен: иначе Windows превратит \r\n в \r\r\n и файл
-            # будет отличаться от оригинала (ложные "изменения" при repack)
-            with open(main_path, "w", encoding="utf-8", newline="") as f:
-                f.write(text)
-            # Unity-обёртка для совместимости со старым пайплайном
-            wrapper = {"m_Name": name, "m_Script": text}
-            with open(outdir / f"{obj.path_id}_{safe_name}.unity.json",
-                      "w", encoding="utf-8", newline="") as f:
-                f.write(json.dumps(wrapper, ensure_ascii=False, indent=2))
-            print(f"  [TextAsset] {obj.path_id} {name!r} -> {main_path.name} ({len(raw)} байт)")
-        else:
-            main_path = outdir / f"{obj.path_id}_{safe_name}.bin"
-            main_path.write_bytes(raw)
-            print(f"  [TextAsset:bin] {obj.path_id} {name!r} -> {main_path.name} ({len(raw)} байт)")
-
-        index.append({"path_id": obj.path_id, "type": otype, "name": name,
-                      "file": main_path.name, "size": len(raw)})
+        # Сохраняем читабельное содержимое TextAsset для существующего repack-пайплайна.
+        if otype == "TextAsset":
+            try:
+                d = obj.read()
+                script = d.m_Script
+                text = script.decode("utf-8-sig") if isinstance(script, bytes) else script
+                text_path = type_dir / f"{stem}{guess_ext(name, text)}"
+                with open(text_path, "w", encoding="utf-8", newline="") as f:
+                    f.write(text)
+                wrapper_path = type_dir / f"{stem}.unity.json"
+                write_json(wrapper_path, {"m_Name": name, "m_Script": text})
+                entry["files"].extend([
+                    text_path.relative_to(outdir).as_posix(),
+                    wrapper_path.relative_to(outdir).as_posix(),
+                ])
+            except Exception as e:
+                entry["errors"].append(f"text-error: {type(e).__name__}: {e}")
+        if entry["errors"]:
+            errors += len(entry["errors"])
+        index.append(entry)
+        objects_summary.append(f"{obj.path_id}\t{otype}\t{name}\t{'; '.join(entry['errors'])}")
         saved += 1
 
-    # полный список объектов тоже сохраняем (вдруг понадобятся path_id)
-    for extra in sorted(set(index[i]["path_id"] for i in range(len(index)) if "path_id" in index[i])):
-        pass
-    (outdir / "index.json").write_text(
-        json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json(outdir / "index.json", index)
     (outdir / "objects_list.txt").write_text("\n".join(objects_summary) + "\n", encoding="utf-8")
+    summary = {"input": str(inp), "objects": len(index), "errors": errors,
+               "types": {t: sum(1 for x in index if x["type"] == t)
+                         for t in sorted({x["type"] for x in index})}}
+    write_json(outdir / "summary.json", summary)
 
-    print(f"\nГотово: извлечено TextAsset: {saved}, всего объектов: {len(objects_summary)}")
+    print(f"\nГотово: извлечено объектов: {saved}, ошибок декодирования/чтения: {errors}")
     print(f"Папка: {outdir}")
     print("Карта: index.json, objects_list.txt")
     return 0
