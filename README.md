@@ -136,8 +136,8 @@ LED HEARTS_Data\resources.assets.bak
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
 - `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/WAV).
-- `make_test_mod.py` — пример: собирает `mod_test.zip` из ассетов в корне
-  игры и тестовой ветки `mod_test_*` (функция `build_test_story()`).
+- `mod_test.zip` — готовый тестовый мод (ветка `mod_test_*` в главе 1 + ассеты
+  Новы): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — извлечение всех ассетов всех типов.
 - `repack_resources.py` — запись изменённых `TextAsset` обратно.
 - `read_chapter.py` — вывод главы в TXT/Markdown.
