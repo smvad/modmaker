@@ -11,6 +11,8 @@ next to `LED HEARTS.exe`). Live game files are one level up.
 .\.venv\Scripts\python.exe modmaker\repack_resources.py --srcdir modmaker\extracted --dry-run
 .\.venv\Scripts\python.exe modmaker\mod_demo_apply.py [--revert]
 .\.venv\Scripts\python.exe modmaker\mod_demo_node.py [--remove]
+.\.venv\Scripts\python.exe modmaker\make_test_mod.py
+.\.venv\Scripts\python.exe modmaker\load_mod.py mymod.zip --dry-run
 ```
 
 - The venv lives in the **game root** (`.\.venv`), not in `modmaker/`.

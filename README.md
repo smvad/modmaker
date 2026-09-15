@@ -56,6 +56,27 @@ python -m venv .venv
 Можно использовать `modmaker\run_demo.bat` для применения обоих изменений
 одной командой.
 
+## Установка мода из ZIP
+
+Мод — это ZIP с JSON глав (`chapter_01.json`, `chapter_02.json` — чистый
+сценарий или Unity-обёртка `{"m_Name":..., "m_Script":...}`) и внешними
+ассетами (`dlc_*.png`, `dlc_*.wav`, подпапки внутри ZIP разрешены).
+Сначала проверка без записи, затем применение (из корня игры):
+
+```bat
+.venv\Scripts\python.exe modmaker\load_mod.py mymod.zip --dry-run
+.venv\Scripts\python.exe modmaker\load_mod.py mymod.zip
+```
+
+Скрипт проверяет JSON (уникальность `nodeId`, существование
+`startingNodeId`/`nextNodeId`/`targetNodeId`, с учётом команды
+`load_chapter:...`), предупреждает о ссылках на ассеты, которых нет ни
+в игре, ни в ZIP, ни в корне игры (пути вида `milly/pose_a/happy`
+считаются внутренними и не проверяются), отклоняет файлы без префикса
+`dlc_` и битые WAV/PNG, делает `resources.assets.bak` один раз и копирует
+`dlc_*` файлы в корень игры (рядом с `LED HEARTS.exe`), откуда их забирает
+внешний загрузчик игры.
+
 Подробно о ручном редактировании JSON и своих ассетах (PNG/WAV, куда кидать,
 форматы): [INSTRUCTIONS.md](INSTRUCTIONS.md).
 
@@ -114,6 +135,9 @@ LED HEARTS_Data\resources.assets.bak
 
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
+- `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/WAV).
+- `make_test_mod.py` — пример: собирает `mod_test.zip` из ассетов в корне
+  игры и тестовой ветки `mod_test_*` (функция `build_test_story()`).
 - `extract_resources.py` — извлечение всех ассетов всех типов.
 - `repack_resources.py` — запись изменённых `TextAsset` обратно.
 - `read_chapter.py` — вывод главы в TXT/Markdown.
