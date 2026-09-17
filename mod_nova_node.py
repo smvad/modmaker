@@ -15,6 +15,9 @@ BACKUP = GAME / "LED HEARTS_Data" / "resources.assets.pre_nova_nodes.bak"
 CHAPTER_ID = 101
 PREFIX = "mod_nova_"
 CUSTOM = ["dlc_nova_neutral.png", "dlc_nova_happy.png", "dlc_nova_test.wav"]
+# имя в корне игры -> запасной локальный файл (dlc_nova_test.wav побайтово
+# совпадает с mod_demo_jingle.wav, отдельный файл не храним)
+FALLBACK = {"dlc_nova_test.wav": "mod_demo_jingle.wav"}
 
 
 def src_of(name: str) -> pathlib.Path:
@@ -22,7 +25,13 @@ def src_of(name: str) -> pathlib.Path:
     cand = IMGDIR / name
     if cand.exists():
         return cand
-    return BASE / name
+    cand = BASE / name
+    if cand.exists():
+        return cand
+    fb = FALLBACK.get(name)
+    if fb:
+        return BASE / fb
+    return cand
 
 
 def line(name, text, text_en, **changes):
