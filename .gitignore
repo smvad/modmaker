@@ -1,6 +1,7 @@
 # Сгенерированные экстракты (могут весить сотни мегабайт с PNG)
 extracted/
 extracted_all_test/
+extracted_audio/
 _test_extract/
 
 # Кэш Python
@@ -12,3 +13,6 @@ __pycache__/
 
 # Бэкапы игровых ассетов (лежат рядом с игрой, не в репозитории)
 *.bak
+
+# Loose-копии больших Nova-PNG (источник — внутри mod_test.zip, в репо не нужны)
+dlc_nova_*.png

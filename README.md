@@ -116,6 +116,13 @@ LED HEARTS_Data\resources.assets.bak
 .venv\Scripts\python.exe modmaker\read_chapter.py --input modmaker\extracted\TextAsset\101_chapter_01.json --format md
 ```
 
+Извлечь весь звук игры в WAV (нужен `ffmpeg` в PATH, результат — в
+`modmaker\extracted_audio`, один клип `falling` требует `vgmstream-cli`):
+
+```bat
+.venv\Scripts\python.exe modmaker\extract_audio.py [--only classroom,crowd]
+```
+
 Проверить изменения без записи:
 
 ```bat
@@ -141,6 +148,7 @@ LED HEARTS_Data\resources.assets.bak
 - `extract_resources.py` — извлечение всех ассетов всех типов.
 - `repack_resources.py` — запись изменённых `TextAsset` обратно.
 - `read_chapter.py` — вывод главы в TXT/Markdown.
+- `extract_audio.py` — извлечение всех `AudioClip` (FSB5/Vorbis) в WAV.
 - `mod_start_bg.png` — демонстрационный фон.
 - `mod_demo_jingle.wav` — кастомный звук, загружаемый игрой из корня.
 - `requirements.txt` — зависимость `UnityPy`.
