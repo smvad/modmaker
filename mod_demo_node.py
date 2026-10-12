@@ -230,7 +230,12 @@ def main() -> int:
     new_bytes = env.file.save()
 
     env2 = UnityPy.load(new_bytes)
-    ch2 = json.loads(env2.file.objects[CHAPTER_PATH_ID].read().m_Script)
+    ch_obj2 = env2.file.objects.get(CHAPTER_PATH_ID)
+    if ch_obj2 is None:
+        print(f'Проверка не удалась: нет объекта {CHAPTER_PATH_ID} в пересборке',
+              file=sys.stderr)
+        return 1
+    ch2 = json.loads(ch_obj2.read().m_Script)
     demo_ids = [n['nodeId'] for n in ch2['nodes'] if n['nodeId'].startswith(PREFIX)]
     print(f'Проверка: старт={ch2["startingNodeId"]}, демо-узлы={demo_ids}')
 

@@ -185,23 +185,18 @@ def main() -> int:
     print(f"Кандидатов из папки: {len(by_path_id)}, TextAsset в файле: {len(current)}")
 
     changed = 0
+    # Карта path_id -> объект один раз: вместо линейного fallback-поиска
+    # по env.objects для каждого заменяемого файла.
+    obj_by_id = {o.path_id: o for o in env.objects}
     for path_id, src in sorted(by_path_id.items()):
         if path_id not in current:
             print(f"  ! {src.name}: path_id {path_id} нет в resources.assets — пропуск")
             continue
         kind, new_content = load_new_content(src)
-        obj = env.file.objects.get(path_id)
+        obj = env.file.objects.get(path_id) or obj_by_id.get(path_id)
         if obj is None:
-            # fallback: поиск перебором
-            found = None
-            for o in env.objects:
-                if o.path_id == path_id:
-                    found = o
-                    break
-            if found is None:
-                print(f"  ! path_id {path_id}: объект не найден — пропуск")
-                continue
-            obj = found
+            print(f"  ! path_id {path_id}: объект не найден — пропуск")
+            continue
         d = obj.read()
         old = d.m_Script
         old_raw = old if isinstance(old, bytes) else old.encode("utf-8")

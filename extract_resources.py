@@ -116,11 +116,23 @@ def main() -> int:
     objects_summary = []
     saved = 0
     errors = 0
+    made_dirs: set[str] = set()
 
     for obj in env.objects:
         otype = obj.type.name
+        # Ранний пропуск для --only по peek_name без тяжёлого парсинга.
+        # peek может вернуть "" или упасть — тогда идём по полному пути ниже.
+        if only:
+            try:
+                peek = obj.peek_name() or ""
+            except Exception:
+                peek = ""
+            if peek and peek not in only:
+                continue
+        if otype not in made_dirs:
+            (outdir / otype).mkdir(parents=True, exist_ok=True)
+            made_dirs.add(otype)
         type_dir = outdir / otype
-        type_dir.mkdir(parents=True, exist_ok=True)
         parsed = None
         error = None
         try:
@@ -186,9 +198,10 @@ def main() -> int:
 
     write_json(outdir / "index.json", index)
     (outdir / "objects_list.txt").write_text("\n".join(objects_summary) + "\n", encoding="utf-8")
+    from collections import Counter
+    type_counts = Counter(x["type"] for x in index)
     summary = {"input": str(inp), "objects": len(index), "errors": errors,
-               "types": {t: sum(1 for x in index if x["type"] == t)
-                         for t in sorted({x["type"] for x in index})}}
+               "types": {t: type_counts[t] for t in sorted(type_counts)}}
     write_json(outdir / "summary.json", summary)
 
     print(f"\nГотово: извлечено объектов: {saved}, ошибок декодирования/чтения: {errors}")

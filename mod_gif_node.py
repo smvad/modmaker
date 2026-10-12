@@ -149,7 +149,12 @@ def main() -> int:
     raw = env.file.save()
     # проверка чтением
     env2 = UnityPy.load(raw)
-    ch2 = json.loads(env2.file.objects[CHAPTER_ID].read().m_Script)
+    ch_obj2 = env2.file.objects.get(CHAPTER_ID)
+    if ch_obj2 is None:
+        print(f'Проверка не удалась: нет объекта {CHAPTER_ID} в пересборке',
+              file=sys.stderr)
+        return 1
+    ch2 = json.loads(ch_obj2.read().m_Script)
     ids = [n["nodeId"] for n in ch2["nodes"] if n["nodeId"].startswith(PREFIX)]
     print(f"Проверка: старт={ch2['startingNodeId']}, gif-узлы={ids}")
     tmp = ASSETS.with_suffix(".tmp")

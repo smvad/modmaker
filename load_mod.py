@@ -301,8 +301,14 @@ def main() -> int:
     textures: set[str] = set()
     sprites: set[str] = set()
     audios: set[str] = set()
+    # Читаем только нужные типы: GameObject/RectTransform/MonoBehaviour и др.
+    # (~80% объектов) имён для проверки ссылок не дают, а их парсинг —
+    # сотни заведомо падающих obj.read() (MonoBehaviour Unity 6000).
+    wanted = {"TextAsset", "Texture2D", "Sprite", "AudioClip"}
     for obj in env.objects:
         t = obj.type.name
+        if t not in wanted:
+            continue
         try:
             d = obj.read()
         except Exception:

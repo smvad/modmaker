@@ -61,8 +61,14 @@ def main() -> int:
 
     # --- 1. подмена текстуры фона ---
     tex_obj = env.file.objects.get(BG_PATH_ID)
+    if tex_obj is None:
+        print(f'Нет объекта фона path_id={BG_PATH_ID} — игра обновилась?', file=sys.stderr)
+        return 1
     tex = tex_obj.read()
-    assert tex.m_Name == 'room_night_wide', tex.m_Name
+    if tex.m_Name != 'room_night_wide':
+        print(f'Фон path_id={BG_PATH_ID} теперь {tex.m_Name!r}, а не room_night_wide — '
+              f'игра обновилась, подмена отменена', file=sys.stderr)
+        return 1
     img = Image.open(SRC_IMG).convert('RGB').resize((tex.m_Width, tex.m_Height))
     tex.image = img
     tex.save()
