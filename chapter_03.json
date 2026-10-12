@@ -1,0 +1,165 @@
+{
+  "chapterId": "chapter_03",
+  "chapterTitle": "Глава 3: Новая комната",
+  "chapterTitle_en": "Chapter 3: New Room",
+  "startingNodeId": "ch3_start",
+  "nodes": [
+    {
+      "nodeId": "ch3_start",
+      "editorX": 0,
+      "editorY": 0,
+      "nextNodeId": "",
+      "lines": [
+        {
+          "characterName": "",
+          "characterName_en": "",
+          "text": "Глава 3. Эта глава добавлена модом: TextAsset внутри resources.assets плюс встроенная текстура фона.",
+          "text_en": "Chapter 3. Added by a mod: TextAsset inside resources.assets plus an embedded background texture.",
+          "characterSprite": "",
+          "backgroundImage": "ch3_room",
+          "voiceClip": "",
+          "musicClip": "lonely_dev",
+          "sfxClip": "",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": []
+        },
+        {
+          "characterName": "",
+          "characterName_en": "",
+          "text": "*Стук в дверь* — встроенный звук не требуется, используем штатный.",
+          "text_en": "*Knock on the door* — stock sound, no embedded audio needed.",
+          "characterSprite": "",
+          "backgroundImage": "",
+          "voiceClip": "",
+          "musicClip": "",
+          "sfxClip": "door_knock:0.5",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": []
+        },
+        {
+          "characterName": "Милли",
+          "characterName_en": "Milly",
+          "text": "Тебе нравится новая комната? Выбирай, чем заняться.",
+          "text_en": "Do you like the new room? Choose what to do.",
+          "characterSprite": "milly/pose_a/happy",
+          "backgroundImage": "",
+          "voiceClip": "",
+          "musicClip": "",
+          "sfxClip": "",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": [
+            {
+              "choiceText": "Пойти в кафе",
+              "choiceText_en": "Go to the cafe",
+              "targetNodeId": "ch3_end_a",
+              "setVariable": "ch3_went_cafe",
+              "modifyValue": 1,
+              "requiredVariables": "",
+              "lockedText": "",
+              "lockedText_en": ""
+            },
+            {
+              "choiceText": "Остаться в комнате",
+              "choiceText_en": "Stay in the room",
+              "targetNodeId": "ch3_end_b",
+              "setVariable": "",
+              "modifyValue": 0,
+              "requiredVariables": "",
+              "lockedText": "",
+              "lockedText_en": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nodeId": "ch3_end_a",
+      "editorX": 300,
+      "editorY": -150,
+      "nextNodeId": "",
+      "lines": [
+        {
+          "characterName": "",
+          "characterName_en": "",
+          "text": "Кафе. Шум толпы по кругу — и тишина командой stop.",
+          "text_en": "The cafe. Looping crowd, then silence via stop.",
+          "characterSprite": "none",
+          "backgroundImage": "cafe",
+          "voiceClip": "",
+          "musicClip": "quiet_room",
+          "sfxClip": "",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": []
+        },
+        {
+          "characterName": "",
+          "characterName_en": "",
+          "text": "Ты выбрал кафе (видно только с переменной ch3_went_cafe). Конец главы 3.",
+          "text_en": "You picked the cafe (gated by ch3_went_cafe). End of chapter 3.",
+          "characterSprite": "",
+          "backgroundImage": "",
+          "voiceClip": "",
+          "musicClip": "",
+          "sfxClip": "crowd:0.6:loop",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "ch3_went_cafe",
+          "choices": []
+        },
+        {
+          "characterName": "Виолетта",
+          "characterName_en": "Violetta",
+          "text": "Шум выключен. Это конец тестовой главы.",
+          "text_en": "Noise off. This is the end of the test chapter.",
+          "characterSprite": "violet/pose_a/neutral",
+          "backgroundImage": "",
+          "voiceClip": "",
+          "musicClip": "",
+          "sfxClip": "stop",
+          "characterPosition": "left",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "nodeId": "ch3_end_b",
+      "editorX": 300,
+      "editorY": 150,
+      "nextNodeId": "",
+      "lines": [
+        {
+          "characterName": "",
+          "characterName_en": "",
+          "text": "Ты остался в новой комнате. Конец главы 3.",
+          "text_en": "You stayed in the new room. End of chapter 3.",
+          "characterSprite": "none",
+          "backgroundImage": "ch3_room",
+          "voiceClip": "",
+          "musicClip": "lonely_dev",
+          "sfxClip": "",
+          "characterPosition": "center",
+          "emotion": "",
+          "overlayAlpha": -1,
+          "requiredVariables": "",
+          "choices": []
+        }
+      ]
+    }
+  ]
+}

@@ -12,20 +12,11 @@
     python read_chapter.py --input chapter_01-resources.assets-61.json --output chapter_01-readable.txt
 """
 import argparse
-import json
 import pathlib
 import sys
 
-
-def load_chapter(input_path: pathlib.Path) -> dict:
-    raw_text = input_path.read_text(encoding="utf-8-sig")
-    outer = json.loads(raw_text)
-    # Обычный случай: Unity-экспорт, сценарий лежит строкой в m_Script
-    if isinstance(outer, dict) and "m_Script" in outer:
-        inner = json.loads(outer["m_Script"])
-        return inner
-    # Уже распакованный сценарий напрямую
-    return outer
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import load_scenario as load_chapter
 
 
 def pick(a_ru: str, a_en: str, lang: str) -> str:

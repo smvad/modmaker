@@ -36,6 +36,10 @@ import tempfile
 import wave
 
 BASE = pathlib.Path(__file__).resolve().parent
+
+sys.path.insert(0, str(BASE))
+from common import find_game_root, safe_name
+
 GAME = BASE
 if not (GAME / "LED HEARTS_Data" / "resources.assets").exists():
     GAME = BASE.parent
@@ -60,10 +64,6 @@ def ensure_vorbis_libs() -> None:
     fsb5.utils.load_lib = _load
 
 
-def safe_name(name: str) -> str:
-    return "".join(c if (c.isalnum() or c in "-_.") else "_" for c in name) or "unnamed"
-
-
 def decode_via_vgmstream(blob: bytes, wav_path: pathlib.Path) -> bool:
     """Фолбэк для клипов, чьи кодовые книги fsb5 не знает. True если вышло."""
     exe = shutil.which("vgmstream-cli") or shutil.which("vgmstream-cli.exe")
@@ -79,14 +79,6 @@ def decode_via_vgmstream(blob: bytes, wav_path: pathlib.Path) -> bool:
         fsb.write_bytes(blob)
         r = subprocess.run([exe, "-o", str(wav_path), str(fsb)], capture_output=True)
         return r.returncode == 0 and wav_path.exists()
-
-
-def find_game_root(start: pathlib.Path) -> pathlib.Path:
-    for d in (start, start.parent, pathlib.Path.cwd(),
-              pathlib.Path.cwd().parent):
-        if (d / "LED HEARTS_Data" / "resources.assets").exists():
-            return d
-    return start
 
 
 def main() -> int:

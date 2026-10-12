@@ -25,9 +25,11 @@
     pip install UnityPy
 """
 import argparse
-import json
 import pathlib
 import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import find_game_root, safe_name, write_json
 
 
 def guess_ext(name: str, text: str) -> str:
@@ -37,27 +39,6 @@ def guess_ext(name: str, text: str) -> str:
     if name.endswith(".json"):
         return ".json"
     return ".txt"
-
-
-def find_game_root(start: pathlib.Path) -> pathlib.Path:
-    """Корень игры = папка с LED HEARTS_Data/resources.assets.
-
-    Скрипт может лежать в корне игры или в подпапке (напр. modmaker/).
-    """
-    for d in (start, start.parent, pathlib.Path.cwd(),
-              pathlib.Path.cwd().parent):
-        if (d / "LED HEARTS_Data" / "resources.assets").exists():
-            return d
-    return start
-
-
-def safe_name(name: str) -> str:
-    return "".join(c if (c.isalnum() or c in "-_.") else "_" for c in name) or "unnamed"
-
-
-def write_json(path: pathlib.Path, value) -> None:
-    with open(path, "w", encoding="utf-8", newline="") as f:
-        json.dump(value, f, ensure_ascii=False, indent=2, default=repr)
 
 
 def object_name(obj, parsed=None) -> str:

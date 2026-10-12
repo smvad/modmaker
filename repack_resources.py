@@ -30,8 +30,10 @@ import argparse
 import json
 import pathlib
 import re
-import shutil
 import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import atomic_write, backup_once, find_game_root
 
 # path_id_name.ext -> (path_id, rest)
 PREFIX_RE = re.compile(r"^(\d+)_.*")
@@ -62,18 +64,6 @@ def load_new_content(path: pathlib.Path):
     except Exception:
         pass
     return "text", text
-
-
-def find_game_root(start: pathlib.Path) -> pathlib.Path:
-    """Корень игры = папка с LED HEARTS_Data/resources.assets.
-
-    Скрипт может лежать в корне игры или в подпапке (напр. modmaker/).
-    """
-    for d in (start, start.parent, pathlib.Path.cwd(),
-              pathlib.Path.cwd().parent):
-        if (d / "LED HEARTS_Data" / "resources.assets").exists():
-            return d
-    return start
 
 
 def main() -> int:
@@ -228,18 +218,11 @@ def main() -> int:
     except OSError:
         same_file = False
     if not args.no_backup and same_file:
-        bak = inp.with_name(inp.name + ".bak")
-        if not bak.exists():
-            shutil.copy2(inp, bak)
-            print(f"Бэкап: {bak}")
-        else:
-            print(f"Бэкап уже есть: {bak} (новый не создаю)")
+        backup_once(inp)
 
     env.file.mark_changed()
     new_bytes = env.file.save()
     out.parent.mkdir(parents=True, exist_ok=True)
-    tmp = out.with_name(out.name + ".tmp")
-    tmp.write_bytes(new_bytes)
 
     # проверка: переоткрыть (из памяти, чтобы не держать lock на tmp в Windows)
     try:
@@ -247,11 +230,10 @@ def main() -> int:
         n = sum(1 for o in env2.objects if o.type.name == "TextAsset")
         print(f"Проверка: пересобранный файл читается, TextAsset: {n}")
     except Exception as e:
-        tmp.unlink(missing_ok=True)
         print(f"ОШИБКА: пересобранный файл не читается: {e}", file=sys.stderr)
         return 1
 
-    shutil.move(str(tmp), str(out))
+    atomic_write(out, new_bytes)
     print(f"\nГотово: заменено TextAsset: {changed}")
     print(f"Записано: {out} ({len(new_bytes)} байт)")
     return 0

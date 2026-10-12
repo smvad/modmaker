@@ -93,6 +93,7 @@ python -m venv .venv
 
 ```text
 LED HEARTS_Data\resources.assets.bak
+LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapter.py)
 ```
 
 ## Извлечение и упаковка
@@ -145,6 +146,13 @@ LED HEARTS_Data\resources.assets.bak
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
 - `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/WAV).
+- `add_texture.py` — вставить PNG внутрь `resources.assets` (пара Texture2D+Sprite
+  + записи в контейнере; аудио не вставляет — только `dlc_*.wav`).
+- `add_chapter.py` — вставить новую главу-TextAsset + запись в контейнере +
+  связка `load_chapter` из старой главы.
+- `chapter_03.json` — тестовый сценарий главы 3 (фон `ch3_room`, выбор, переменная).
+- `write_save.py` — сейв в слот + точка Продолжить перед главой 3
+  (PlayerPrefs в `HKCU\Software\fugas_kitsune\LED HEARTS`, бэкап `led_saves_backup.reg`).
 - `mod_test.zip` — готовый тестовый мод (ветка `mod_test_*` в главе 1 + ассеты
   Новы): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — извлечение всех ассетов всех типов.

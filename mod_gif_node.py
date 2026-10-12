@@ -29,9 +29,11 @@ import shutil
 import sys
 
 BASE = pathlib.Path(__file__).resolve().parent
-GAME = BASE
-if not (GAME / "LED HEARTS_Data" / "resources.assets").exists():
-    GAME = BASE.parent
+
+sys.path.insert(0, str(BASE))
+from common import atomic_write, find_game_root, require_unitypy
+
+GAME = find_game_root(BASE)
 IMGDIR = BASE / "images"
 ASSETS = GAME / "LED HEARTS_Data" / "resources.assets"
 BACKUP = GAME / "LED HEARTS_Data" / "resources.assets.pre_gif_nodes.bak"
@@ -114,7 +116,7 @@ def nodes():
 
 
 def main() -> int:
-    import UnityPy
+    UnityPy = require_unitypy()
 
     remove = "--remove" in sys.argv
     if not remove:
@@ -157,9 +159,7 @@ def main() -> int:
     ch2 = json.loads(ch_obj2.read().m_Script)
     ids = [n["nodeId"] for n in ch2["nodes"] if n["nodeId"].startswith(PREFIX)]
     print(f"Проверка: старт={ch2['startingNodeId']}, gif-узлы={ids}")
-    tmp = ASSETS.with_suffix(".tmp")
-    tmp.write_bytes(raw)
-    shutil.move(str(tmp), str(ASSETS))
+    atomic_write(ASSETS, raw)
     print("Записано:", ASSETS)
     if not remove:
         print("Запусти LED HEARTS.exe и смотри Player.log: "

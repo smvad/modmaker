@@ -88,10 +88,11 @@ formats): [INSTRUCTIONS_EN.md](INSTRUCTIONS_EN.md).
 .venv\Scripts\python.exe modmaker\mod_demo_apply.py --revert
 ```
 
-To fully restore the original file you can recover:
+To fully restore the original files you can recover:
 
 ```text
 LED HEARTS_Data\resources.assets.bak
+LED HEARTS_Data\globalgamemanagers.bak   (after add_texture.py / add_chapter.py)
 ```
 
 ## Extraction and repacking
@@ -144,6 +145,14 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `mod_demo_apply.py` — first-background replacement and a simple text marker.
 - `mod_demo_node.py` — demo node chain insertion.
 - `load_mod.py` — mod installation from ZIP (chapter JSON + `dlc_*` PNG/WAV).
+- `add_texture.py` — embed a PNG inside `resources.assets` (Texture2D+Sprite pair
+  plus container entries; no audio — custom sounds stay external `dlc_*.wav`).
+- `add_chapter.py` — insert a new chapter TextAsset plus container entry plus
+  a `load_chapter` link from an old chapter.
+- `chapter_03.json` — test chapter-3 scenario (embedded `ch3_room` background,
+  choice, variable).
+- `write_save.py` — write a slot save + Continue point before chapter 3
+  (PlayerPrefs in `HKCU\Software\fugas_kitsune\LED HEARTS`, backs up to `led_saves_backup.reg`).
 - `mod_test.zip` — a ready test mod (`mod_test_*` branch in chapter 1 + Nova
   assets): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — extraction of all assets of all types.

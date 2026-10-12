@@ -29,9 +29,11 @@ import sys
 import pathlib
 
 BASE = pathlib.Path(__file__).resolve().parent
-GAME = BASE
-if not (GAME / 'LED HEARTS_Data' / 'resources.assets').exists():
-    GAME = BASE.parent
+
+sys.path.insert(0, str(BASE))
+from common import atomic_write, find_game_root, require_unitypy
+
+GAME = find_game_root(BASE)
 ASSETS = GAME / 'LED HEARTS_Data' / 'resources.assets'
 BAK = GAME / 'LED HEARTS_Data' / 'resources.assets.pre_demo_nodes.bak'
 CHAPTER_PATH_ID = 101
@@ -183,7 +185,7 @@ def build_demo():
 
 
 def main() -> int:
-    import UnityPy
+    UnityPy = require_unitypy()
 
     remove = '--remove' in sys.argv
 
@@ -239,9 +241,7 @@ def main() -> int:
     demo_ids = [n['nodeId'] for n in ch2['nodes'] if n['nodeId'].startswith(PREFIX)]
     print(f'Проверка: старт={ch2["startingNodeId"]}, демо-узлы={demo_ids}')
 
-    tmp = ASSETS.with_name(ASSETS.name + '.tmp')
-    tmp.write_bytes(new_bytes)
-    shutil.move(str(tmp), str(ASSETS))
+    atomic_write(ASSETS, new_bytes)
     print('Записано:', ASSETS)
     return 0
 

@@ -8,7 +8,11 @@ import shutil
 import sys
 
 BASE = pathlib.Path(__file__).resolve().parent
-GAME = BASE.parent
+
+sys.path.insert(0, str(BASE))
+from common import atomic_write, find_game_root, require_unitypy
+
+GAME = find_game_root(BASE)
 IMGDIR = BASE / "images"
 ASSETS = GAME / "LED HEARTS_Data" / "resources.assets"
 BACKUP = GAME / "LED HEARTS_Data" / "resources.assets.pre_nova_nodes.bak"
@@ -117,7 +121,7 @@ def nodes():
 
 
 def main() -> int:
-    import UnityPy
+    UnityPy = require_unitypy()
 
     remove = "--remove" in sys.argv
     if not remove:
@@ -147,9 +151,17 @@ def main() -> int:
     asset.save()
     env.file.mark_changed()
     raw = env.file.save()
-    tmp = ASSETS.with_suffix(".tmp")
-    tmp.write_bytes(raw)
-    shutil.move(str(tmp), str(ASSETS))
+    # проверка чтением (как в mod_gif_node)
+    env2 = UnityPy.load(raw)
+    ch_obj2 = env2.file.objects.get(CHAPTER_ID)
+    if ch_obj2 is None:
+        print(f'Проверка не удалась: нет объекта {CHAPTER_ID} в пересборке',
+              file=sys.stderr)
+        return 1
+    ch2 = json.loads(ch_obj2.read().m_Script)
+    ids = [n["nodeId"] for n in ch2["nodes"] if n["nodeId"].startswith(PREFIX)]
+    print(f"Проверка: старт={ch2['startingNodeId']}, nova-узлы={ids}")
+    atomic_write(ASSETS, raw)
     print("Установлено:" if not remove else "Удалено:",
           "старт=" + (PREFIX + "start" if not remove else "start"))
     return 0

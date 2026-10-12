@@ -18,13 +18,13 @@ import sys
 import pathlib
 
 BASE = pathlib.Path(__file__).resolve().parent
-GAME = BASE
-if not (GAME / 'LED HEARTS_Data' / 'resources.assets').exists():
-    GAME = BASE.parent
+
+sys.path.insert(0, str(BASE))
+from common import atomic_write, backup_once, find_game_root, require_unitypy
+
+GAME = find_game_root(BASE)
 ASSETS = GAME / 'LED HEARTS_Data' / 'resources.assets'
-BAK = BASE / 'LED HEARTS_Data' / 'resources.assets.bak'
-if not BAK.parent.exists():
-    BAK = GAME / 'LED HEARTS_Data' / 'resources.assets.bak'
+BAK = GAME / 'LED HEARTS_Data' / 'resources.assets.bak'
 SRC_IMG = BASE / 'mod_start_bg.png'
 if not SRC_IMG.exists():
     SRC_IMG = GAME / 'mod_start_bg.png'
@@ -34,7 +34,7 @@ CHAPTER_PATH_ID = 101    # chapter_01
 
 
 def main() -> int:
-    import UnityPy
+    UnityPy = require_unitypy()
     from PIL import Image
 
     revert = '--revert' in sys.argv
@@ -51,11 +51,7 @@ def main() -> int:
         print('Нет картинки:', SRC_IMG)
         return 1
 
-    if not BAK.exists():
-        shutil.copy2(ASSETS, BAK)
-        print('Бэкап оригинала:', BAK)
-    else:
-        print('Бэкап уже есть, оригинал не трогаю:', BAK)
+    backup_once(ASSETS)
 
     env = UnityPy.load(str(ASSETS))
 
@@ -97,9 +93,7 @@ def main() -> int:
     ok_ch = any(o.type.name == 'TextAsset' for o in env2.objects)
     print(f'Проверка пересборки: Texture2D={ok_tex}, TextAsset={ok_ch}, размер={len(new_bytes)}')
 
-    tmp = ASSETS.with_name(ASSETS.name + '.tmp')
-    tmp.write_bytes(new_bytes)
-    shutil.move(str(tmp), str(ASSETS))
+    atomic_write(ASSETS, new_bytes)
     print('Записано:', ASSETS)
     return 0
 

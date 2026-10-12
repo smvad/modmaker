@@ -14,6 +14,9 @@ next to `LED HEARTS.exe`). Live game files are one level up.
 .\.venv\Scripts\python.exe modmaker\mod_demo_node.py [--remove]
 .\.venv\Scripts\python.exe modmaker\load_mod.py mymod.zip --dry-run
 .\.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip --dry-run
+.\.venv\Scripts\python.exe modmaker\add_texture.py --png modmaker\mod_start_bg.png --name ch3_room --dry-run
+.\.venv\Scripts\python.exe modmaker\add_chapter.py --dry-run
+.\.venv\Scripts\python.exe modmaker\write_save.py --slot 0 --dry-run
 ```
 
 - The venv lives in the **game root** (`.\.venv`), not in `modmaker/`.
@@ -28,6 +31,15 @@ next to `LED HEARTS.exe`). Live game files are one level up.
 
 ## UnityPy gotchas (verified, do not "fix")
 
+- `env.objects` is a **list**, `env.file.objects` is a **dict** keyed by path_id.
+  New objects: `copy.copy(donor_reader)` + new `path_id` + `save()`/`save_typetree()`,
+  insert into `env.file.objects`, `mark_changed()`, `save()`. Verified for
+  TextAsset/Sprite; Texture2D via `.image=` writes inline and zeroes `m_StreamData`.
+- `Resources.Load` resolves ONLY through `ResourceManager.m_Container` in the
+  `globalgamemanagers` file (path `dialoguedata/chapter_03`, `backgrounds/<name>`
+  twice: Texture2D + Sprite, all lowercase, `m_FileID: 4` = resources.assets).
+  A new object without a container entry is invisible to the game.
+  Chapters chain via `nextNodeId: "load_chapter:<id>:<node>"`.
 - `env.file.objects.get(path_id)` — `env.file.get(int)` is `File.getattr` and crashes.
 - Untouched objects round-trip byte-for-byte (`data is None` → raw copy).
   Only call `.save()` on objects you actually changed; never "repair" the rest.
@@ -73,6 +85,10 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
 - Do not commit: `extracted/`, `__pycache__/`, `*.tmp`, `*.bak` (gitignored).
 - `read_chapter.py --input` must be passed explicitly (its default filename
   is a stale artifact).
+- Shared helpers live in `common.py` (`find_game_root`, `backup_once`,
+  `atomic_write`, chapter validation via `validate_chapter`/`collect_refs`).
+  New scripts must reuse them instead of duplicating; run scripts only from
+  the game root so `import common` resolves.
 - Release flow: zip must contain top-level `modmaker/` dir; to replace a
   release: `gh release delete <tag> --yes --cleanup-tag`, rebuild zip,
   `gh release create <tag> <zip>`.

@@ -42,6 +42,20 @@ import wave
 import zipfile
 
 BASE = pathlib.Path(__file__).resolve().parent
+
+sys.path.insert(0, str(BASE))
+from common import (
+    AUDIO_FIELDS,
+    IMAGE_FIELDS,
+    SKIP_REFS,
+    atomic_write,
+    backup_once,
+    clip_base,
+    collect_refs,
+    find_game_root,
+    validate_chapter,
+)
+
 GAME = BASE
 if not (GAME / "LED HEARTS_Data" / "resources.assets").exists():
     GAME = BASE.parent
@@ -50,20 +64,6 @@ CHAPTER_RE = re.compile(r"^(\d+)_.*")
 IMAGE_EXTS = {".png", ".jpg", ".jpeg"}
 AUDIO_EXTS = {".wav"}
 JSON_EXTS = {".json"}
-# значения, которые не являются именами ассетов
-SKIP_REFS = {"", "none", "stop"}
-
-# поля строк, где лежат ссылки на ассеты
-IMAGE_FIELDS = ("backgroundImage", "characterSprite")
-AUDIO_FIELDS = ("musicClip", "sfxClip", "voiceClip")
-
-
-def find_game_root(start: pathlib.Path) -> pathlib.Path:
-    for d in (start, start.parent, pathlib.Path.cwd(),
-              pathlib.Path.cwd().parent):
-        if (d / "LED HEARTS_Data" / "resources.assets").exists():
-            return d
-    return start
 
 
 def chapter_key_from_filename(name: str) -> str:
@@ -99,68 +99,6 @@ def parse_chapter_file(text: str, fname: str) -> tuple[str, dict, str]:
         target = str(outer.get("chapterId") or chapter_key_from_filename(fname))
         return target, outer, "raw"
     raise ValueError(f"{fname}: нет ни m_Script, ни chapterId/nodes")
-
-
-def validate_chapter(scenario: dict) -> list[str]:
-    """Список проблем (ошибки и предупреждения одной строкой)."""
-    problems: list[str] = []
-    if not isinstance(scenario.get("nodes"), list) or not scenario["nodes"]:
-        return ["нет массива nodes"]
-    nodes = scenario["nodes"]
-    ids = [n.get("nodeId", "") for n in nodes]
-    if len(set(ids)) != len(ids):
-        problems.append("дублирующиеся nodeId")
-    start = scenario.get("startingNodeId", "")
-    if start not in set(ids):
-        problems.append(f"startingNodeId {start!r} нет среди узлов")
-    known = set(ids)
-
-    def is_special_target(tgt: str) -> bool:
-        # load_chapter:chapter_02:node — команда перехода между главами, не узел
-        return tgt.startswith("load_chapter:")
-
-    for n in nodes:
-        nxt = n.get("nextNodeId", "")
-        if nxt and nxt not in known and not is_special_target(nxt):
-            problems.append(f"узел {n.get('nodeId')}: nextNodeId {nxt!r} никуда не ведёт")
-        for i, line in enumerate(n.get("lines", []) or []):
-            for c in line.get("choices", []) or []:
-                tgt = c.get("targetNodeId", "")
-                if tgt and tgt not in known and not is_special_target(tgt):
-                    problems.append(
-                        f"узел {n.get('nodeId')} строка {i + 1}: "
-                        f"targetNodeId {tgt!r} никуда не ведёт"
-                    )
-    return problems
-
-
-def clip_base(value: object) -> str:
-    """'crowd:0.6:loop' -> 'crowd'; 'stop'/'none'/'' -> ''."""
-    if not isinstance(value, str):
-        return ""
-    base = value.split(":")[0].strip()
-    if base in SKIP_REFS:
-        return ""
-    return base
-
-
-def collect_refs(scenario: dict) -> tuple[set[str], set[str]]:
-    """Вернуть (image_refs, audio_refs) — имена ассетов без пустых/none/stop."""
-    images: set[str] = set()
-    audios: set[str] = set()
-    for n in scenario.get("nodes", []) or []:
-        for line in n.get("lines", []) or []:
-            if not isinstance(line, dict):
-                continue
-            for f in IMAGE_FIELDS:
-                v = line.get(f, "")
-                if isinstance(v, str) and v and v not in SKIP_REFS:
-                    images.add(v)
-            for f in AUDIO_FIELDS:
-                v = clip_base(line.get(f, ""))
-                if v:
-                    audios.add(v)
-    return images, audios
 
 
 def check_wav(path: pathlib.Path) -> str:
@@ -406,12 +344,7 @@ def main() -> int:
 
     if changed:
         if not args.no_backup:
-            bak = inp.with_name(inp.name + ".bak")
-            if not bak.exists():
-                shutil.copy2(inp, bak)
-                print(f"Бэкап: {bak}")
-            else:
-                print(f"Бэкап уже есть: {bak} (новый не создаю)")
+            backup_once(inp)
         env.file.mark_changed()
         new_bytes = env.file.save()
         try:
@@ -422,9 +355,7 @@ def main() -> int:
             print(f"ОШИБКА: пересобранный файл не читается: {e}", file=sys.stderr)
             shutil.rmtree(tmpdir, ignore_errors=True)
             return 1
-        tmp = inp.with_name(inp.name + ".tmp")
-        tmp.write_bytes(new_bytes)
-        shutil.move(str(tmp), str(inp))
+        atomic_write(inp, new_bytes)
         print(f"Глав заменено: {changed}. Записано: {inp} ({len(new_bytes)} байт)")
     else:
         print("Главы без изменений — resources.assets не трогаю.")
