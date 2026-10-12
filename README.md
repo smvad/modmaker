@@ -1,5 +1,7 @@
 # LED HEARTS Modmaker
 
+> **Язык:** Русский | [English version](README_EN.md)
+
 Набор скриптов для моддинга LED HEARTS: извлечение ассетов, правка глав,
 замена фонов, кастомные звуки и демо-мод.
 
@@ -153,7 +155,7 @@ LED HEARTS_Data\resources.assets.bak
 - `mod_demo_jingle.wav` — кастомный звук, загружаемый игрой из корня.
 - `requirements.txt` — зависимость `UnityPy`.
 - `run_demo.bat` — применить оба демо-мода.
-- `INSTRUCTIONS.md` — ручное редактирование глав и свои ассеты.
+- `INSTRUCTIONS.md` / `INSTRUCTIONS_EN.md` — ручное редактирование глав и свои ассеты (RU/EN).
 
 При применении `mod_demo_node.py` кастомный WAV автоматически копируется из
 `modmaker` в корень игры: внешний загрузчик игры ищет его именно там.
