@@ -152,7 +152,7 @@
           "backgroundImage": "ch3_room",
           "voiceClip": "",
           "musicClip": "lonely_dev",
-          "sfxClip": "",
+          "sfxClip": "ch3_chime:0.9",
           "characterPosition": "center",
           "emotion": "",
           "overlayAlpha": -1,

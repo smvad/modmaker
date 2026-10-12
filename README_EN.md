@@ -145,14 +145,6 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `mod_demo_apply.py` — first-background replacement and a simple text marker.
 - `mod_demo_node.py` — demo node chain insertion.
 - `load_mod.py` — mod installation from ZIP (chapter JSON + `dlc_*` PNG/WAV).
-- `add_texture.py` — embed a PNG inside `resources.assets` (Texture2D+Sprite pair
-  plus container entries; no audio — custom sounds stay external `dlc_*.wav`).
-- `add_chapter.py` — insert a new chapter TextAsset plus container entry plus
-  a `load_chapter` link from an old chapter.
-- `chapter_03.json` — test chapter-3 scenario (embedded `ch3_room` background,
-  choice, variable).
-- `write_save.py` — write a slot save + Continue point before chapter 3
-  (PlayerPrefs in `HKCU\Software\fugas_kitsune\LED HEARTS`, backs up to `led_saves_backup.reg`).
 - `mod_test.zip` — a ready test mod (`mod_test_*` branch in chapter 1 + Nova
   assets): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — extraction of all assets of all types.
@@ -164,6 +156,25 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `requirements.txt` — the `UnityPy` dependency.
 - `run_demo.bat` — apply both demo mods.
 - `INSTRUCTIONS_EN.md` / `INSTRUCTIONS.md` — manual chapter editing and custom assets (EN/RU).
+
+## Experimental (test scripts, bugs possible)
+
+Manually verified on build 6000.3.11f1 (embedded background/chapter/sound
+play in-game), but test coverage is partial. The scripts back up to `.bak`
+(and `led_saves_backup.reg` for saves) before writing — keep those until
+verified in-game. Report bugs via repo issues.
+
+- `add_texture.py` — embed a PNG inside `resources.assets` (Texture2D+Sprite
+  pair plus container entries).
+- `add_chapter.py` — insert a new chapter TextAsset plus container entry plus
+  a `load_chapter` link from an old chapter.
+- `chapter_03.json` — test chapter-3 scenario (embedded `ch3_room` background
+  and `ch3_chime` sound, choice, variable).
+- `fsb5pcm.py` — WAV PCM16 → FSB5/PCM16 encoder for the `resources.resource` bank.
+- `add_audio.py` — embed a WAV inside `resources.resource` + AudioClip +
+  container entry (`"sfxClip": "ch3_chime:0.9"`).
+- `write_save.py` — write a slot save + Continue point before chapter 3
+  (PlayerPrefs in `HKCU\Software\fugas_kitsune\LED HEARTS`).
 
 When `mod_demo_node.py` is applied, the custom WAV is automatically copied
 from `modmaker` into the game root: the game's external loader looks for it

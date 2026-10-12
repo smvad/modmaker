@@ -16,6 +16,7 @@ next to `LED HEARTS.exe`). Live game files are one level up.
 .\.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip --dry-run
 .\.venv\Scripts\python.exe modmaker\add_texture.py --png modmaker\mod_start_bg.png --name ch3_room --dry-run
 .\.venv\Scripts\python.exe modmaker\add_chapter.py --dry-run
+.\.venv\Scripts\python.exe modmaker\add_audio.py --wav modmaker\mod_demo_jingle.wav --name ch3_chime --dry-run
 .\.venv\Scripts\python.exe modmaker\write_save.py --slot 0 --dry-run
 ```
 
@@ -45,9 +46,11 @@ next to `LED HEARTS.exe`). Live game files are one level up.
   Only call `.save()` on objects you actually changed; never "repair" the rest.
 - `MonoBehaviour` reads often raise `ValueError` on Unity 6000 — expected.
   The extractor still keeps their `.raw`.
-- `AudioClip.m_AudioData` is `None`: audio bytes live in
-  `LED HEARTS_Data/resources.resource` as FSB5. Never hand-edit bundle audio;
-  custom sounds go in as loose files (below).
+- `AudioClip.m_AudioData` is `None`: stock audio bytes live in
+  `LED HEARTS_Data/resources.resource` as FSB5/Vorbis. New sounds can be
+  embedded as FSB5/PCM16 via `fsb5pcm.py` + `add_audio.py` (pure Python,
+  keeps the 16-byte alignment invariant); hand-editing stock blobs is still
+  off-limits. Loose `dlc_*.wav` remains the zero-risk option.
 - `Texture2D.image` works (game textures are uncompressed RGB24), except the
   4 built-in `Font Texture`s which fail PNG decode with a bogus
   `PermissionError` — their `.raw` is still saved, leave them alone.
@@ -89,6 +92,9 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
   `atomic_write`, chapter validation via `validate_chapter`/`collect_refs`).
   New scripts must reuse them instead of duplicating; run scripts only from
   the game root so `import common` resolves.
+- `add_texture.py` / `add_chapter.py` / `add_audio.py` / `write_save.py` /
+  `fsb5pcm.py` are experimental test scripts (bugs possible): verified manually
+  on 6000.3.11f1, do not present them as stable API.
 - Release flow: zip must contain top-level `modmaker/` dir; to replace a
   release: `gh release delete <tag> --yes --cleanup-tag`, rebuild zip,
   `gh release create <tag> <zip>`.

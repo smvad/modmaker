@@ -146,13 +146,6 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
 - `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/WAV).
-- `add_texture.py` — вставить PNG внутрь `resources.assets` (пара Texture2D+Sprite
-  + записи в контейнере; аудио не вставляет — только `dlc_*.wav`).
-- `add_chapter.py` — вставить новую главу-TextAsset + запись в контейнере +
-  связка `load_chapter` из старой главы.
-- `chapter_03.json` — тестовый сценарий главы 3 (фон `ch3_room`, выбор, переменная).
-- `write_save.py` — сейв в слот + точка Продолжить перед главой 3
-  (PlayerPrefs в `HKCU\Software\fugas_kitsune\LED HEARTS`, бэкап `led_saves_backup.reg`).
 - `mod_test.zip` — готовый тестовый мод (ветка `mod_test_*` в главе 1 + ассеты
   Новы): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — извлечение всех ассетов всех типов.
@@ -164,6 +157,25 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `requirements.txt` — зависимость `UnityPy`.
 - `run_demo.bat` — применить оба демо-мода.
 - `INSTRUCTIONS.md` / `INSTRUCTIONS_EN.md` — ручное редактирование глав и свои ассеты (RU/EN).
+
+## Экспериментальное (тестовые скрипты, возможны баги)
+
+Проверены на сборке 6000.3.11f1 вручную (фон/глава/звук в игре работают),
+но покрытие тестами частичное. Перед записью скрипты делают `.bak`
+(и `led_saves_backup.reg` для сейвов) — не удаляйте их до проверки в игре.
+О багах — issue в репозитории.
+
+- `add_texture.py` — вставить PNG внутрь `resources.assets` (пара Texture2D+Sprite
+  + записи в контейнере).
+- `add_chapter.py` — вставить новую главу-TextAsset + запись в контейнере +
+  связка `load_chapter` из старой главы.
+- `chapter_03.json` — тестовый сценарий главы 3 (встроенные фон `ch3_room`
+  и звук `ch3_chime`, выбор, переменная).
+- `fsb5pcm.py` — кодировщик WAV PCM16 → FSB5/PCM16 для банка `resources.resource`.
+- `add_audio.py` — вшить WAV внутрь `resources.resource` + AudioClip + запись
+  в контейнере (`"sfxClip": "ch3_chime:0.9"`).
+- `write_save.py` — сейв в слот + точка Продолжить перед главой 3
+  (PlayerPrefs в `HKCU\Software\fugas_kitsune\LED HEARTS`).
 
 При применении `mod_demo_node.py` кастомный WAV автоматически копируется из
 `modmaker` в корень игры: внешний загрузчик игры ищет его именно там.
