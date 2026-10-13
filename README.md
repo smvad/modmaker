@@ -89,11 +89,17 @@ python -m venv .venv
 **в любой подпапке** корня игры (побеждает самый мелкий путь, дубли —
 warning в лог; свои копии в корне отслеживаются и обновляются сами).
 
-Установка BepInEx уже выполнена в корне игры (`winhttp.dll`,
-`doorstop_config.ini`, `BepInEx/`, `dotnet/`); плагин лежит в
-`BepInEx\plugins\DlcRecursiveSearch.dll`. Проверка: положить PNG
-в подпапку, запустить игру, в `BepInEx\LogOutput.log` должны быть
-`DLC index: N file(s)` и `Patches applied: 3/3`.
+Ванильная игра видит внешние `dlc_*` файлы только в корне. Плагин
+`DlcRecursiveSearch` ищет `dlc_*.png`, `dlc_*.wav` и `nsfw_dlc.dat`
+**в любой подпапке** корня игры (побеждает самый мелкий путь, дубли —
+warning в лог; свои копии в корне отслеживаются и обновляются сами).
+
+Установка: распаковать BepInEx 6 (Unity.IL2CPP, win-x64) в корень игры,
+один раз запустить игру (сгенерируется `BepInEx/interop/`), положить
+собранный `DlcRecursiveSearch.dll` в `BepInEx\plugins\`.
+Проверка: положить PNG в подпапку, запустить игру,
+в `BepInEx\LogOutput.log` должны быть `DLC index: N file(s)` и
+`Patches applied: 3/3`.
 Подробности, сборка (.NET SDK, офлайн), удаление:
 [dlc_search_plugin/README.md](dlc_search_plugin/README.md).
 

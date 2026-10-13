@@ -89,11 +89,12 @@ The `DlcRecursiveSearch` plugin finds `dlc_*.png`, `dlc_*.wav` and
 wins, duplicates warn in the log; staged root copies are tracked and
 refreshed automatically).
 
-BepInEx is already installed in the game root (`winhttp.dll`,
-`doorstop_config.ini`, `BepInEx/`, `dotnet/`); the plugin lives in
-`BepInEx\plugins\DlcRecursiveSearch.dll`. Check: drop a PNG into a
-subfolder, start the game, `BepInEx\LogOutput.log` should show
-`DLC index: N file(s)` and `Patches applied: 3/3`.
+Install: unpack BepInEx 6 (Unity.IL2CPP, win-x64) into the game root,
+start the game once (`BepInEx/interop/` gets generated), put the built
+`DlcRecursiveSearch.dll` into `BepInEx\plugins\`.
+Check: drop a PNG into a subfolder, start the game,
+`BepInEx\LogOutput.log` should show `DLC index: N file(s)` and
+`Patches applied: 3/3`.
 Details, building (.NET SDK, offline), removal:
 [dlc_search_plugin/README.md](dlc_search_plugin/README.md).
 

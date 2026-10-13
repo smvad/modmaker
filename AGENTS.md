@@ -44,10 +44,12 @@ next to `LED HEARTS.exe`). Live game files are one level up.
   `DialogueManager.IsNSFWDLCOwned`); no generated interop needed to build.
 - Load markers in `BepInEx\LogOutput.log`: `DLC index: N file(s)`,
   `Patched ...`, `Patches applied: 3/3`.
-- BepInEx install layout in game root: `winhttp.dll`,
-  `.doorstop_version`, `doorstop_config.ini`, `BepInEx/` (`core`,
-  `plugins`, `interop` + `offline-generated.txt`, `config`), `dotnet/`
-  (mini-coreclr 6.0.7). Removal = delete these; saves/game files untouched.
+- BepInEx install layout in game root (create by unpacking BepInEx 6
+  Unity.IL2CPP + one first launch; on this machine already present):
+  `winhttp.dll`, `.doorstop_version`, `doorstop_config.ini`, `BepInEx/`
+  (`core`, `plugins`, `interop` + `offline-generated.txt`, `config`),
+  `dotnet/` (mini-coreclr 6.0.7). Removal = delete these; saves/game
+  files untouched.
 
 ## UnityPy gotchas (verified, do not "fix")
 
