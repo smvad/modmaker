@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace DlcRecursiveSearch;
 
-[BepInPlugin("ledhearts.dlc.recursive-search", "DLC Recursive Search", "1.0.0")]
+[BepInPlugin("ledhearts.dlc.recursive-search", "DLC Recursive Search", "1.0.1")]
 public class Plugin : BasePlugin
 {
     private ConfigEntry<bool> _enabled;
