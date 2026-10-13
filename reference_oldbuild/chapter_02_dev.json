@@ -1,0 +1,2783 @@
+{
+ "chapterId": "chapter_02",
+ "chapterTitle": "Глава 2: Ночные тайны",
+ "chapterTitle_en": "Chapter 2: Night Secrets",
+ "startingNodeId": "corridor_chase",
+ "nodes": [
+  {
+   "nodeId": "scene2_start",
+   "nextNodeId": "ask_milly_go_home",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Проходит урок за уроком. Занятия тянутся медленно, но наконец раздается финальный звонок.",
+     "text_en": "Class after class passes. The lessons drag on slowly, but finally, the end bell rings.",
+     "backgroundImage": "school_classroom_day",
+     "characterSprite": "none",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Урок окончен. Но куда мне сейчас идти? В этом странном мире у меня нет дома. Да и Милли... она ведет себя так, будто мы живем обычной жизнью.",
+     "text_en": "(In my thoughts) Class is over. But where do I go now? I don't have a home in this strange world. And Milly... she acts as if we're living a normal life."
+    },
+    {
+     "characterName": "",
+     "text": "Я решаю подойти к Милли. Нужно спросить её об этом, но осторожно, чтобы не выдать себя.",
+     "text_en": "I decide to approach Milly. I need to ask her about this, but carefully, to not blow my cover."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_stairwell_daniel",
+   "nextNodeId": "scene2_cafeteria_queue",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы с Милли выходим из класса и направляемся по длинному коридору в сторону лестничного пролёта.",
+     "text_en": "Milly and I leave the classroom and head down the long corridor toward the stairwell.",
+     "backgroundImage": "stairs",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Почему этот парень ходит вверх-вниз по лестнице с такой странной улыбкой?",
+     "text_en": "(In my thoughts) Why is this guy walking up and down the stairs with such a strange smile?",
+     "backgroundImage": "stairs_withmem"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли, а... кто это?",
+     "text_en": "Milly, uh... who is that?"
+    },
+    {
+     "characterName": "Милли",
+     "text": "А, это Дэниел. Очень странный парень. Каждый день он просто ходит вверх и вниз по этой лестнице, ни на что не реагируя.",
+     "text_en": "Oh, that's Daniel. A very strange guy. Every day he just walks up and down these stairs, not reacting to anything.",
+     "characterSprite": "milly/pose_a/surprised",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Мы оставляем Дэниела позади и наконец приходим в просторную школьную столовую, чтобы позавтракать.",
+     "text_en": "We leave Daniel behind and finally arrive at the spacious school cafeteria to have breakfast.",
+     "backgroundImage": "cafe",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "ask_milly_go_home",
+   "nextNodeId": "violetta_approaches",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Милли, пойдём домой, может?",
+     "text_en": "Milly, let's go home, maybe?",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Максим, ты сегодня какой-то странный. Зачем идти туда, где мы и так?",
+     "text_en": "Maxim, you're being kind of weird today. Why go to where we already are?",
+     "characterSprite": "milly/pose_a/smug"
+    },
+    {
+     "characterName": "Милли",
+     "text": "До завтра, Максим. Не зависай.",
+     "text_en": "See you tomorrow, Maxim. Don't freeze up.",
+     "characterSprite": "milly/pose_a/happy"
+    },
+    {
+     "characterName": "",
+     "text": "Вдруг Милли резко замирает в своей обычной позе. Её глаза продолжают мягко светиться, но тело становится абсолютно неподвижным, словно выключенный терминал.",
+     "text_en": "Suddenly, Milly freezes in her default pose. Her eyes continue to glow softly, but her body becomes completely motionless, like a shut down terminal.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли? Эй, аууу!",
+     "text_en": "Milly? Hey, hello?"
+    },
+    {
+     "characterName": "",
+     "text": "Я машу рукой перед её лицом, пытаюсь позвать её, но она никак не реагирует.",
+     "text_en": "I wave my hand in front of her face, trying to get her attention, but she doesn't react at all."
+    }
+   ]
+  },
+  {
+   "nodeId": "violetta_approaches",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Сзади раздаются тихие шаги. Я оборачиваюсь и вижу Виолетту.",
+     "text_en": "Quiet footsteps sound from behind. I turn around and see Violetta.",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "far"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Опять Милли рано ушла спать... Её совсем не интересуют ни кружки, ни дополнительные занятия после школы.",
+     "text_en": "Milly went to sleep early again... She's not interested in clubs or after-school activities at all.",
+     "characterSprite": "violet/pose_a/sad",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Крутится только вокруг тебя. Иногда она ведёт себя так естественно, что даже на робота не похожа.",
+     "text_en": "She only revolves around you. Sometimes she behaves so naturally she doesn't even look like a robot.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, действительно...",
+     "text_en": "Yeah, indeed...",
+     "choices": [
+      {
+       "choiceText": "Что значит «ушла спать»? Что с ней стало?",
+       "choiceText_en": "What do you mean 'went to sleep'? What happened to her?",
+       "targetNodeId": "ask_what_happened_milly"
+      },
+      {
+       "choiceText": "А что ты собираешься делать сейчас?",
+       "choiceText_en": "What are you planning to do now?",
+       "targetNodeId": "ask_violetta_plans"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "ask_what_happened_milly",
+   "nextNodeId": "violetta_leaves",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "Как что? Отключилась для экономии энергии и синхронизации баз данных. Все делают это после занятий.",
+     "text_en": "What do you mean? She shut down for power saving and database synchronization. Everyone does that after class.",
+     "characterSprite": "violet/pose_a/surprised"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Ты... почему ты спрашиваешь об этом так, будто видишь впервые? Всё в порядке?",
+     "text_en": "You... why are you asking about this as if you're seeing it for the first time? Is everything okay?",
+     "characterSprite": "violet/pose_a/sad"
+    },
+    {
+     "characterName": "",
+     "text": "В её взгляде проскальзывает лёгкое подозрение, но она быстро отводит глаза, смущённо поправляя очки.",
+     "text_en": "A slight suspicion slips into her gaze, but she quickly looks away, shyly adjusting her glasses."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Прости, я не должна лезть не в своё дело. Наверное, ты просто устал.",
+     "text_en": "Sorry, I shouldn't pry into your business. You must be tired.",
+     "characterSprite": "violet/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "ask_violetta_plans",
+   "nextNodeId": "violetta_leaves",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "Я... я собираюсь пойти в библиотеку. Нужно разобрать архивы и подготовить отчёты старосты.",
+     "text_en": "I... I'm going to the library. I need to sort the archives and prepare the class rep reports.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Там тихо, и... никто не мешает.",
+     "text_en": "It's quiet there, and... no one disturbs me.",
+     "characterSprite": "violet/pose_a/sad"
+    }
+   ]
+  },
+  {
+   "nodeId": "violetta_leaves",
+   "nextNodeId": "inspect_milly",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Мне хочется расспросить её о многом другом... О Великом Исходе, о городе, о том, кто контролирует школу. Но лучше промолчать, чтобы не вызвать лишних подозрений.",
+     "text_en": "(In my thoughts) I want to ask her about so many other things... About the Great Exodus, about the city, about who controls the school. But it's better to stay silent to not raise unnecessary suspicions.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "До завтра, Максим. Постарайся тоже отдохнуть.",
+     "text_en": "See you tomorrow, Maxim. Try to rest too."
+    },
+    {
+     "characterName": "",
+     "text": "Виолетта вежливо кивает, собирает свои книги и выходит из класса. Я остаюсь наедине с замершей Милли.",
+     "text_en": "Violetta nods politely, gathers her books, and leaves the classroom. I'm left alone with the frozen Milly.",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "inspect_milly",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я перевожу взгляд на Милли. Она по-прежнему стоит неподвижно. Как программисту, мне безумно любопытно изучить её устройство.",
+     "text_en": "I turn my gaze to Milly. She remains motionless. As a programmer, I'm insanely curious to inspect how she is built.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Я подхожу ближе. Осматриваю её кожу, волосы, одежду. Всё выполнено с пугающей реалистичностью. Никаких швов, видимых стыков или металлических частей.",
+     "text_en": "I step closer. Inspecting her skin, hair, clothes. Everything is made with frightening realism. No seams, visible joints, or metal parts."
+    },
+    {
+     "characterName": "",
+     "text": "Осторожно протягиваю руку и прикасаюсь к её лицу, затем беру её ладонь. Кожа тёплая, упругая, мягкая. Это совершенно не похоже на обычный силикон — текстура куда более сложная.",
+     "text_en": "I cautiously reach out and touch her face, then take her hand. The skin is warm, elastic, soft. This doesn't feel like normal silicone at all - the texture is much more complex."
+    },
+    {
+     "characterName": "",
+     "text": "Что же мне делать дальше?",
+     "text_en": "What should I do next?",
+     "choices": [
+      {
+       "choiceText": "Прекратить осмотр.",
+       "choiceText_en": "Stop inspection.",
+       "targetNodeId": "milly_inspect_stop"
+      },
+      {
+       "choiceText": "Погладить по голове.",
+       "choiceText_en": "Pat her on the head.",
+       "targetNodeId": "milly_inspect_pat"
+      },
+      {
+       "choiceText": "Снять одежду, посмотреть устройство роботов.",
+       "choiceText_en": "Take off clothes, see how robots are built.",
+       "targetNodeId": "milly_inspect_undress"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "milly_inspect_stop",
+   "nextNodeId": "classroom_exploration",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я качаю головой и отхожу назад. Не стоит заниматься глупостями. Лучше осмотреть остальной класс.",
+     "text_en": "I shake my head and step back. No point in doing silly things. Better to inspect the rest of the classroom."
+    }
+   ]
+  },
+  {
+   "nodeId": "milly_inspect_pat",
+   "nextNodeId": "classroom_exploration",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я аккуратно кладу руку на её голову и мягко глажу по волосам.",
+     "text_en": "I gently place my hand on her head and softly pat her hair."
+    },
+    {
+     "characterName": "",
+     "text": "Вдруг выражение лица Милли меняется. Её глаза широко распахиваются, а на щеках появляется смущение.",
+     "text_en": "Suddenly, Milly's facial expression changes. Her eyes widen, and a blush of embarrassment appears on her cheeks.",
+     "characterSprite": "milly/pose_a/surprised"
+    },
+    {
+     "characterName": "",
+     "text": "Тем не менее, она продолжает стоять абсолютно неподвижно и безмолвно. Я подмечаю эту странность, но решаю не заострять внимание.",
+     "text_en": "Nevertheless, she continues to stand completely still and silent. I note this oddity but decide not to focus on it."
+    }
+   ]
+  },
+  {
+   "nodeId": "milly_inspect_undress",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Любопытство побеждает. Я протягиваю руки к её воротнику, собираясь расстегнуть верхние пуговицы рубашки...",
+     "text_en": "Curiosity wins. I reach my hands toward her collar, preparing to unbutton the top buttons of her shirt..."
+    },
+    {
+     "characterName": "РАЗРАБОТЧИК",
+     "text": "ЭЙ! ЭТО ТЕБЕ НЕ ХЕНТАЙНАЯ НОВЕЛЛА!",
+     "text_en": "HEY! THIS ISN'T A HENTAI VISUAL NOVEL!"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ч-что это сейчас было?!",
+     "text_en": "W-what was that just now?!"
+    },
+    {
+     "characterName": "",
+     "text": "Невидимая сила отбрасывает меня назад. Голова кружится, и перед глазами всё на секунду темнеет.",
+     "text_en": "An invisible force flings me back. My head spins, and everything goes dark for a second.",
+     "choices": [
+      {
+       "choiceText": "Прекратить осмотр.",
+       "choiceText_en": "Stop inspection.",
+       "targetNodeId": "milly_inspect_stop"
+      },
+      {
+       "choiceText": "Погладить по голове.",
+       "choiceText_en": "Pat her on the head.",
+       "targetNodeId": "milly_inspect_pat"
+      },
+      {
+       "choiceText": "[Заблокировано] Снять одежду.",
+       "choiceText_en": "[Locked] Take off clothes.",
+       "targetNodeId": "milly_inspect_undress_locked"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "milly_inspect_undress_locked",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Кнопка заблокирована. Разработчик ясно дал понять, что сюда лезть не стоит.",
+     "text_en": "The button is locked. The developer made it clear that I shouldn't go there.",
+     "choices": [
+      {
+       "choiceText": "Прекратить осмотр.",
+       "choiceText_en": "Stop inspection.",
+       "targetNodeId": "milly_inspect_stop"
+      },
+      {
+       "choiceText": "Погладить по голове.",
+       "choiceText_en": "Pat her on the head.",
+       "targetNodeId": "milly_inspect_pat"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "classroom_exploration",
+   "nextNodeId": "corridor_chase",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я хожу по пустому классу. На партах лежат забытые тетради, а в углах класса сидят еще несколько замерших учеников. Все они спят глубоким сном.",
+     "text_en": "I wander around the empty classroom. Forgotten notebooks lie on the desks, and in the corners sit a few more frozen students. All of them sleep in a deep slumber.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Они так похожи на людей... Если настоящие люди действительно улетели, то кто же создал этих андроидов? Как они развили это общество, эту школу? Зачем им имитировать человеческую рутину?",
+     "text_en": "(In my thoughts) They look so human... If real humans actually flew away, then who created these androids? How did they develop this society, this school? Why do they copy human routines?"
+    },
+    {
+     "characterName": "",
+     "text": "Пока я брожу среди парт, погружённый в свои мысли, внезапно с резким щелчком гаснет свет. Всё здание погружается в кромешную тьму.",
+     "text_en": "While I wander among the desks, lost in my thoughts, suddenly with a sharp click the lights go out. The whole building plunges into pitch black darkness.",
+     "backgroundImage": "school_classroom_day_dark"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Ого... Похоже, наступила «ночь» для энергосбережения. Наверное, сейчас абсолютно все роботы и андроиды в школе перешли в спящий режим.",
+     "text_en": "(In my thoughts) Whoa... Looks like 'night' mode has started for power saving. Probably every single robot and android in the school has entered sleep mode now."
+    },
+    {
+     "characterName": "",
+     "text": "Я решаю аккуратно выйти из класса и осмотреть ночную школу. Но не успеваю я сделать и шага к выходу, как из коридора доносится тихий шорох шагов.",
+     "text_en": "I decide to carefully exit the classroom and inspect the night school. But before I can take a step toward the exit, a quiet rustling of footsteps comes from the hallway."
+    },
+    {
+     "characterName": "",
+     "text": "Шаги приближаются к нашему классу. От резкого страха я замираю прямо рядом со спящей Милли, стараясь не двигаться и слиться с темнотой.",
+     "text_en": "The footsteps approach our classroom. From sudden fear, I freeze right next to the sleeping Milly, trying not to move and blend into the darkness."
+    },
+    {
+     "characterName": "",
+     "text": "В класс медленно входит какая-то фигура. Из-за темноты разглядеть её невозможно — виден лишь еле заметный чёрный силуэт.",
+     "text_en": "A figure slowly enters the classroom. Because of the darkness, it's impossible to make it out - only a barely visible black silhouette.",
+     "backgroundImage": "silhouette_red_eyes",
+     "musicClip": "suspens_first:suspens"
+    },
+    {
+     "characterName": "",
+     "text": "Но одна деталь бросается в глаза — у фигуры ярко светятся два красных глаза. В отличие от мягкого света учеников, этот свет холодный и хищный.",
+     "text_en": "But one detail catches the eye - the figure has two bright glowing red eyes. Unlike the soft glow of the students, this light is cold and predatory."
+    },
+    {
+     "characterName": "",
+     "text": "Силуэт бесшумно подходит к учительскому столу, что-то берет оттуда и собирается уходить. На исходе сил я случайно задеваю ногой ножку парты — раздается негромкий скрип.",
+     "text_en": "The silhouette silently walks to the teacher's desk, takes something, and prepares to leave. On the edge of my strength, I accidentally nudge a desk leg with my foot - a quiet squeak sounds."
+    },
+    {
+     "characterName": "",
+     "text": "Фигура резко останавливается и разворачивается в мою сторону. Красные глаза смотрят прямо на меня сквозь темноту. Моё сердце колотится как сумасшедшее. Мы стоим неподвижно несколько секунд.",
+     "text_en": "The figure stops abruptly and turns toward me. The red eyes stare right at me through the darkness. My heart pounds like crazy. We stand motionless for a few seconds."
+    },
+    {
+     "characterName": "",
+     "text": "Затем фигура делает движение рукой к лицу... Красный свет гаснет, словно она сняла светящиеся линзы или очки. И я слышу тихий, испуганный шёпот:",
+     "text_en": "Then the figure makes a hand movement to its face... The red light goes out, as if they removed glowing lenses or glasses. And I hear a quiet, frightened whisper:"
+    },
+    {
+     "characterName": "???",
+     "text": "Я... я тоже...",
+     "text_en": "I... I too..."
+    },
+    {
+     "characterName": "",
+     "text": "Слова эхом отдаются в моих ушах. Фигура быстро разворачивается и бесшумно исчезает в темном коридоре.",
+     "text_en": "The words echo in my ears. The figure quickly turns and silently disappears into the dark hallway.",
+     "backgroundImage": "school_classroom_day_dark"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) «Я тоже»? Что это значит? Неужели... неужели здесь есть кто-то еще? Живой человек, как и я? И почему она носила эти светящиеся красные глаза?",
+     "text_en": "(In my thoughts) 'I too'? What does it mean? Could it be... could there be someone else here? A living human, just like me? And why did she wear those glowing red eyes?"
+    },
+    {
+     "characterName": "",
+     "text": "Эти слова мёртвой хваткой впиваются в мою память. Я стою один в тёмном классе, а вокруг меня спят безжизненные оболочки роботов.",
+     "text_en": "Those words claw deep into my memory. I stand alone in the dark classroom, while lifeless robot shells sleep all around me."
+    }
+   ]
+  },
+  {
+   "nodeId": "corridor_chase",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Преодолевая оцепенение, я бросаюсь следом за ушедшим силуэтом и выбегаю в темный коридор.",
+     "text_en": "Overcoming my numbness, I rush after the departed silhouette and run out into the dark hallway.",
+     "backgroundImage": "coridor_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Коридор абсолютно пуст. Ледяная тишина школы давит на уши. Я оглядываюсь по сторонам, но не вижу и следа таинственной незнакомки.",
+     "text_en": "The hallway is absolutely empty. The icy silence of the school presses on my ears. I look around, but see no trace of the mysterious stranger."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Она исчезла бесследно... Но её слова... «Я тоже». Неужели она имела в виду, что тоже человек? Человек, маскирующийся под робота с помощью этих пугающих линз?",
+     "text_en": "(In my thoughts) She disappeared without a trace... But her words... 'I too'. Did she mean she is also a human? A human masquerading as a robot with those scary lenses?"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Ночью школа спит. Все роботы отключены. Это мой шанс осмотреться и попытаться найти ответы, пока меня никто не видит.",
+     "text_en": "(In my thoughts) The school sleeps at night. All the robots are shut down. This is my chance to look around and try to find answers while no one is watching."
+    },
+    {
+     "characterName": "",
+     "text": "Куда мне направиться?",
+     "text_en": "Where should I head?",
+     "choices": [
+      {
+       "choiceText": "Попытаться сбежать из школы.",
+       "choiceText_en": "Try to escape the school.",
+       "targetNodeId": "branch_escape_school",
+       "setVariable": "",
+       "modifyValue": 0
+      },
+      {
+       "choiceText": "Изучить школьную библиотеку.",
+       "choiceText_en": "Explore the school library.",
+       "targetNodeId": "branch_library"
+      },
+      {
+       "choiceText": "Вернуться в класс и лечь спать.",
+       "choiceText_en": "Return to the classroom and go to sleep.",
+       "targetNodeId": "branch_stay_in_class",
+       "setVariable": "",
+       "modifyValue": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "branch_escape_school",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я решаю пробраться к главному выходу. Спускаясь по темным лестницам коридоров, я наконец оказываюсь у тяжелых парадных дверей школы.",
+     "text_en": "I decide to make my way to the main exit. Walking down the dark staircases, I finally find myself at the heavy main doors of the school.",
+     "backgroundImage": "main_door_night"
+    },
+    {
+     "characterName": "",
+     "text": "Толкнув створки дверей, я делаю шаг на улицу... и замираю на месте от неописуемого ужаса.",
+     "text_en": "Pushing the doors open, I take a step outside... and freeze in place from indescribable horror.",
+     "backgroundImage": "tower"
+    },
+    {
+     "characterName": "",
+     "text": "На улице нет солнца. Нет неба. Лишь бесконечная темная пустота, уходящая за невидимый горизонт, хотя повсюду струится непонятный, мягкий свет без видимого источника.",
+     "text_en": "There is no sun outside. No sky. Only an endless dark void stretching beyond the invisible horizon, though an incomprehensible, soft light flows everywhere without a visible source."
+    },
+    {
+     "characterName": "",
+     "text": "Прямо перед школой начинается огромный металлический мост, тянущийся вдаль. Он ведет к колоссальной, циклопической башне, которая пронзает пустоту в самом центре.",
+     "text_en": "Right in front of the school, a massive metal bridge stretches into the distance. It leads to a colossal, cyclopean tower that pierces the void in the very center."
+    },
+    {
+     "characterName": "",
+     "text": "Но страшнее другое: от этой башни по кругу расходятся точно такие же мосты к десяткам... нет, сотням других школ. Вдалеке, насколько хватает глаз, видна паутина мостов и одинаковые здания школ-дубликатов.",
+     "text_en": "But there's something scarier: from this tower, identical bridges branch out in a circle to dozens... no, hundreds of other schools. In the distance, as far as the eye can see, a web of bridges and identical duplicate school buildings are visible."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Что это за место?! Почему здесь так много одинаковых школ? Какая-то огромная фабрика? Игрушка безумного создателя? Это точно не Земля...",
+     "text_en": "(In my thoughts) What is this place?! Why are there so many identical schools? Some giant factory? A toy of a mad creator? This is definitely not Earth..."
+    },
+    {
+     "characterName": "",
+     "text": "Я хочу пойти по мосту вперед к башне, но она находится слишком далеко — я физически не смогу дойти туда за ночь. Но затем я замечаю другую деталь.",
+     "text_en": "I want to walk along the bridge toward the tower, but it is too far - I won't physically make it there tonight. But then I notice another detail."
+    },
+    {
+     "characterName": "",
+     "text": "Мосты соседних школ проходят очень близко друг к другу. Расстояние между ними кажется крошечным, его вполне можно перепрыгнуть.",
+     "text_en": "The bridges of neighboring schools pass very close to each other. The distance between them seems tiny, quite jumpable."
+    },
+    {
+     "characterName": "",
+     "text": "Что делать?",
+     "text_en": "What to do?",
+     "choices": [
+      {
+       "choiceText": "Перепрыгнуть на мост соседней школы.",
+       "choiceText_en": "Jump to the neighboring school's bridge.",
+       "targetNodeId": "escape_jump_bridge"
+      },
+      {
+       "choiceText": "Вернуться обратно в свою школу.",
+       "choiceText_en": "Return back to my school.",
+       "targetNodeId": "escape_return_school",
+       "setVariable": "",
+       "modifyValue": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "escape_jump_bridge",
+   "nextNodeId": "awakening_from_alternate_school",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Взглянув вниз, в бездонную черную пропасть, я сглатываю ком. Ошибка будет стоить мне жизни. Но любопытство и страх толкают меня вперед.",
+     "text_en": "Looking down into the bottomless black abyss, I swallow hard. A mistake will cost me my life. But curiosity and fear push me forward.",
+     "backgroundImage": "bridge"
+    },
+    {
+     "characterName": "",
+     "text": "Я разбегаюсь и прыгаю через разделяющий мосты проем. Приземлившись на холодный металл соседнего моста, я тяжело дышу от выброса адреналина. Живой.",
+     "text_en": "I take a run-up and jump across the gap separating the bridges. Landing on the cold metal of the neighboring bridge, I breathe heavily from the adrenaline rush. Alive."
+    },
+    {
+     "characterName": "",
+     "text": "Я быстро бегу ко входу в соседнюю школу. Внутри все абсолютно, пугающе идентично. Те же лестницы, те же коридоры.",
+     "text_en": "I run quickly to the entrance of the neighboring school. Inside, everything is absolutely, frighteningly identical. Same stairs, same hallways.",
+     "backgroundImage": "coridor_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Я нахожу нужный кабинет и приоткрываю дверь. Внутри царит полумрак.",
+     "text_en": "I find the right classroom and peek through the door. Semi-darkness reigns inside.",
+     "backgroundImage": "school_classroom_day_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Мое сердце сжимает дикий, животный страх. За партами в спящем режиме сидят точно такие же одноклассники. В самом центре класса сидит точная копия Милли.",
+     "text_en": "My heart is gripped by wild, primal fear. At the desks, identical classmates sit in sleep mode. Right in the center of the class sits an exact copy of Milly.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Я перевожу взгляд в сторону. За другой партой, неподвижно застыв, сидит такая же копия Виолетты.",
+     "text_en": "I turn my gaze aside. Behind another desk, frozen completely still, sits an identical copy of Violetta.",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Нет... Это невозможно... Точно такие же куклы, на тех же местах... Это какой-то конвейер! Кошмарный инкубатор!",
+     "text_en": "(In my thoughts) No... It's impossible... The exact same dolls, in the exact same spots... This is some assembly line! A nightmarish incubator!",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "",
+     "text": "Холодный пот мгновенно прошибает тело. Воздуха резко начинает не хватать, дыхание становится частым и прерывистым, а грудь сжимает тисками. Меня накрывает дикая паническая атака. Нужно немедленно бежать отсюда!",
+     "text_en": "A cold sweat instantly breaks out all over my body. Air suddenly runs thin, my breathing becomes shallow and rapid, and my chest feels squeezed by a vise. A full panic attack washes over me. I need to run away right now!"
+    },
+    {
+     "characterName": "",
+     "text": "Я разворачиваюсь и в слепой панике бегу обратно по темному пустому коридору, задыхаясь от собственного страха.",
+     "text_en": "I turn around and run back down the dark, empty corridor in blind panic, choking on my own fear.",
+     "backgroundImage": "coridor_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Вылетаю к парадным дверям школы и с силой толкаю их от себя.",
+     "text_en": "I burst out to the main doors of the school and push them open with all my strength.",
+     "backgroundImage": "main_door_night"
+    },
+    {
+     "characterName": "",
+     "text": "Не глядя вниз, я перепрыгиваю разделяющую мосты пропасть обратно, едва удерживая равновесие на лету.",
+     "text_en": "Without looking down, I jump back across the abyss separating the bridges, barely keeping my balance in mid-air.",
+     "backgroundImage": "bridge"
+    },
+    {
+     "characterName": "",
+     "text": "С трудом переводя дыхание и дрожа всем телом, я бегу по коридору уже своей школы.",
+     "text_en": "Hardly catching my breath and trembling all over, I run through the corridor of my own school.",
+     "backgroundImage": "coridor_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Вбегаю в класс, без сил валюсь за парту и проваливаюсь в тяжелый, беспокойный сон.",
+     "text_en": "I burst into the classroom, collapse onto my desk exhausted, and fall into a heavy, restless sleep.",
+     "backgroundImage": "school_classroom_day_dark"
+    }
+   ]
+  },
+  {
+   "nodeId": "escape_return_school",
+   "nextNodeId": "awakening_from_escape_return",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Нет. Пропасть слишком глубокая. Если я сорвусь, никто меня не спасет и даже не узнает о моей смерти. Слишком рискованно.",
+     "text_en": "(In my thoughts) No. The abyss is too deep. If I fall, no one will save me or even know about my death. Too risky."
+    },
+    {
+     "characterName": "",
+     "text": "Я разворачиваюсь, захожу обратно в школу и возвращаюсь в свой класс. Опустив голову на парту рядом со спящей Милли, я закрываю глаза. Разберусь с этим завтра.",
+     "text_en": "I turn around, go back inside the school, and return to my classroom. Resting my head on the desk next to the sleeping Milly, I close my eyes. I'll deal with this tomorrow.",
+     "backgroundImage": "school_classroom_day_dark"
+    }
+   ]
+  },
+  {
+   "nodeId": "branch_stay_in_class",
+   "nextNodeId": "awakening_from_class_stay",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Бродить по школе в такой темноте бессмысленно. Я ничего не увижу, кроме светящихся глаз этих спящих андроидов. Лучше дождаться утра.",
+     "text_en": "(In my thoughts) Wandering around the school in this darkness is pointless. I won't see anything except the glowing eyes of these sleeping androids. Better to wait for morning."
+    },
+    {
+     "characterName": "",
+     "text": "Я возвращаюсь на свое место, кладу голову на сложенные руки и пытаюсь заснуть под тихое, едва слышное гудение спящих приборов школы.",
+     "text_en": "I return to my seat, rest my head on my folded arms, and try to fall asleep to the quiet, barely audible hum of the school's sleeping electronics.",
+     "backgroundImage": "school_classroom_day_dark"
+    }
+   ]
+  },
+  {
+   "nodeId": "branch_library",
+   "nextNodeId": "awakening_from_library",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я осторожно пробираюсь по темным коридорам школы в поисках библиотеки. Если здесь и есть хоть какие-то ответы о прошлом этого мира, они должны быть на бумаге.",
+     "text_en": "I carefully make my way through the dark school corridors in search of the library. If there are any answers about this world's past, they must be in writing.",
+     "backgroundImage": "coridor_dark"
+    },
+    {
+     "characterName": "",
+     "text": "Пройдя несколько лестничных пролетов, я замечаю впереди слабый свет. Двери библиотеки слегка приоткрыты.",
+     "text_en": "After going down a few staircases, I notice a faint light ahead. The library doors are slightly ajar.",
+     "backgroundImage": "library_night"
+    },
+    {
+     "characterName": "",
+     "text": "Я захожу внутрь. Библиотека на удивление освещена мягким теплым светом. Видимо, система скопировала человеческую привычку задерживаться в библиотеках допоздна.",
+     "text_en": "I step inside. Surprisingly, the library is lit by a soft warm light. Apparently, the system copied the human habit of staying in libraries late.",
+     "backgroundImage": "inside_library_night"
+    },
+    {
+     "characterName": "",
+     "text": "За одним из столиков я вижу знакомую неподвижную фигуру. Виолетта сидит здесь, застыв в спящем режиме с книгой в руках.",
+     "text_en": "At one of the tables, I see a familiar motionless figure. Violetta sits here, frozen in sleep mode with a book in her hands.",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Я аккуратно высвобождаю книгу из её расслабленных пальцев. На обложке написано: «Забытая история».",
+     "text_en": "I gently free the book from her relaxed fingers. The cover reads: 'Forgotten History'."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) «Забытая история»... Посмотрим, что от нас скрывают.",
+     "text_en": "(In my thoughts) 'Forgotten History'... Let's see what they are hiding from us."
+    },
+    {
+     "characterName": "",
+     "text": "Я быстро прохожусь по полкам, собирая всё, что похоже на исторические хроники: «История человечества», «Первый робот». Сев за соседний стол, я принимаюсь жадно читать.",
+     "text_en": "I quickly scan the shelves, gathering anything that looks like historical chronicles: 'History of Humanity', 'The First Robot'. Sitting at a nearby table, I start reading greedily.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "",
+     "text": "Из книг я узнаю несколько важных фактов. Люди покинули Землю около 400 лет назад ради «великой миссии колонизации». А первый мыслящий робот появился 500 лет назад, и звали её...",
+     "text_en": "From the books, I learn a few important facts. Humans left Earth about 400 years ago for a 'great mission of colonization'. And the first thinking robot appeared 500 years ago, and her name was..."
+    },
+    {
+     "characterName": "",
+     "text": "Имя робота стерто. Либо страницы были повреждены, либо кто-то намеренно вырезал имя «₽&#*₽» из всех архивов.",
+     "text_en": "The robot's name is erased. Either the pages were damaged, or someone intentionally cut the name '₽&#*₽' from all archives."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Бред какой-то. Люди улетели из-за банального любопытства? Все до единого бросили родной дом просто ради «исследования»? Не верю. И этот зазор в 100 лет между первым роботом и исходом... Тут явно скрыто что-то страшное.",
+     "text_en": "(In my thoughts) What nonsense. Humans left just because of simple curiosity? Every single one abandoned their home just for 'exploration'? I don't buy it. And this 100-year gap between the first robot and the exodus... Something terrible is clearly hidden here."
+    },
+    {
+     "characterName": "",
+     "text": "Пока я сопоставляю факты в голове, усталость берет свое. Мои веки тяжелеют, и я засыпаю прямо на разложенных книгах.",
+     "text_en": "While I piece the facts together in my head, exhaustion takes over. My eyelids grow heavy, and I fall asleep right on the spread-out books."
+    }
+   ]
+  },
+  {
+   "nodeId": "awakening_from_alternate_school",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я резко открываю глаза. Комната залита утренним полумраком. Я проснулся на полу своего класса раньше, чем сработал общий запуск роботов.",
+     "text_en": "I snap my eyes open. The room is flooded with morning twilight. I woke up on the floor of my classroom before the general robot boot-up triggered.",
+     "backgroundImage": "school_classroom_day_dark",
+     "characterSprite": "none",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Те другие школы... Другие Милли... Это всё не сон. Это не может быть сном! Хотя, господи, как бы мне хотелось, чтобы это было обычным кошмаром...",
+     "text_en": "(In my thoughts) Those other schools... Other Millys... It wasn't a dream. It can't be a dream! Although, God, how I wish it was just a regular nightmare..."
+    },
+    {
+     "characterName": "",
+     "text": "Я перевожу взгляд на Милли. Она спит на своем место. Я долго смотрю на неё, а затем медленно подхожу вплотную.",
+     "text_en": "I turn my gaze to Milly. She is sleeping in her seat. I stare at her for a long time, and then slowly approach closely.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "close",
+     "choices": [
+      {
+       "choiceText": "Продолжить смотреть",
+       "choiceText_en": "Continue looking",
+       "targetNodeId": "alt_milly_look"
+      },
+      {
+       "choiceText": "Обнять её",
+       "choiceText_en": "Hug her",
+       "targetNodeId": "alt_milly_hug",
+       "setVariable": "milly_hugs",
+       "modifyValue": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "alt_milly_look",
+   "nextNodeId": "alt_milly_question",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я продолжаю стоять рядом и пристально всматриваться в её лицо, пытаясь разглядеть детали её спящего лица.",
+     "text_en": "I continue to stand nearby, staring closely at her face, trying to study the details of her sleeping expression.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "",
+     "text": "Внезапно с громким щелчком включается свет. Милли мгновенно «просыпается» и видит мое лицо прямо перед своими глазами, буквально в паре сантиметров.",
+     "text_en": "Suddenly, with a loud click, the lights turn on. Milly instantly 'wakes up' and sees my face right in front of her eyes, literally a couple of centimeters away.",
+     "backgroundImage": "school_classroom_day",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Милли",
+     "text": "М-Максим?! Ч-что ты делаешь так близко?!",
+     "text_en": "M-Maxim?! W-what are you doing so close?!",
+     "characterSprite": "milly/pose_a/blush",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Максим",
+     "text": "А... я... да я просто хотел тебя разбудить! Да, именно разбудить.",
+     "text_en": "Ah... I... I just wanted to wake you up! Yeah, precisely wake you up.",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Оу, правда? Или тебе просто нравится смотреть на меня, Максим? Признайся~",
+     "text_en": "Oh, really? Or do you just like looking at me, Maxim? Admit it~",
+     "characterSprite": "milly/pose_a/smug",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Д-да нет, я просто... ну да, хотел разбудить.",
+     "text_en": "N-no, I just... yeah, I wanted to wake you up.",
+     "characterPosition": "close"
+    }
+   ]
+  },
+  {
+   "nodeId": "alt_milly_hug",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Я ничего не понимаю... Мне безумно страшно. Почему там были другие Милли? Но эта Милли... только её я признаю. Только она для меня реальна.",
+     "text_en": "(In my thoughts) I don't understand anything... I'm so scared. Why were there other Millys? But this Milly... she is the only one I recognize. Only she is real to me.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "",
+     "text": "Поддавшись эмоциям и страху, я осторожно наклоняюсь и обнимаю её.",
+     "text_en": "Surrendering to my emotions and fear, I gently lean forward and wrap my arms around her."
+    },
+    {
+     "characterName": "",
+     "text": "Внезапно с громким щелчком включается свет. Милли мгновенно просыпается и застывает от удивления, почувствовав мои объятия.",
+     "text_en": "Suddenly, with a loud click, the lights turn on. Milly instantly wakes up and freezes in surprise, feeling my hug.",
+     "backgroundImage": "school_classroom_day",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Милли",
+     "text": "М-Максим?! Ч-что ты делаешь?!",
+     "text_en": "M-Maxim?! W-what are you doing?!",
+     "characterSprite": "milly/pose_a/blush",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Я... я просто проверял кое-что. Да, проверял...",
+     "text_en": "I... I was just checking something. Yeah, checking...",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Господи, только бы она ничего не заподозрила. Если она посчитает мое поведение аномальным и сообщит системе, мне конец.",
+     "text_en": "(In my thoughts) God, let's just hope she doesn't suspect anything. If she considers my behavior anomalous and reports to the system, I'm done."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Дурак... Предупреждать надо. Если тебе... хотелось, ты мог бы просто посмотреть на меня подольше...",
+     "text_en": "Idiot... You should warn me. If you... wanted to, you could have just looked at me longer...",
+     "characterSprite": "milly/pose_a/pouting",
+     "characterPosition": "close",
+     "choices": [
+      {
+       "choiceText": "Обнять её еще раз и крепче",
+       "choiceText_en": "Hug her again and tighter",
+       "targetNodeId": "alt_milly_hug_tight",
+       "setVariable": "hugged_milly_twice",
+       "modifyValue": 1
+      },
+      {
+       "choiceText": "Сказать, что уже всё проверил",
+       "choiceText_en": "Say you've already checked everything",
+       "targetNodeId": "alt_milly_hug_stop"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "alt_milly_hug_tight",
+   "nextNodeId": "alt_milly_question",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я ничего не отвечаю. Вместо этого я прижимаю её к себе крепче.",
+     "text_en": "I don't say anything. Instead, I pull her closer and hold her tighter.",
+     "characterSprite": "milly/pose_a/blush",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "",
+     "text": "Мы стоим так около минуты в полной тишине, нарушаемой лишь тихим гудением приборов класса.",
+     "text_en": "We stand like this for about a minute in complete silence, broken only by the quiet hum of the classroom electronics."
+    },
+    {
+     "characterName": "Милли",
+     "text": "...тепло... приятно...",
+     "text_en": "...warm... nice...",
+     "characterSprite": "milly/pose_a/blush",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Максим",
+     "text": "А? Милли, ты что-то сказала?",
+     "text_en": "Ah? Milly, did you say something?",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ничего я не говорила! Вообще ничего!",
+     "text_en": "I didn't say anything! Nothing at all!",
+     "characterSprite": "milly/pose_a/angry",
+     "characterPosition": "normal"
+    }
+   ]
+  },
+  {
+   "nodeId": "alt_milly_hug_stop",
+   "nextNodeId": "alt_milly_question",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Да нет, всё в порядке, я уже всё проверил.",
+     "text_en": "No, it's fine, I've already checked everything.",
+     "characterSprite": "milly/pose_a/pouting",
+     "characterPosition": "normal"
+    }
+   ]
+  },
+  {
+   "nodeId": "alt_milly_question",
+   "nextNodeId": "scene2_stairwell_daniel",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Милли... скажи, а ты когда-нибудь выходила за пределы школы? Ну, наружу?",
+     "text_en": "Milly... tell me, have you ever gone outside the school boundaries? You know, outside?",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "normal"
+    },
+    {
+     "characterName": "Милли",
+     "text": "За пределы? Конечно нет, как и любой другой. Пределы школы — это запретная зона. Нам запрещено туда ходить.",
+     "text_en": "Outside? Of course not, just like anyone else. School boundaries are a restricted zone. We are forbidden to go there.",
+     "characterSprite": "milly/pose_a/surprised",
+     "characterPosition": "normal"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Значит, они действительно запрограммированы бояться внешнего мира. Но почему?",
+     "text_en": "(In my thoughts) So they are programmed to fear the outside world. But why?"
+    },
+    {
+     "characterName": "",
+     "text": "Я хочу спросить что-то еще, но громкий школьный звонок внезапно прерывает меня.",
+     "text_en": "I want to ask something else, but a loud school bell suddenly interrupts me."
+    },
+    {
+     "characterName": "Милли",
+     "text": "О, звонок на завтрак! Пойдём в столовую, Максим, а то всё разберут!",
+     "text_en": "Oh, the breakfast bell! Let's go to the cafeteria, Maxim, before everything is gone!",
+     "characterSprite": "milly/pose_a/happy",
+     "characterPosition": "normal"
+    }
+   ]
+  },
+  {
+   "nodeId": "awakening_from_escape_return",
+   "nextNodeId": "scene2_stairwell_daniel",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Кто-то осторожно трясет меня за плечо. Я с трудом разлепляю глаза. В классе уже горит свет.",
+     "text_en": "Someone gently shakes my shoulder. I open my eyes with difficulty. The lights are already on in the classroom.",
+     "backgroundImage": "school_classroom_day",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Максим, просыпайся! Занятия скоро начнутся, а ты спишь прямо на парте.",
+     "text_en": "Maxim, wake up! Class starts soon, and you're sleeping right at your desk."
+    },
+    {
+     "characterName": "Максим",
+     "text": "А... Милли... Слушай, а ты когда-нибудь выходила наружу? Ну, за ворота школы?",
+     "text_en": "Ah... Milly... Listen, have you ever gone outside? You know, past the school gates?"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Наружу? Нет, конечно. Нам запрещено покидать территорию школы. Это закрытая зона безопасности. Почему ты спрашиваешь?",
+     "text_en": "Outside? No, of course not. We are forbidden from leaving the school territory. It's a closed security zone. Why do you ask?",
+     "characterSprite": "milly/pose_a/surprised"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да так... приснилось просто что-то странное ночью.",
+     "text_en": "Oh, nothing... just had a weird dream last night."
+    },
+    {
+     "characterName": "",
+     "text": "В этот момент по коридорам разносится громкий звонок.",
+     "text_en": "At that moment, a loud bell rings through the hallways."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Звонок! Пора идти завтракать. Пошли скорее в столовую!",
+     "text_en": "The bell! Time to go eat breakfast. Let's run to the cafeteria!",
+     "characterSprite": "milly/pose_a/happy"
+    }
+   ]
+  },
+  {
+   "nodeId": "awakening_from_class_stay",
+   "nextNodeId": "scene2_stairwell_daniel",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я просыпаюсь от того, что свет бьет мне в глаза. В классе уже шумно.",
+     "text_en": "I wake up from the light hitting my eyes. The classroom is already noisy.",
+     "backgroundImage": "school_classroom_day",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Доброе утро, соня! Ты всю ночь проспал за партой. Как у тебя шея не затекла?",
+     "text_en": "Good morning, sleepyhead! You slept at your desk all night. How is your neck not stiff?"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, немного затекла... Доброе утро, Милли.",
+     "text_en": "Yeah, it's a bit stiff... Good morning, Milly."
+    },
+    {
+     "characterName": "",
+     "text": "Пока я разминаю плечи, раздается школьный звонок.",
+     "text_en": "While I stretch my shoulders, the school bell rings."
+    },
+    {
+     "characterName": "Милли",
+     "text": "О, звонок на завтрак! Пошли скорее в столовую, я жутко проголодалась!",
+     "text_en": "Oh, the breakfast bell! Let's go to the cafeteria quickly, I'm starving!",
+     "characterSprite": "milly/pose_a/happy"
+    }
+   ]
+  },
+  {
+   "nodeId": "awakening_from_library",
+   "nextNodeId": "scene2_violetta_cafeteria",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Кто-то деликатно касается моего плеча. Я поднимаю голову со стола, щурясь от яркого дневного света, заливающего библиотеку.",
+     "text_en": "Someone delicately touches my shoulder. I lift my head from the table, squinting at the bright daylight flooding the library.",
+     "backgroundImage": "inside_library_day",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Доброе утро, Максим. Не думала, что встречу тебя здесь так рано... или ты проспал здесь всю ночь?",
+     "text_en": "Good morning, Maxim. I didn't think I'd meet you here so early... or did you sleep here all night?"
+    },
+    {
+     "characterName": "Максим",
+     "text": "А... да, зачитался книгами по истории и сам не заметил, как уснул. Прости, если помешал.",
+     "text_en": "Ah... yeah, got carried away reading history books and didn't notice falling asleep. Sorry if I disturbed you."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Неужели тебе тоже интересна история людей? Обычно все читают только технические руководства.",
+     "text_en": "Are you really interested in human history too? Usually everyone only reads technical manuals.",
+     "characterSprite": "violet/pose_a/surprised"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, хотелось узнать больше о том, как всё было устроено раньше.",
+     "text_en": "Yes, I wanted to learn more about how things were set up before."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Приятно знать. Я прихожу сюда каждый вечер, чтобы почитать в тишине. Если хочешь... мы могли бы сегодня почитать вместе.",
+     "text_en": "It's nice to know. I come here every evening to read in silence. If you want... we could read together tonight.",
+     "characterSprite": "violet/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "С удовольствием, Виолетта. Буду рад.",
+     "text_en": "With pleasure, Violetta. I'd be glad."
+    },
+    {
+     "characterName": "",
+     "text": "Она слегка улыбается, но тут раздается громкий звонок.",
+     "text_en": "She smiles slightly, but then a loud bell rings."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Звонок. Пора идти в столовую на завтрак. Пойдём вместе?",
+     "text_en": "The bell. Time to go to the cafeteria for breakfast. Shall we go together?",
+     "characterSprite": "violet/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_cafeteria_queue",
+   "nextNodeId": "scene2_femboy_fall",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Ого, какая очередь! Максим, давай ты пока займёшь свободное место, а я пойду куплю что-нибудь вкусненькое для нас.",
+     "text_en": "Wow, what a queue! Maxim, why don't you go grab a free seat while I buy something tasty for us.",
+     "backgroundImage": "cafe",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Хорошо, тогда договорились. Возьми мне то же, что и себе.",
+     "text_en": "Alright, sounds like a plan. Get me the same thing you get for yourself."
+    },
+    {
+     "characterName": "",
+     "text": "Милли убегает в сторону прилавков, лавируя между голодными учениками.",
+     "text_en": "Milly runs off toward the counters, navigating between the hungry students.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "",
+     "text": "Я прохожу по школьной столовой, оглядываясь в поисках свободного столика. Практически все места заняты, но где-то вдалеке, у окна, я замечаю один незанятый стул.",
+     "text_en": "I walk through the school cafeteria, looking around for a free table. Almost all seats are taken, but somewhere in the distance, by the window, I spot a free chair."
+    },
+    {
+     "characterName": "",
+     "text": "Я иду туда и сажусь, устало выдыхая и дожидаясь возвращения Милли.",
+     "text_en": "I go over and sit down, exhaling tiredly and waiting for Milly's return."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_femboy_fall",
+   "nextNodeId": "scene2_femboy_discussion",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Вдруг, словно в какой-то дешёвой аниме-комедии, мимо моего стола кто-то спотыкается. Тело летит прямо на меня.",
+     "text_en": "Suddenly, as if in some cheap anime comedy, someone trips near my table. The body flies straight at me."
+    },
+    {
+     "characterName": "",
+     "text": "Каким-то чудом мои рефлексы срабатывают на грани фантастики. Я резко протягиваю руки и ловлю падающую фигуру прямо на лету.",
+     "text_en": "By some miracle, my reflexes react on the edge of science fiction. I sharply reach out and catch the falling figure mid-air."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Воу... Я что, в какой-то романтической комедии? Откуда вообще такая нереальная реакция? Я в реальной жизни так быстро никогда не двигался.",
+     "text_en": "(In my thoughts) Whoa... Am I in some romantic comedy? Where did this unrealistic reaction even come from? I've never moved this fast in real life."
+    },
+    {
+     "characterName": "",
+     "text": "Передо мной оказывается очень милая, изящная девушка с испуганными глазами.",
+     "text_en": "In front of me is a very cute, delicate girl with frightened eyes.",
+     "characterSprite": "femboy/pose_a/blush",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Эй, ты в порядке? Всё хорошо? Не ушиблась?",
+     "text_en": "Hey, are you okay? Everything alright? You didn't get hurt?"
+    },
+    {
+     "characterName": "Неуклюжая девушка",
+     "text": "Да... да, всё хорошо. Огромное спасибо, что поймали меня...",
+     "text_en": "Yes... yes, everything is fine. Thank you so much for catching me...",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Какой милый голос... Да и сама она выглядит очень изящно. Настоящая героиня какого-нибудь гаремника.",
+     "text_en": "(In my thoughts) What a sweet voice... And she looks very delicate. A true heroine of some harem anime."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_femboy_discussion",
+   "nextNodeId": "scene2_milly_jealous",
+   "lines": [
+    {
+     "characterName": "Неуклюжая девушка",
+     "text": "А... извините, у вас тут не занято? Можно я присяду рядом?",
+     "text_en": "Ah... excuse me, is this seat taken? Can I sit next to you?",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Ну, мы сидим только с Милли, места полно, так что ничего страшного.",
+     "text_en": "(In my thoughts) Well, it's just me and Milly sitting here, there's plenty of space, so it's fine."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, не занято. Присаживайся, конечно.",
+     "text_en": "Yes, it's free. Have a seat, of course."
+    },
+    {
+     "characterName": "Неуклюжая девушка",
+     "text": "Спасибо большое! Вы не против, если я тут рядом поем? Очередь сегодня просто сумасшедшая.",
+     "text_en": "Thank you so much! Do you mind if I eat here next to you? The queue today is just crazy.",
+     "characterSprite": "femboy/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_milly_jealous",
+   "nextNodeId": "scene2_eating_together",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "В этот момент возвращается Милли с подносом в руках. Заметив, что я оживленно разговариваю с новой «соседкой», она резко останавливается.",
+     "text_en": "At that moment, Milly returns with a tray in her hands. Noticing that I'm chatting lively with our new 'neighbor', she stops abruptly.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "left"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Максим... Опять ты во что-то вляпался? И когда только успел сойтись с кем-то... Я отошла буквально на пять минут!",
+     "text_en": "Maxim... Did you get into something again? And when did you manage to hook up with someone... I stepped away for literally five minutes!",
+     "characterSprite": "milly/pose_a/pouting"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Эй, Милли, всё не так, как ты думаешь! Она просто споткнулась и упала, а я её поймал.",
+     "text_en": "Hey, Milly, it's not what you think! She just tripped and fell, and I caught her."
+    },
+    {
+     "characterName": "Неуклюжая <color=#888888>д̶е̶в̶у̶ш̶к̶а̶</color> парень",
+     "text": "А... прошу прощения. Я... я не «она». Я «он».",
+     "text_en": "Ah... excuse me. I... I am not a 'she'. I am a 'he'.",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ч-что?! В смысле... парень?!",
+     "text_en": "W-what?! Meaning... a guy?!"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ха-ха! Ой, Максим... Не знала, что ты у нас по мальчикам!",
+     "text_en": "Haha! Oh, Maxim... I didn't know you were into boys!",
+     "characterSprite": "milly/pose_a/smug"
+    },
+    {
+     "characterName": "",
+     "text": "Я в полном шоке смотрю то на Милли, то на смущённо улыбающегося парня, не зная, куда деться от неловкости.",
+     "text_en": "In complete shock, I look from Milly to the embarrassingly smiling guy, not knowing where to hide from the awkwardness.",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_eating_together",
+   "nextNodeId": "scene2_kiv_manga_talk",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы все втроём садимся за стол. Неловкая тишина повисает на пару секунд.",
+     "text_en": "The three of us sit down at the table. An awkward silence hangs for a few seconds.",
+     "backgroundImage": "cafe",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Всё-таки фембои и в этом мире есть... Ладно, к этому я уже готов не был.",
+     "text_en": "(In my thoughts) So femboys exist in this world too... Okay, I definitely wasn't ready for that."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Эй... а почему ты один кушаешь? У тебя нет друзей?",
+     "text_en": "Hey... why do you eat alone? Don't you have any friends?",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "left"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Не-а... Остальные не очень хотят со мной общаться. Говорят, я странный.",
+     "text_en": "Nope... The others don't really want to hang out with me. They say I'm weird.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "right"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ну... ладно, можешь с нами поесть. Кстати, а как тебя зовут?",
+     "text_en": "Well... fine, you can eat with us. By the way, what's your name?",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Меня зовут Кив! Приятно познакомиться!",
+     "text_en": "My name is Kiv! Nice to meet you!",
+     "characterSprite": "femboy/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_manga_talk",
+   "nextNodeId": "scene2_milly_library_promise",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Кив, а чем ты вообще занимаешься целый день?",
+     "text_en": "Kiv, what do you even do all day?",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Обычно сижу один и читаю мангу.",
+     "text_en": "I usually sit alone and read manga.",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Подожди... Тут есть манга?!",
+     "text_en": "Wait... There's manga here?!"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Ну да, но она сейчас не особо популярна. Сохранились только те, что были ещё со времён человечества. Новые никто не выпускает — роботы не понимают, зачем это нужно.",
+     "text_en": "Well yeah, but it's not very popular now. Only the ones from the era of humanity survived. Nobody makes new ones — robots don't understand why it's needed.",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Манга со времён людей... Через неё можно хоть что-то узнать о прошлом! Это мой шанс!",
+     "text_en": "(In my thoughts) Manga from the era of humans... I can learn something about the past through it! This is my chance!"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Кив, а у тебя есть манга, которую можно одолжить почитать?",
+     "text_en": "Kiv, do you have any manga I could borrow to read?"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Конечно есть! Только надо сходить ко мне в класс, они там лежат.",
+     "text_en": "Of course I do! We just need to go to my classroom, they're there.",
+     "characterSprite": "femboy/pose_a/blush"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_milly_library_promise",
+   "nextNodeId": "scene2_kiv_corridor",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Эй, Максим! Ты же обещал сегодня сходить со мной в библиотеку!",
+     "text_en": "Hey, Maxim! You promised to go to the library with me today!",
+     "characterSprite": "milly/pose_a/pouting",
+     "characterPosition": "left"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли, мы просто возьмём мангу и сразу пойдём к тебе. Это займёт пять минут.",
+     "text_en": "Milly, we'll just grab the manga and come straight to you. It'll take five minutes."
+    },
+    {
+     "characterName": "Милли",
+     "text": "...Делай что хочешь.",
+     "text_en": "...Do whatever you want.",
+     "characterSprite": "milly/pose_a/pouting"
+    },
+    {
+     "characterName": "",
+     "text": "Милли встаёт из-за стола и уходит, даже не обернувшись.",
+     "text_en": "Milly gets up from the table and leaves without even looking back.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Повёл себя как тварь... Но узнать правду важнее. Извинюсь потом.",
+     "text_en": "(In my thoughts) I acted like a jerk... But finding the truth is more important. I'll apologize later."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_corridor",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы с Кивом идём по школьному коридору. Я замечаю, что ученики вокруг перешёптываются, глядя на нас.",
+     "text_en": "Kiv and I walk through the school corridor. I notice the students around us whispering, looking at us.",
+     "backgroundImage": "coridor",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "",
+     "text": "«С Кивом реально кто-то общается?» — «Не может быть...» — «Бедный новенький, он не знает...»",
+     "text_en": "'Someone's actually talking to Kiv?' — 'No way...' — 'Poor new kid, he doesn't know...'",
+     "characterSprite": "none",
+     "backgroundImage": "coridor"
+    },
+    {
+     "characterName": "",
+     "text": "Я смотрю на Кива — он весь покраснел, но старается не подавать вида.",
+     "text_en": "I look at Kiv — he's all red, but trying not to show it.",
+     "characterSprite": "femboy/pose_a/blush",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Наконец мы доходим до его класса. Внутри никого нет — у всех уже закончились уроки.",
+     "text_en": "We finally reach his classroom. Nobody's inside — everyone's classes are already over.",
+     "backgroundImage": "school_classroom_day",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "",
+     "text": "Кив достаёт из своего рюкзака несколько потрёпанных томиков манги и протягивает мне.",
+     "text_en": "Kiv pulls out several worn manga volumes from his backpack and hands them to me."
+    },
+    {
+     "characterName": "Кив",
+     "text": "Вот, держи! А... не хочешь посидеть и почитать вместе со мной?",
+     "text_en": "Here you go! And... would you like to sit and read together with me?",
+     "characterSprite": "femboy/pose_a/love",
+     "choices": [
+      {
+       "choiceText": "Да, конечно, можем почитать",
+       "choiceText_en": "Sure, we can read together",
+       "targetNodeId": "scene2_kiv_manga_references"
+      },
+      {
+       "choiceText": "Извини, я всё-таки обещал Милли сходить в библиотеку",
+       "choiceText_en": "Sorry, I did promise Milly to go to the library",
+       "targetNodeId": "scene2_library_apology"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_manga_references",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Кив",
+     "text": "Отлично! Вот смотри, это мои самые любимые! «В любви как на огороде» — это гениальная история о двух людях, которые влюблены друг в друга, но оба слишком горды, чтобы признаться!",
+     "text_en": "Great! Look, these are my favorites! 'Love on the Garden' — it's a genius story about two people who are in love but both too proud to confess!",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "А вот «Моя февральская ложь» — про музыканта, который потерял способность слышать свою музыку... Я каждый раз плачу на последней главе.",
+     "text_en": "And here's 'My February Lie' — about a musician who lost the ability to hear his own music... I cry every time at the last chapter.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Ещё «Киотский гуль»! Жёсткая история про существо, которое застряло между двумя мирами. И «Моё имя» — про двоих, которые связаны через время!",
+     "text_en": "Also 'Kyoto Ghoul'! A dark story about a creature stuck between two worlds. And 'My Name' — about two people connected through time!",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "А «Физическая битва»! Там такие бои!.. Ты хоть что-нибудь из этого слышал?",
+     "text_en": "And 'Physical Battle'! The fights are amazing!.. Have you heard of any of these?",
+     "characterSprite": "femboy/pose_a/blush",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, кое-что слышал. Звучит интересно.",
+     "text_en": "Yeah, I've heard of some of them. Sounds interesting.",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "Кив заметно оживляется. Его глаза загораются — видно, что мы его первый собеседник, который хоть что-то знает об этих историях.",
+     "text_en": "Kiv visibly lights up. His eyes sparkle — it's clear we're his first conversation partner who knows anything about these stories.",
+     "characterSprite": "femboy/pose_a/love",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "",
+     "text": "В порыве увлечения Кив начинает рассказывать всё эмоциональнее, не замечая, как с каждым предложением подходит к нам всё ближе и ближе.",
+     "text_en": "In a burst of enthusiasm, Kiv starts talking more and more emotionally, not noticing how with each sentence he's getting closer and closer to us.",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Кив",
+     "text": "А вот в «Февральской лжи» есть момент, когда главная героиня говорит ему, что всё это время играла для него! Только для него! И он...",
+     "text_en": "And in 'February Lie' there's a moment when the main heroine tells him she was playing for him all along! Only for him! And he...",
+     "characterSprite": "femboy/pose_a/love",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Он... очень близко подошёл. Я даже чувствую его дыхание. Это... некомфортно.",
+     "text_en": "(In my thoughts) He's... gotten really close. I can even feel his breath. This is... uncomfortable.",
+     "choices": [
+      {
+       "choiceText": "Эй, Кив, ты чуть-чуть увлёкся... Может, отойдёшь немного?",
+       "choiceText_en": "Hey Kiv, you got a bit carried away... Maybe step back a little?",
+       "targetNodeId": "scene2_kiv_apologize_back_off"
+      },
+      {
+       "choiceText": "(Промолчать)",
+       "choiceText_en": "(Stay silent)",
+       "targetNodeId": "scene2_kiv_hug_reveal"
+      }
+     ],
+     "characterPosition": "approaching"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_apologize_back_off",
+   "nextNodeId": "scene2_kiv_manga_discovery",
+   "lines": [
+    {
+     "characterName": "Кив",
+     "text": "О-ой! Извини, извини! Меня занесло... Просто давно ни с кем не разговаривал об этом...",
+     "text_en": "O-oh! Sorry, sorry! I got carried away... It's just been a long time since I talked to anyone about this...",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Всё нормально. Давай лучше дальше почитаем?",
+     "text_en": "It's fine. Let's just keep reading, okay?"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Д-да! Конечно!",
+     "text_en": "Y-yeah! Of course!",
+     "characterSprite": "femboy/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_manga_discovery",
+   "nextNodeId": "scene2_kiv_shadow_behind",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы садимся на расстоянии друг от друга и начинаем читать. Спустя какое-то время я замечаю кое-что интересное.",
+     "text_en": "We sit at a distance from each other and start reading. After a while, I notice something interesting.",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) В этих последних выпущенных мангах уже упоминаются первые роботы... Значит, люди знали о них. Нужно читать дальше.",
+     "text_en": "(In my thoughts) In these last published manga volumes, early robots are already mentioned... So humans knew about them. I need to keep reading."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Кив, а есть ещё более поздние выпуски? Самые последние, что выходили?",
+     "text_en": "Kiv, are there even later issues? The very last ones that were published?"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Есть... Но от них почему-то стали избавляться. Я не знаю почему — вроде обычные манги.",
+     "text_en": "There are... But for some reason they've been getting rid of them. I don't know why — they seem like normal manga.",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Избавляются от манг, в которых упоминаются первые роботы... Это точно не совпадение.",
+     "text_en": "(In my thoughts) Getting rid of manga that mention the first robots... This is definitely not a coincidence."
+    },
+    {
+     "characterName": "Кив",
+     "text": "Ты чего загрустил? Не переживай! У меня есть пару таких манг! Только... никому не говори, ладно?",
+     "text_en": "Why so glum? Don't worry! I have a couple of those manga! Just... don't tell anyone, okay?",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Спасибо, Кив. Обещаю — никому.",
+     "text_en": "Thanks, Kiv. I promise — not a soul."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_shadow_behind",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы продолжаем читать в тишине. Спокойно, почти уютно. Кив время от времени комментирует какие-то моменты, и я чувствую, что он искренне рад.",
+     "text_en": "We continue reading in silence. Calm, almost cozy. Kiv occasionally comments on certain moments, and I feel that he's genuinely happy.",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Максим... Сзади — это твоя подруга?",
+     "text_en": "Maxim... Behind you — is that your friend?",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "",
+     "text": "Я резко поворачиваюсь. Никого.",
+     "text_en": "I turn around sharply. Nobody.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Хм... Уже ушла, наверное.",
+     "text_en": "Hm... She must have already left.",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) По спине пробежала дрожь. Кто стоял за мной?.. Нет, не думай об этом. Не сейчас.",
+     "text_en": "(In my thoughts) A chill ran down my spine. Who was standing behind me?.. No, don't think about it. Not now."
+    },
+    {
+     "characterName": "",
+     "text": "Мы продолжаем читать, стараясь не обращать внимания на странное чувство тревоги.",
+     "text_en": "We continue reading, trying to ignore the strange feeling of anxiety.",
+     "characterSprite": "femboy/pose_a/neutral"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Максим... а можно мы с этого дня будем тут собираться и вместе читать манги? Каждый день?",
+     "text_en": "Maxim... can we meet here from now on and read manga together? Every day?",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Да, Кив. Конечно можно.",
+     "text_en": "Yeah, Kiv. Of course we can."
+    },
+    {
+     "characterName": "",
+     "text": "Кив улыбается — впервые за весь день по-настоящему счастливой улыбкой.",
+     "text_en": "Kiv smiles — for the first time all day, with a genuinely happy smile.",
+     "characterSprite": "femboy/pose_a/love"
+    },
+    {
+     "characterName": "",
+     "text": "Конец главы 2.",
+     "text_en": "End of Chapter 2.",
+     "backgroundImage": "black",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_hug_reveal",
+   "nextNodeId": "scene2_kiv_confession",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Кив делает ещё один шаг ближе и... внезапно обнимает нас.",
+     "text_en": "Kiv takes one more step closer and... suddenly hugs us.",
+     "characterSprite": "femboy/pose_a/love",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Максим",
+     "text": "К-Кив?! Что ты делаешь?",
+     "text_en": "K-Kiv?! What are you doing?",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Ты... ты мой первый друг, который меня понимает. Извини... просто...",
+     "text_en": "You're... you're my first friend who understands me. Sorry... it's just...",
+     "characterSprite": "femboy/pose_a/blush",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Не слишком ли быстро мы перешли на обнимашки? Мы только сегодня познакомились.",
+     "text_en": "Aren't we moving a bit fast with the hugging? We only met today.",
+     "characterPosition": "approaching"
+    },
+    {
+     "characterName": "Кив",
+     "text": "...",
+     "text_en": "...",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Максим... Я должен тебе кое-что рассказать. Я... я дефектный робот.",
+     "text_en": "Maxim... I need to tell you something. I'm... I'm a defective robot.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Дефектный?.. В каком смысле?",
+     "text_en": "Defective?.. What do you mean?",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Моё тело... мужское. Но чип памяти, который в меня поставили, — женский. Меня собрали неправильно.",
+     "text_en": "My body... is male. But the memory chip they put in me is female. I was assembled wrong.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Если об этом узнают... меня отправят на утилизацию.",
+     "text_en": "If anyone finds out... they'll send me for disposal.",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Утилизация... Почему его ещё не отправили? Он ведь даже не скрывает свою женственность...",
+     "text_en": "(In my thoughts) Disposal... Why haven't they sent him already? He doesn't even hide his femininity...",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Ты ведь думаешь — как меня ещё не спалили, да?",
+     "text_en": "You're thinking — how haven't I been caught yet, right?",
+     "characterSprite": "femboy/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я говорю всем, что я просто парень, которому нравится женская одежда. За это не утилизируют. Но если кто-то доложит на проверку и найдут дефект чипа...",
+     "text_en": "I tell everyone I'm just a guy who likes women's clothing. They don't dispose of you for that. But if someone reports me for inspection and they find the chip defect...",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Кив... почему ты решил рассказать это мне? Мы знакомы несколько часов.",
+     "text_en": "Kiv... why did you decide to tell me this? We've known each other for a few hours.",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Потому что я устал. Устал жить в страхе каждый день. Быть парнем тоже не хочу. И я решил рискнуть... потому что увидел, что ты меня не сторонишься.",
+     "text_en": "Because I'm tired. Tired of living in fear every day. I don't want to be a guy either. And I decided to take a risk... because I saw that you don't avoid me.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "center"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_confession",
+   "nextNodeId": "scene2_kiv_figure_interrupt",
+   "lines": [
+    {
+     "characterName": "Кив",
+     "text": "Максим... пока меня не раскрыли... давай встречаться.",
+     "text_en": "Maxim... before I get caught... let's date.",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ч-что?!",
+     "text_en": "W-what?!"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Меня собрали неправильно — но внутри я девушка. И как все девушки... я хочу почувствовать любовь. Хотя бы раз.",
+     "text_en": "I was assembled wrong — but inside I'm a girl. And like all girls... I want to feel love. At least once.",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "",
+     "text": "В его голосе нет безумия — только бесконечная усталость. Голос дрожит. Он отводит взгляд.",
+     "text_en": "There's no madness in his voice — only infinite exhaustion. His voice trembles. He looks away."
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я видел, что тебе я не противен... Может, даже привлекаю. Я ничем не отличаюсь от девушки, кроме тела.",
+     "text_en": "I saw that you're not disgusted by me... Maybe even attracted. I'm no different from a girl, except for my body.",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я... я могу тебя и без женского тела удовлетворить...",
+     "text_en": "I... I can satisfy you even without a female body...",
+     "characterSprite": "femboy/pose_a/blush"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Кив, остановись. Всё слишком быстро. Тебе надо расслабиться. Не стоит признаваться первому встречному.",
+     "text_en": "Kiv, stop. Everything is too fast. You need to relax. You shouldn't confess to a stranger."
+    },
+    {
+     "characterName": "Кив",
+     "text": "ТЫ НЕ ПЕРВЫЙ ВСТРЕЧНЫЙ!",
+     "text_en": "YOU'RE NOT A STRANGER!",
+     "characterSprite": "femboy/pose_a/angry"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я... я знаю о тебе больше, чем ты думаешь...",
+     "text_en": "I... I know more about you than you think...",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "О чём ты?",
+     "text_en": "What are you talking about?"
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я знаю, что ты...",
+     "text_en": "I know that you..."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_figure_interrupt",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Кив резко замирает на полуслове. Перестаёт говорить. Перестаёт двигаться. Как будто кто-то нажал кнопку «пауза».",
+     "text_en": "Kiv suddenly freezes mid-sentence. Stops talking. Stops moving. As if someone pressed the 'pause' button.",
+     "characterSprite": "femboy/pose_a/neutral",
+     "overlayAlpha": 0.0
+    },
+    {
+     "characterName": "???",
+     "text": "Пока ещё рано...",
+     "text_en": "It's too early yet...",
+     "characterSprite": "none",
+     "overlayAlpha": 0.05
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Этот голос... Тот самый, из ночного класса! Что происходит?!",
+     "text_en": "(In my thoughts) That voice... The same one from the night classroom! What's happening?!",
+     "overlayAlpha": 0.05
+    },
+    {
+     "characterName": "",
+     "text": "Я хочу обернуться, но в эту секунду Кив словно «оживает» и хватает меня с нечеловеческой силой. Руки робота сжимаются как тиски — я не могу пошевелиться.",
+     "text_en": "I want to turn around, but in that second Kiv 'comes alive' and grabs me with inhuman strength. The robot's arms clamp down like a vice — I can't move.",
+     "characterSprite": "femboy/pose_a/love",
+     "overlayAlpha": 0.1
+    },
+    {
+     "characterName": "Максим",
+     "text": "Кив! Отпусти! Что ты делаешь?!",
+     "text_en": "Kiv! Let go! What are you doing?!",
+     "overlayAlpha": 0.15
+    },
+    {
+     "characterName": "Кив",
+     "text": "Я люблю тебя, Максим. Я люблю. Я люблю.",
+     "text_en": "I love you, Maxim. I love you. I love you.",
+     "characterSprite": "femboy/pose_a/love",
+     "overlayAlpha": 0.2
+    },
+    {
+     "characterName": "???",
+     "text": "Теперь очередь Милли.",
+     "text_en": "Now it's Milly's turn.",
+     "overlayAlpha": 0.25
+    },
+    {
+     "characterName": "",
+     "text": "Я слышу, как шаги фигуры удаляются. Но не могу ничего сделать — Кив держит слишком крепко.",
+     "text_en": "I hear the figure's footsteps receding. But I can't do anything — Kiv's grip is too strong.",
+     "characterSprite": "femboy/pose_a/love",
+     "overlayAlpha": 0.3
+    },
+    {
+     "characterName": "Максим",
+     "text": "КИВ, ОСТАНОВИСЬ!",
+     "text_en": "KIV, STOP!",
+     "overlayAlpha": 0.35
+    },
+    {
+     "characterName": "",
+     "text": "Его руки перемещаются на моё горло. Слёзы текут по его лицу, пока он сжимает всё сильнее.",
+     "text_en": "His hands move to my throat. Tears stream down his face as he squeezes harder and harder.",
+     "characterSprite": "femboy/pose_a/sad",
+     "characterPosition": "close",
+     "overlayAlpha": 0.45
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Я... не могу дышать...",
+     "text_en": "(In my thoughts) I... can't breathe...",
+     "overlayAlpha": 0.6
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Мне нужно... выбраться... Милли... мне нужно спасти Милли...",
+     "text_en": "(In my thoughts) I need to... get out... Milly... I need to save Milly...",
+     "backgroundImage": "black",
+     "characterSprite": "none",
+     "overlayAlpha": 0.8
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Милли... беги...",
+     "text_en": "(In my thoughts) Milly... run...",
+     "overlayAlpha": 0.92
+    },
+    {
+     "characterName": "",
+     "text": ".........",
+     "text_en": ".........",
+     "overlayAlpha": 1.0
+    },
+    {
+     "characterName": "",
+     "text": "Концовка 2 — «Милли, беги...»",
+     "text_en": "Ending 2 — 'Milly, run...'",
+     "overlayAlpha": 1.0
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_library_apology",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Кив",
+     "text": "А... ну ладно. Может, в другой раз тогда...",
+     "text_en": "Ah... well okay. Maybe another time then...",
+     "characterSprite": "femboy/pose_a/sad"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Обязательно, Кив. Спасибо за мангу!",
+     "text_en": "Definitely, Kiv. Thanks for the manga!"
+    },
+    {
+     "characterName": "",
+     "text": "Мы выходим из класса Кива. Я иду по коридору в сторону библиотеки.",
+     "text_en": "We leave Kiv's classroom. I walk down the corridor toward the library.",
+     "backgroundImage": "coridor",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Эти манги... В них может быть информация о прошлом. Нужно обязательно почитать их подробнее.",
+     "text_en": "(In my thoughts) Those manga... They might contain information about the past. I definitely need to read them more carefully."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) И с Кивом стоит подружиться. Он может знать больше, чем показывает.",
+     "text_en": "(In my thoughts) And I should befriend Kiv. He might know more than he lets on."
+    },
+    {
+     "characterName": "",
+     "text": "Вот и вход в библиотеку.",
+     "text_en": "Here's the library entrance.",
+     "backgroundImage": "library_dayy"
+    },
+    {
+     "characterName": "",
+     "text": "Захожу внутрь и нахожу Милли — она сидит за столом с грустным лицом.",
+     "text_en": "I go inside and find Milly — she's sitting at a table with a sad face.",
+     "backgroundImage": "inside_library_day",
+     "characterSprite": "milly/pose_a/sad",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли... Извини. Я обещаю, что такого больше не будет. Мы просто взяли мангу, и я сразу побежал к тебе.",
+     "text_en": "Milly... Sorry. I promise it won't happen again. We just grabbed the manga, and I ran straight to you."
+    },
+    {
+     "characterName": "Милли",
+     "text": "...А Кив, по-твоему, милый и красивый?",
+     "text_en": "...Do you think Kiv is cute and beautiful?",
+     "characterSprite": "milly/pose_a/pouting",
+     "choices": [
+      {
+       "choiceText": "Ну... да, согласен, он милый",
+       "choiceText_en": "Well... yes, I agree, he's cute",
+       "targetNodeId": "scene2_kiv_cute_agree"
+      },
+      {
+       "choiceText": "При чём тут вообще это?",
+       "choiceText_en": "What does that even have to do with anything?",
+       "targetNodeId": "scene2_kiv_cute_irrelevant"
+      },
+      {
+       "choiceText": "Милли, ты намного милее и красивее его",
+       "choiceText_en": "Milly, you're way cuter and more beautiful than him",
+       "targetNodeId": "scene2_kiv_cute_milly_better",
+       "setVariable": "milly_prettier_than_kiv",
+       "modifyValue": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_cute_agree",
+   "nextNodeId": "scene2_math_study",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "...Ясно.",
+     "text_en": "...I see.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ладно. Давай лучше подготовимся к математике, как и обещали.",
+     "text_en": "Fine. Let's just prepare for math, like we promised."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_cute_irrelevant",
+   "nextNodeId": "scene2_math_study",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Ничего такого. Забудь.",
+     "text_en": "Nothing like that. Forget it.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Давай лучше подготовимся к математике.",
+     "text_en": "Let's just prepare for math."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_kiv_cute_milly_better",
+   "nextNodeId": "scene2_math_study",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Н-не обязательно было такое говорить, дурак...",
+     "text_en": "Y-you didn't have to say that, dummy...",
+     "characterSprite": "milly/pose_a/blush"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Д-давай лучше подготовимся к математике!",
+     "text_en": "L-let's just prepare for math!"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_math_study",
+   "nextNodeId": "scene2_milly_love_glitch",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Мы садимся за стол и начинаем готовиться к математике. Проходит какое-то время. Тишина, только шелест страниц.",
+     "text_en": "We sit down at the table and start preparing for math. Some time passes. Silence, just the rustle of pages.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_milly_love_glitch",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Максим... Я люблю тебя.",
+     "text_en": "Maxim... I love you.",
+     "characterSprite": "milly/pose_a/blush"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Максим, я люблю тебя.",
+     "text_en": "Maxim, I love you."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли?! Что случилось?",
+     "text_en": "Milly?! What happened?"
+    },
+    {
+     "characterName": "",
+     "text": "Она не отвечает. Молча поднимается, подходит ко мне и нежно обнимает.",
+     "text_en": "She doesn't answer. Silently stands up, walks over to me, and gently hugs me.",
+     "characterSprite": "milly/pose_a/blush"
+    },
+    {
+     "characterName": "???",
+     "text": "Наслаждайся жизнью. И не пытайся узнать правду.",
+     "text_en": "Enjoy life. And don't try to find the truth."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Этот голос... Тот самый! Из ночного класса! Он здесь, прямо за мной!",
+     "text_en": "(In my thoughts) That voice... The same one! From the night classroom! It's here, right behind me!"
+    },
+    {
+     "characterName": "",
+     "text": "Я пытаюсь обернуться, но Милли крепко держит меня.",
+     "text_en": "I try to turn around, but Milly holds me tightly."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли, отпусти меня, пожалуйста. Ты не похожа на себя.",
+     "text_en": "Milly, please let go of me. You're not yourself."
+    },
+    {
+     "characterName": "",
+     "text": "Проходит несколько секунд... и Милли действительно отпускает.",
+     "text_en": "A few seconds pass... and Milly actually lets go.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "???",
+     "text": "С тобой будет сложнее.",
+     "text_en": "It will be harder with you."
+    },
+    {
+     "characterName": "",
+     "text": "Звук шагов. Фигура уходит.",
+     "text_en": "The sound of footsteps. The figure leaves.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Милли",
+     "text": "М... Максим? А почему я тебя обнимаю? Что вообще произошло?",
+     "text_en": "M... Maxim? Why am I hugging you? What happened?",
+     "characterSprite": "milly/pose_a/surprised"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли... ты только что обняла меня и повторяла, что любишь меня. Тебя кто-то контролировал? Кто-то завладел твоей системой?",
+     "text_en": "Milly... you just hugged me and kept saying you love me. Was someone controlling you? Did someone take over your system?"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Что?! Нет... вроде нет. И вообще... «люблю» — это всё ложь. Я просто слишком долго училась, наверное, заглючила.",
+     "text_en": "What?! No... I don't think so. And anyway... 'love' is all a lie. I probably just studied too long and glitched.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Но... гипотетически... чисто теоретически... Что бы ты ответил? Мне не интересно, просто спрашиваю.",
+     "text_en": "But... hypothetically... purely theoretically... What would you have answered? I'm not interested, just asking.",
+     "characterSprite": "milly/pose_a/blush",
+     "choices": [
+      {
+       "choiceText": "Я люблю Эмилию",
+       "choiceText_en": "I love Emilia",
+       "targetNodeId": "scene2_love_emilia"
+      },
+      {
+       "choiceText": "Не могу пока дать ответ",
+       "choiceText_en": "I can't answer that yet",
+       "targetNodeId": "scene2_love_no_answer"
+      },
+      {
+       "choiceText": "Да, Милли. Я тебя тоже люблю",
+       "choiceText_en": "Yes, Milly. I love you too",
+       "targetNodeId": "scene2_love_confession",
+       "requiredVariables": "went_to_cafeteria_ch1,hugged_milly_twice,milly_prettier_than_kiv",
+       "lockedText": "(условия не соблюдены)",
+       "lockedText_en": "(conditions not met)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_love_emilia",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "...Эмилию? Какую Эмилию?",
+     "text_en": "...Emilia? What Emilia?",
+     "characterSprite": "milly/pose_a/surprised"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Пошутил.",
+     "text_en": "Just kidding."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Эмилия? Откуда я вообще это взял? Странно...",
+     "text_en": "(In my thoughts) Emilia? Where did I even get that from? Strange..."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Неудачная шутка... Ладно, пойдём уже в класс.",
+     "text_en": "Bad joke... Come on, let's go to class.",
+     "characterSprite": "milly/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_love_no_answer",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Я и не надеялась на ответ. Я же пошутила.",
+     "text_en": "I wasn't hoping for an answer. I was joking.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Пойдём на уроки, хватит тут сидеть.",
+     "text_en": "Let's go to class, enough sitting here."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_love_confession",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "...",
+     "text_en": "...",
+     "characterSprite": "milly/pose_a/blush"
+    },
+    {
+     "characterName": "Милли",
+     "text": "..........",
+     "text_en": "..........",
+     "characterPosition": "close",
+     "characterSprite": "milly/pose_a/blush"
+    },
+    {
+     "characterName": "",
+     "text": "Милли молчит. Долго. Потом медленно поднимается и подходит ко мне.",
+     "text_en": "Milly is silent. For a long time. Then slowly stands up and walks over to me.",
+     "characterPosition": "near"
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ты только не говори об этом никому...",
+     "text_en": "Just don't tell anyone about this...",
+     "characterSprite": "milly/pose_a/blush",
+     "textSpeed": "slow",
+     "characterPosition": "close"
+    },
+    {
+     "characterName": "",
+     "text": "Она обнимает меня. На секунду. И тут же убегает в сторону класса.",
+     "text_en": "She hugs me. For a second. And immediately runs off toward the classroom."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Максим... ты только что признался своей ИИшке. А пофиг. Будь что будет.",
+     "text_en": "(In my thoughts) Maxim... you just confessed to your AI. Whatever. Let it be."
+    },
+    {
+     "characterName": "",
+     "text": "Я иду за ней в класс.",
+     "text_en": "I follow her to the classroom.",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_cafeteria",
+   "nextNodeId": "scene2_violetta_history_talk",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "Я уже заранее заказала обед на двоих, так что ждать не придётся.",
+     "text_en": "I already pre-ordered lunch for two, so we won't have to wait.",
+     "backgroundImage": "cafe",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center",
+     "musicClip": "quiet_room"
+    },
+    {
+     "characterName": "Максим",
+     "text": "На двоих? Ты заранее знала, что я пойду с тобой?",
+     "text_en": "For two? You knew in advance I'd come with you?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Я всегда заказываю на двоих. На всякий случай. Просто обычно второй поднос выбрасывают.",
+     "text_en": "I always order for two. Just in case. Usually the second tray gets thrown away.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Это... грустно, если честно.",
+     "text_en": "(In my thoughts) That's... actually sad."
+    },
+    {
+     "characterName": "",
+     "text": "Мы садимся за стол. Обед уже стоит — горячий, аккуратно разложенный.",
+     "text_en": "We sit at a table. Lunch is already waiting — hot, neatly arranged."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_history_talk",
+   "nextNodeId": "scene2_violetta_school_age",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Виолетта, ты вчера говорила что-то про историю. Что роботы не всё знают о своём прошлом?",
+     "text_en": "Violetta, yesterday you mentioned something about history. That robots don't know everything about their past?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Я такое говорила? Ну... да. В истории есть много ошибок. Нестыковок.",
+     "text_en": "I said that? Well... yes. There are a lot of mistakes in history. Inconsistencies.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Какие, например?",
+     "text_en": "Like what, for example?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "В учебниках написано, что роботы создали себя сами. Но тогда кто построил первый завод? Завод не может построить сам себя.",
+     "text_en": "The textbooks say robots created themselves. But then who built the first factory? A factory can't build itself.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Логично... Я даже не задумывался об этом.",
+     "text_en": "(In my thoughts) That's logical... I hadn't even thought about that."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Во всех записях история начинается с одной даты. Ничего «до». Как будто кто-то нажал кнопку — и мир включился.",
+     "text_en": "In all records, history starts from a single date. Nothing 'before'. As if someone pressed a button — and the world turned on."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "И ещё... Я однажды нашла документ, где упоминается слово «оператор». Такого слова нет ни в одном словаре. Его вычистили.",
+     "text_en": "And also... I once found a document that mentions the word 'operator'. That word doesn't exist in any dictionary. It was scrubbed."
+    },
+    {
+     "characterName": "Максим",
+     "text": "«Оператор»?.. Кто-то, кто управляет?",
+     "text_en": "'Operator'?.. Someone who controls?"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_school_age",
+   "nextNodeId": "scene2_violetta_fear",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "Вот ещё. Максим, как ты думаешь, сколько лет нашей школе?",
+     "text_en": "Here's another one. Maxim, how old do you think our school is?",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Не знаю... лет тридцать?",
+     "text_en": "I don't know... thirty years?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "В официальных записях — тридцать. А теперь посмотри на стены. Видишь трещины? Этому зданию минимум двести лет.",
+     "text_en": "According to official records — thirty. Now look at the walls. See the cracks? This building is at least two hundred years old."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Куда делись сто семьдесят лет, Максим?",
+     "text_en": "Where did one hundred and seventy years go, Maxim?"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Виолетта... ты веришь, что правительство что-то скрывает?",
+     "text_en": "Violetta... do you believe the government is hiding something?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Скрывает? Много чего. Я даже не знаю, с чего начать.",
+     "text_en": "Hiding? A lot. I don't even know where to start."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Так расскажи! Это же важно!",
+     "text_en": "Then tell me! This is important!"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_fear",
+   "nextNodeId": "scene2_violetta_warning",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "...Мне не интересно. Пока это меня не касается.",
+     "text_en": "...I'm not interested. As long as it doesn't concern me.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Её руки дрожали, когда она это говорила. Она не равнодушна. Она боится.",
+     "text_en": "(In my thoughts) Her hands were trembling when she said that. She's not indifferent. She's afraid."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Виолетта, почему ты не хочешь продолжать? Ты же сама нашла эти нестыковки.",
+     "text_en": "Violetta, why don't you want to continue? You found these inconsistencies yourself."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Был один робот. В прошлом году. Тоже задавал вопросы. Его перевели в другую школу.",
+     "text_en": "There was one robot. Last year. He also asked questions. He was transferred to another school.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Только вот... той школы не существует.",
+     "text_en": "It's just... that school doesn't exist."
+    },
+    {
+     "characterName": "Максим",
+     "text": "...",
+     "text_en": "..."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Поэтому мне не интересно, Максим. Понимаешь?",
+     "text_en": "That's why I'm not interested, Maxim. Understand?"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Она не равнодушна. Она в ужасе. И прячет это за маской безразличия.",
+     "text_en": "(In my thoughts) She's not indifferent. She's terrified. And hiding it behind a mask of apathy."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_warning",
+   "nextNodeId": "scene2_violetta_milly_arrives",
+   "lines": [
+    {
+     "characterName": "Виолетта",
+     "text": "Ты странный, Максим. Другие роботы не задают таких вопросов. Они принимают мир таким, какой он есть.",
+     "text_en": "You're strange, Maxim. Other robots don't ask such questions. They accept the world as it is.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "А ты... смотришь так, будто видишь всё впервые.",
+     "text_en": "And you... look at everything as if you're seeing it for the first time."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Она что-то заметила... Но не говорит прямо.",
+     "text_en": "(In my thoughts) She's noticed something... But won't say it directly."
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "И ещё, Максим... Не попадайся ей.",
+     "text_en": "And one more thing, Maxim... Don't get caught by her."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ей? Кому — «ей»?",
+     "text_en": "Her? Who is 'her'?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "...Да так. Не бери в голову.",
+     "text_en": "...Never mind. Don't worry about it.",
+     "characterSprite": "violet/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) «Ей»... Фигура — это «она»? Виолетта знает о ней?",
+     "text_en": "(In my thoughts) 'Her'... The figure is a 'she'? Does Violetta know about her?"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_violetta_milly_arrives",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "Максим! Ты обещал сходить со мной в библиотеку! А ты тут... с Виолеттой?!",
+     "text_en": "Maxim! You promised to go to the library with me! And you're here... with Violetta?!",
+     "characterSprite": "milly/pose_a/pouting",
+     "characterPosition": "left"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли, мы только вышли из столовой с Виолеттой, я...",
+     "text_en": "Milly, we just came from the cafeteria with Violetta, I..."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Ты был с Виолеттой с утра?!",
+     "text_en": "You've been with Violetta since morning?!",
+     "characterSprite": "milly/pose_a/pouting"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ну... да.",
+     "text_en": "Well... yes."
+    },
+    {
+     "characterName": "",
+     "text": "Милли разворачивается и убегает. Я вижу слёзы на её лице.",
+     "text_en": "Milly turns around and runs away. I can see tears on her face.",
+     "characterSprite": "milly/pose_a/sad"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Вышло не очень, раз ты ей обещал...",
+     "text_en": "That didn't go well, since you promised her...",
+     "characterSprite": "violet/pose_a/neutral",
+     "choices": [
+      {
+       "choiceText": "Побежать за Милли",
+       "choiceText_en": "Run after Milly",
+       "targetNodeId": "scene2_vio_chase_milly"
+      },
+      {
+       "choiceText": "Остаться с Виолеттой",
+       "choiceText_en": "Stay with Violetta",
+       "targetNodeId": "scene2_vio_stay"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_vio_stay",
+   "nextNodeId": "scene2_vio_voice_alone",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Я решаю остаться. Виолетта доедает в тишине.",
+     "text_en": "I decide to stay. Violetta finishes eating in silence.",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Мне нужно заказать обед на завтра. Я чуть отойду, подожди здесь.",
+     "text_en": "I need to pre-order lunch for tomorrow. I'll step away for a bit, wait here."
+    },
+    {
+     "characterName": "Максим",
+     "text": "Хорошо, я подожду.",
+     "text_en": "Okay, I'll wait."
+    },
+    {
+     "characterName": "",
+     "text": "Виолетта уходит. Я остаюсь один за столом.",
+     "text_en": "Violetta leaves. I'm left alone at the table.",
+     "characterSprite": "none"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_vio_voice_alone",
+   "nextNodeId": "scene2_vio_milly_who",
+   "lines": [
+    {
+     "characterName": "???",
+     "text": "Один... Верное решение.",
+     "text_en": "Alone... The right decision."
+    },
+    {
+     "characterName": "???",
+     "text": "Но оставлять Милли было неверное решение.",
+     "text_en": "But leaving Milly was the wrong decision."
+    },
+    {
+     "characterName": "",
+     "text": "Я резко оборачиваюсь. Никого.",
+     "text_en": "I turn around sharply. Nobody."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Опять этот голос! Тот самый! Прямо здесь, в столовой, среди всех!",
+     "text_en": "(In my thoughts) That voice again! The same one! Right here, in the cafeteria, among everyone!"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Максим? Что случилось? Ты весь побледнел.",
+     "text_en": "Maxim? What happened? You've gone pale.",
+     "characterSprite": "violet/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Виолетта... Рядом со мной только что кто-то стоял?",
+     "text_en": "Violetta... Was someone just standing next to me?"
+    },
+    {
+     "characterName": "Виолетта",
+     "text": "Нет... Я никого не видела.",
+     "text_en": "No... I didn't see anyone."
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_vio_milly_who",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "",
+     "text": "Вдруг я замечаю Милли. Она стоит неподалёку, спокойная, как ни в чём не бывало.",
+     "text_en": "Suddenly I notice Milly. She's standing nearby, calm, as if nothing happened.",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли?! Ты же... разве ты не должна быть в библиотеке?",
+     "text_en": "Milly?! Weren't you... aren't you supposed to be at the library?"
+    },
+    {
+     "characterName": "Милли",
+     "text": "В библиотеке? Нет. А почему я должна?",
+     "text_en": "The library? No. Why should I be?",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Ну мы же обещали... Мы с тобой договаривались...",
+     "text_en": "But we promised... We agreed together..."
+    },
+    {
+     "characterName": "Милли",
+     "text": "А вы кто?",
+     "text_en": "And who are you?",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "",
+     "text": "Конец главы 2.",
+     "text_en": "End of Chapter 2.",
+     "characterSprite": "none",
+     "backgroundImage": "black"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_vio_chase_milly",
+   "nextNodeId": "scene2_vio_milly_forgot",
+   "lines": [
+    {
+     "characterName": "Максим",
+     "text": "Виолетта, прости! Мне нужно за ней!",
+     "text_en": "Violetta, sorry! I need to go after her!",
+     "characterSprite": "none",
+     "backgroundImage": "cafe"
+    },
+    {
+     "characterName": "",
+     "text": "Я вскакиваю из-за стола и бегу по коридору.",
+     "text_en": "I jump up from the table and run through the corridor.",
+     "backgroundImage": "coridor"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Когда я ей обещал?.. Я ведь не помню, чтобы договаривался о библиотеке...",
+     "text_en": "(In my thoughts) When did I promise her?.. I don't remember agreeing to go to the library..."
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Неужто «прошлый я» — тот, кого они помнят — успел ей что-то пообещать?.. Что вообще происходит?",
+     "text_en": "(In my thoughts) Could the 'previous me' — the one they remember — have promised her something?.. What is even happening?"
+    },
+    {
+     "characterName": "",
+     "text": "Вот и вход в библиотеку.",
+     "text_en": "Here's the library entrance.",
+     "backgroundImage": "library_dayy"
+    },
+    {
+     "characterName": "",
+     "text": "Вбегаю внутрь и вижу Милли. Она стоит посреди зала с абсолютно нейтральным выражением лица.",
+     "text_en": "I rush inside and see Milly. She's standing in the middle of the hall with a completely neutral expression.",
+     "backgroundImage": "inside_library_day",
+     "characterSprite": "milly/pose_a/neutral",
+     "characterPosition": "center"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли! Подожди! Я хочу извиниться, я...",
+     "text_en": "Milly! Wait! I want to apologize, I..."
+    },
+    {
+     "characterName": "",
+     "text": "Милли молчит. Просто стоит и смотрит куда-то сквозь меня.",
+     "text_en": "Milly is silent. Just standing and looking through me."
+    },
+    {
+     "characterName": "???",
+     "text": "Слишком поздно.",
+     "text_en": "Too late.",
+     "characterSprite": "none"
+    },
+    {
+     "characterName": "Максим",
+     "text": "(В мыслях) Этот голос! Снова! Тот самый!",
+     "text_en": "(In my thoughts) That voice! Again! The same one!"
+    },
+    {
+     "characterName": "",
+     "text": "Оборачиваюсь — никого. Поворачиваюсь обратно к Милли.",
+     "text_en": "I turn around — nobody. I turn back to Milly.",
+     "characterSprite": "milly/pose_a/neutral"
+    }
+   ]
+  },
+  {
+   "nodeId": "scene2_vio_milly_forgot",
+   "nextNodeId": "",
+   "lines": [
+    {
+     "characterName": "Милли",
+     "text": "А?.. Почему мы стоим и смотрим на меня?",
+     "text_en": "Huh?.. Why are we standing and staring at me?",
+     "characterSprite": "milly/pose_a/surprised"
+    },
+    {
+     "characterName": "Максим",
+     "text": "Милли, я... Я хотел извиниться за то, что...",
+     "text_en": "Milly, I... I wanted to apologize for..."
+    },
+    {
+     "characterName": "Милли",
+     "text": "Я вижу вас впервые.",
+     "text_en": "I'm seeing you for the first time.",
+     "characterSprite": "milly/pose_a/neutral"
+    },
+    {
+     "characterName": "",
+     "text": "Конец главы 2.",
+     "text_en": "End of Chapter 2.",
+     "characterSprite": "none",
+     "backgroundImage": "black"
+    }
+   ]
+  }
+ ]
+}
