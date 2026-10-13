@@ -93,8 +93,8 @@ Install: unpack BepInEx 6 (Unity.IL2CPP, win-x64) into the game root,
 start the game once (`BepInEx/interop/` gets generated), put the built
 `DlcRecursiveSearch.dll` into `BepInEx\plugins\`.
 Check: drop a PNG into a subfolder, start the game,
-`BepInEx\LogOutput.log` should show `DLC index: N file(s)` and
-`Patches applied: 3/3`.
+`BepInEx\LogOutput.log` should show `DLC index: N file(s)`,
+three `Patched ...` lines and `Patches applied: 3/3`.
 Details, building (.NET SDK, offline), removal:
 [dlc_search_plugin/README.md](dlc_search_plugin/README.md).
 
@@ -161,7 +161,9 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 
 - `mod_demo_apply.py` — first-background replacement and a simple text marker.
 - `mod_demo_node.py` — demo node chain insertion.
-- `load_mod.py` — mod installation from ZIP (chapter JSON + `dlc_*` PNG/WAV).
+- `mod_nova_node.py` / `mod_gif_node.py` — extra demo chains (`--remove` to roll back).
+- `common.py` — shared helpers (paths, backups, chapter validation).
+- `load_mod.py` — mod installation from ZIP (chapter JSON + `dlc_*` PNG/JPG/WAV).
 - `mod_test.zip` — a ready test mod (`mod_test_*` branch in chapter 1 + Nova
   assets): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — extraction of all assets of all types.
@@ -170,7 +172,7 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `extract_audio.py` — extraction of all `AudioClip`s (FSB5/Vorbis) to WAV.
 - `mod_start_bg.png` — demo background.
 - `mod_demo_jingle.wav` — custom sound loaded by the game from the root.
-- `requirements.txt` — the `UnityPy` dependency.
+- `requirements.txt` — the `UnityPy`, `fsb5`, `Pillow` dependencies.
 - `run_demo.bat` — apply both demo mods.
 - `dlc_search_plugin/` — BepInEx plugin for recursive `dlc_*` subfolder
   search + README (install, build, verify).

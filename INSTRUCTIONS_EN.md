@@ -61,7 +61,7 @@ playthroughs (e.g. a chapter 1 choice affects chapter 2).
 - Change text: edit `text` / `text_en` of the line you need.
 - Hide the character before narration: set `"characterSprite": "none"`.
 - Change background: set an existing name (`zoo`, `cafe`, `room_day`, ...).
-  The full name list is in `objects_list.txt` after extraction.
+  The full name list is in `modmaker\extracted\objects_list.txt` after extraction.
 - Add a node: copy any node, give it a new `nodeId`, reference it via
   a choice's `nextNodeId` or `targetNodeId`.
 

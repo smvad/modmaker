@@ -31,7 +31,7 @@
 1. Поставьте BepInEx 6 для IL2CPP-игр: свежий `BepInEx-Unity.IL2CPP-win-x64`
    (ветка 6.0.0, bleeding edge) с официального сайта сборок BepInEx,
    распакуйте архив **в корень игры** (рядом с `LED HEARTS.exe`) —
-   появятся `winhttp.dll`, `doorstop_config.ini`, `BepInEx/`, `dotnet/`.
+   появятся `winhttp.dll`, `.doorstop_version`, `doorstop_config.ini`, `BepInEx/`, `dotnet/`.
 2. Запустите игру один раз и дождитесь меню: BepInEx сам сгенерирует
    interop-сборки для Unity 6000.3.11f1 в `BepInEx/interop/`
    (нужен интернет — докачиваются базовые Unity-библиотеки), затем

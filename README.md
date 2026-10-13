@@ -89,17 +89,12 @@ python -m venv .venv
 **в любой подпапке** корня игры (побеждает самый мелкий путь, дубли —
 warning в лог; свои копии в корне отслеживаются и обновляются сами).
 
-Ванильная игра видит внешние `dlc_*` файлы только в корне. Плагин
-`DlcRecursiveSearch` ищет `dlc_*.png`, `dlc_*.wav` и `nsfw_dlc.dat`
-**в любой подпапке** корня игры (побеждает самый мелкий путь, дубли —
-warning в лог; свои копии в корне отслеживаются и обновляются сами).
-
 Установка: распаковать BepInEx 6 (Unity.IL2CPP, win-x64) в корень игры,
 один раз запустить игру (сгенерируется `BepInEx/interop/`), положить
 собранный `DlcRecursiveSearch.dll` в `BepInEx\plugins\`.
 Проверка: положить PNG в подпапку, запустить игру,
-в `BepInEx\LogOutput.log` должны быть `DLC index: N file(s)` и
-`Patches applied: 3/3`.
+в `BepInEx\LogOutput.log` должны быть `DLC index: N file(s)`,
+три `Patched ...` и `Patches applied: 3/3`.
 Подробности, сборка (.NET SDK, офлайн), удаление:
 [dlc_search_plugin/README.md](dlc_search_plugin/README.md).
 
@@ -166,7 +161,9 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 
 - `mod_demo_apply.py` — замена первого фона и простой текстовый маркер.
 - `mod_demo_node.py` — добавление демонстрационной цепочки узлов.
-- `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/WAV).
+- `mod_nova_node.py` / `mod_gif_node.py` — дополнительные демо-цепочки (`--remove` для отката).
+- `common.py` — общие помощники (пути, бэкапы, валидация глав).
+- `load_mod.py` — установка мода из ZIP (JSON глав + `dlc_*` PNG/JPG/WAV).
 - `mod_test.zip` — готовый тестовый мод (ветка `mod_test_*` в главе 1 + ассеты
   Новы): `.venv\Scripts\python.exe modmaker\load_mod.py modmaker\mod_test.zip`.
 - `extract_resources.py` — извлечение всех ассетов всех типов.
@@ -175,7 +172,7 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `extract_audio.py` — извлечение всех `AudioClip` (FSB5/Vorbis) в WAV.
 - `mod_start_bg.png` — демонстрационный фон.
 - `mod_demo_jingle.wav` — кастомный звук, загружаемый игрой из корня.
-- `requirements.txt` — зависимость `UnityPy`.
+- `requirements.txt` — зависимости `UnityPy`, `fsb5`, `Pillow`.
 - `run_demo.bat` — применить оба демо-мода.
 - `dlc_search_plugin/` — BepInEx-плагин рекурсивного поиска `dlc_*`
   по подпапкам + README (установка, сборка, проверка).

@@ -94,8 +94,8 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
 - Variables are ints: `setVariable` + `modifyValue: 1`;
   `requiredVariables` is comma-AND; `lockedText` shows when the gate fails.
 - External assets load from the **game root by base name**:
-  `my_room.png` → `"backgroundImage": "my_room"`;
-  `my_jingle.wav` → `"sfxClip": "my_jingle:0.9"`.
+  `dlc_my_room.png` → `"backgroundImage": "dlc_my_room"`;
+  `dlc_my_jingle.wav` → `"sfxClip": "dlc_my_jingle:0.9"`.
   WAV must be PCM 16-bit 44100 Hz. Never reference `DLC/` — that folder is the
   user's private add-on and does not ship with the game.
   With the `DlcRecursiveSearch` plugin, `dlc_*` also resolves from any root
@@ -118,7 +118,8 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
   the game root so `import common` resolves.
 - `add_texture.py` / `add_chapter.py` / `add_audio.py` / `write_save.py` /
   `fsb5pcm.py` are experimental test scripts (bugs possible): verified manually
-  on 6000.3.11f1, do not present them as stable API.
+  on 6000.3.11f1, do not present them as stable API. `chapter_03.json` is the
+  test scenario used by them.
 - Release flow: zip must contain top-level `modmaker/` dir; to replace a
   release: `gh release delete <tag> --yes --cleanup-tag`, rebuild zip,
   `gh release create <tag> <zip>`.
