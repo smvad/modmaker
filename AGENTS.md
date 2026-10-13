@@ -21,7 +21,7 @@ next to `LED HEARTS.exe`). Live game files are one level up.
 ```
 
 - The venv lives in the **game root** (`.\.venv`), not in `modmaker/`.
-- Pinned dep: `UnityPy==1.25.3`, plus `fsb5` for audio (`modmaker/requirements.txt`).
+- Pinned deps: `UnityPy==1.25.3`, plus `fsb5` for audio and `Pillow` for images (`modmaker/requirements.txt`).
   `extract_audio.py` also needs `ffmpeg` in PATH and the vorbis DLLs in
   `modmaker/tools/` (already vendored); the single `falling` clip needs
   external `vgmstream-cli` (auto-used from `modmaker/tools/` or PATH).
