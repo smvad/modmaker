@@ -8,6 +8,34 @@
 > Все команды в этом файле запускаются **только из корня игры**
 > (`./LED HEARTS` — папка с `LED HEARTS.exe`).
 
+> **Рекомендация:** с модмейкером проще работать через агентную
+> coding-систему (например, OpenCode): покажите агенту `AGENTS.md` в папке
+> `modmaker/` — он выполнит команды из корня игры, проверки `--dry-run`
+> и откат при необходимости. Ручной запуск тоже поддерживается, но требует
+> аккуратности с путями и бэкапами.
+
+## Демо: что подхватывает глава 3
+
+Тестовая глава 3 (`chapter_03.json`, ставится через `add_chapter.py`)
+использует встроенные фон `ch3_room` и звук `ch3_chime:0.9` (плюс штатные
+`cafe`, `lonely_dev`, `door_knock`, `crowd` и спрайты Милли/Виолетты).
+
+- Фон `ch3_room` — вшивается из `modmaker/mod_start_bg.png` через `add_texture.py`:
+
+  ![Демо-фон главы 3 (`ch3_room`)](mod_start_bg.png)
+
+- Звук `ch3_chime` — вшивается из `modmaker/mod_demo_jingle.wav` через `add_audio.py`:
+
+  [▶ mod_demo_jingle.wav](mod_demo_jingle.wav)
+
+Проверка связки (из корня игры, без записи):
+
+```bat
+.venv\Scripts\python.exe modmaker\add_texture.py --png modmaker\mod_start_bg.png --name ch3_room --dry-run
+.venv\Scripts\python.exe modmaker\add_audio.py --wav modmaker\mod_demo_jingle.wav --name ch3_chime --dry-run
+.venv\Scripts\python.exe modmaker\add_chapter.py --dry-run
+```
+
 ## Установка
 
 ### Вариант 1: ZIP из Releases (без git)
@@ -179,12 +207,6 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `INSTRUCTIONS.md` / `INSTRUCTIONS_EN.md` — ручное редактирование глав и свои ассеты (RU/EN).
 
 ## Экспериментальное (тестовые скрипты, возможны баги)
-
-> **Рекомендация:** с этими скриптами проще работать через агентную
-> coding-систему (например, OpenCode): покажите агенту `AGENTS.md` в папке
-> `modmaker/` — он выполнит команды из корня игры, проверки `--dry-run`
-> и откат при необходимости. Ручной запуск тоже поддерживается, но требует
-> аккуратности с путями и бэкапами.
 
 Проверены на сборке 6000.3.11f1 вручную (фон/глава/звук в игре работают),
 но покрытие тестами частичное. Перед записью скрипты делают `.bak`
