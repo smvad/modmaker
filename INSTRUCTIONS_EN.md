@@ -85,9 +85,12 @@ The original is saved to `LED HEARTS_Data\resources.assets.bak` (once).
 
 The game first looks an asset up in `resources.assets`, and if it is not
 there — loads an external file **from the game root** (next to
-`LED HEARTS.exe`).
+`LED HEARTS.exe`). With the [DlcRecursiveSearch](dlc_search_plugin/README.md)
+plugin installed, **any subfolder** of the game root works too (rules:
+`dlc_` prefix, shallowest path wins, duplicates warn in
+`BepInEx\LogOutput.log`).
 
-### Backgrounds and sprites — PNG in the game root, name strictly with the `dlc_` prefix
+### Backgrounds and sprites — PNG, name strictly with the `dlc_` prefix
 
 - The external loader (`LoadExternalDLCSprite`) only tries a file if its name
   starts with `dlc_`. Without the prefix the game stops at a
@@ -97,8 +100,8 @@ there — loads an external file **from the game root** (next to
 - File name = scenario name. Example: the file `dlc_my_room.png` in the game
   root is used by the line `"backgroundImage": "dlc_my_room"`.
 - Same for characters: `dlc_my_hero.png` + `"characterSprite": "dlc_my_hero"`.
-- Do not put them in subfolders (e.g. inside `modmaker/`) — the loader looks
-  strictly in the game root (next to `LED HEARTS.exe`).
+- Without the plugin — game root only (next to `LED HEARTS.exe`); with the
+  `DlcRecursiveSearch` plugin any root subfolder works.
 
 ### Sounds — WAV in the game root, name strictly with the `dlc_` prefix
 

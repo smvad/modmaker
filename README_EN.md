@@ -81,6 +81,22 @@ files without the `dlc_` prefix and broken WAV/PNG files, makes a one-time
 Details on manual JSON editing and custom assets (PNG/WAV, where to put them,
 formats): [INSTRUCTIONS_EN.md](INSTRUCTIONS_EN.md).
 
+## Recursive DLC asset search (BepInEx)
+
+The vanilla game only sees external `dlc_*` files in the root.
+The `DlcRecursiveSearch` plugin finds `dlc_*.png`, `dlc_*.wav` and
+`nsfw_dlc.dat` in **any subfolder** of the game root (shallowest path
+wins, duplicates warn in the log; staged root copies are tracked and
+refreshed automatically).
+
+BepInEx is already installed in the game root (`winhttp.dll`,
+`doorstop_config.ini`, `BepInEx/`, `dotnet/`); the plugin lives in
+`BepInEx\plugins\DlcRecursiveSearch.dll`. Check: drop a PNG into a
+subfolder, start the game, `BepInEx\LogOutput.log` should show
+`DLC index: N file(s)` and `Patches applied: 3/3`.
+Details, building (.NET SDK, offline), removal:
+[dlc_search_plugin/README.md](dlc_search_plugin/README.md).
+
 ## Rollback
 
 ```bat
@@ -155,6 +171,8 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `mod_demo_jingle.wav` — custom sound loaded by the game from the root.
 - `requirements.txt` — the `UnityPy` dependency.
 - `run_demo.bat` — apply both demo mods.
+- `dlc_search_plugin/` — BepInEx plugin for recursive `dlc_*` subfolder
+  search + README (install, build, verify).
 - `INSTRUCTIONS_EN.md` / `INSTRUCTIONS.md` — manual chapter editing and custom assets (EN/RU).
 
 ## Experimental (test scripts, bugs possible)

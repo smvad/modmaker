@@ -29,6 +29,25 @@ next to `LED HEARTS.exe`). Live game files are one level up.
   with spaces, invoke `.venv/Scripts/python.exe` directly (no `& "..."` wrapper needed).
 - Verification pattern: `repack --dry-run` must show 0 changes on a fresh
   extract; after edits, repack then reload the file with UnityPy and read back.
+- Every game launch MUST end with killing it in the same command
+  (`try { Start-Process ...; Start-Sleep ... } finally { Stop-Process -Name 'LED HEARTS' -Force }`);
+  never leave the game running for the user to kill.
+
+## DlcRecursiveSearch plugin (`modmaker/dlc_search_plugin/`, net6.0)
+
+- Build (needs .NET SDK 8+, offline — project has only DLL refs to the
+  installed `BepInEx/core`, no NuGet restore needed):
+  `dotnet build modmaker\dlc_search_plugin\DlcRecursiveSearch.csproj -c Release`;
+  output DLL goes to `BepInEx\plugins\`. `bin/`/`obj/` are gitignored.
+- Patch targets resolve at runtime by method name over `Assembly-CSharp`
+  (`VNSceneSetup.LoadExternalDLCSprite/LoadExternalDLCAudio`,
+  `DialogueManager.IsNSFWDLCOwned`); no generated interop needed to build.
+- Load markers in `BepInEx\LogOutput.log`: `DLC index: N file(s)`,
+  `Patched ...`, `Patches applied: 3/3`.
+- BepInEx install layout in game root: `winhttp.dll`,
+  `.doorstop_version`, `doorstop_config.ini`, `BepInEx/` (`core`,
+  `plugins`, `interop` + `offline-generated.txt`, `config`), `dotnet/`
+  (mini-coreclr 6.0.7). Removal = delete these; saves/game files untouched.
 
 ## UnityPy gotchas (verified, do not "fix")
 
@@ -77,6 +96,8 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
   `my_jingle.wav` → `"sfxClip": "my_jingle:0.9"`.
   WAV must be PCM 16-bit 44100 Hz. Never reference `DLC/` — that folder is the
   user's private add-on and does not ship with the game.
+  With the `DlcRecursiveSearch` plugin, `dlc_*` also resolves from any root
+  subfolder (shallowest wins, duplicates warn, staged copies auto-refresh).
 
 ## Repo conventions
 
@@ -85,7 +106,8 @@ on Windows doubles it to `\r\r\n`, which shows up as phantom repack diffs.
 - `mod_demo_node.py` is idempotent: it deletes `mod_demo_*` nodes before
   re-inserting. Backups (`resources.assets.bak`, `*.pre_demo_nodes.bak`)
   are created once, next to the assets — never overwrite them.
-- Do not commit: `extracted/`, `__pycache__/`, `*.tmp`, `*.bak` (gitignored).
+- Do not commit: `extracted/`, `__pycache__/`, `*.tmp`, `*.bak`,
+  `[Bb]in/`, `[Oo]bj/` (gitignored).
 - `read_chapter.py --input` must be passed explicitly (its default filename
   is a stale artifact).
 - Shared helpers live in `common.py` (`find_game_root`, `backup_once`,

@@ -82,6 +82,21 @@ python -m venv .venv
 Подробно о ручном редактировании JSON и своих ассетах (PNG/WAV, куда кидать,
 форматы): [INSTRUCTIONS.md](INSTRUCTIONS.md).
 
+## Рекурсивный поиск DLC-ассетов (BepInEx)
+
+Ванильная игра видит внешние `dlc_*` файлы только в корне. Плагин
+`DlcRecursiveSearch` ищет `dlc_*.png`, `dlc_*.wav` и `nsfw_dlc.dat`
+**в любой подпапке** корня игры (побеждает самый мелкий путь, дубли —
+warning в лог; свои копии в корне отслеживаются и обновляются сами).
+
+Установка BepInEx уже выполнена в корне игры (`winhttp.dll`,
+`doorstop_config.ini`, `BepInEx/`, `dotnet/`); плагин лежит в
+`BepInEx\plugins\DlcRecursiveSearch.dll`. Проверка: положить PNG
+в подпапку, запустить игру, в `BepInEx\LogOutput.log` должны быть
+`DLC index: N file(s)` и `Patches applied: 3/3`.
+Подробности, сборка (.NET SDK, офлайн), удаление:
+[dlc_search_plugin/README.md](dlc_search_plugin/README.md).
+
 ## Откат
 
 ```bat
@@ -156,6 +171,8 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `mod_demo_jingle.wav` — кастомный звук, загружаемый игрой из корня.
 - `requirements.txt` — зависимость `UnityPy`.
 - `run_demo.bat` — применить оба демо-мода.
+- `dlc_search_plugin/` — BepInEx-плагин рекурсивного поиска `dlc_*`
+  по подпапкам + README (установка, сборка, проверка).
 - `INSTRUCTIONS.md` / `INSTRUCTIONS_EN.md` — ручное редактирование глав и свои ассеты (RU/EN).
 
 ## Экспериментальное (тестовые скрипты, возможны баги)
