@@ -180,6 +180,12 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 
 ## Experimental (test scripts, bugs possible)
 
+> **Recommendation:** these scripts are easier to run via an agentic coding
+> system (e.g. OpenCode): point the agent at `AGENTS.md` in the `modmaker/`
+> folder — it will run the commands from the game root, the `--dry-run`
+> checks, and roll back if needed. Manual runs work too, but require care
+> with paths and backups.
+
 Manually verified on build 6000.3.11f1 (embedded background/chapter/sound
 play in-game), but test coverage is partial. The scripts back up to `.bak`
 (and `led_saves_backup.reg` for saves) before writing — keep those until

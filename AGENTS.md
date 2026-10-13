@@ -4,6 +4,10 @@ Modding toolkit for the Unity (6000.3, IL2CPP) game LED HEARTS.
 Repo root = `modmaker/`; it must sit in the game root (`./LED HEARTS`,
 next to `LED HEARTS.exe`). Live game files are one level up.
 
+> Human users are encouraged to drive this repo via an agentic coding
+> system (e.g. OpenCode) rather than by hand: point the agent at this file
+> and let it run the commands below from the game root.
+
 ## Commands (run ONLY from game root)
 
 ```bat
