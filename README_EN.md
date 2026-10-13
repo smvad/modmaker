@@ -14,29 +14,6 @@ background replacement, custom sounds, and a demo mod.
 > checks, and roll back if needed. Manual runs work too, but require care
 > with paths and backups.
 
-## Demo: what chapter 3 picks up
-
-The test chapter 3 (`chapter_03.json`, installed via `add_chapter.py`)
-uses the embedded background `ch3_room` and sound `ch3_chime:0.9` (plus
-the stock `cafe`, `lonely_dev`, `door_knock`, `crowd` and the Milly/Violetta
-sprites).
-
-- Background `ch3_room` — embedded from `modmaker/mod_start_bg.png` via `add_texture.py`:
-
-  ![Chapter 3 demo background (`ch3_room`)](mod_start_bg.png)
-
-- Sound `ch3_chime` — embedded from `modmaker/mod_demo_jingle.wav` via `add_audio.py`:
-
-  [▶ mod_demo_jingle.wav](mod_demo_jingle.wav)
-
-Checking the chain (from the game root, no writes):
-
-```bat
-.venv\Scripts\python.exe modmaker\add_texture.py --png modmaker\mod_start_bg.png --name ch3_room --dry-run
-.venv\Scripts\python.exe modmaker\add_audio.py --wav modmaker\mod_demo_jingle.wav --name ch3_chime --dry-run
-.venv\Scripts\python.exe modmaker\add_chapter.py --dry-run
-```
-
 ## Installation
 
 ### Option 1: ZIP from Releases (no git)
