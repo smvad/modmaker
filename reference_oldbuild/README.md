@@ -1,4 +1,4 @@
-# reference_oldbuild — эталон dev-билда (`C:\Fff\Windows`, 10.09.2026)
+# reference_oldbuild — эталон dev-билда (10.09.2026)
 
 Старый билд игры до Steam-релиза. `chapter_01_dev.json` / `chapter_02_dev.json` —
 ванильные сценарии из его `LedHearts_Data/resources.assets` (извлечены UnityPy,

@@ -182,6 +182,10 @@ LED HEARTS_Data\globalgamemanagers.bak   (после add_texture.py / add_chapte
 - `run_demo.bat` — применить оба демо-мода.
 - `dlc_search_plugin/` — BepInEx-плагин рекурсивного поиска `dlc_*`
   по подпапкам + README (установка, сборка, проверка).
+- `exit_skip_plugin/` — BepInEx-плагин: пропуск экрана выхода/капчи
+  любой клавишей или кнопкой мыши + README.
+- `gallery_unlock_plugin/` — BepInEx-плагин (временный): открывает все 20 CG
+  галереи, выставляя `cg_seen_*` в PlayerPrefs.
 - `INSTRUCTIONS.md` / `INSTRUCTIONS_EN.md` — ручное редактирование глав и свои ассеты (RU/EN).
 
 ## Экспериментальное (тестовые скрипты, возможны баги)

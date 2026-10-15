@@ -182,6 +182,10 @@ paths like `modmaker\...` and `LED HEARTS_Data\...` are resolved from it.
 - `run_demo.bat` — apply both demo mods.
 - `dlc_search_plugin/` — BepInEx plugin for recursive `dlc_*` subfolder
   search + README (install, build, verify).
+- `exit_skip_plugin/` — BepInEx plugin: skips the exit captcha / exit screen
+  with any key or mouse button + README.
+- `gallery_unlock_plugin/` — BepInEx plugin (temporary): unlocks all 20 gallery
+  CGs by setting `cg_seen_*` in PlayerPrefs.
 - `INSTRUCTIONS_EN.md` / `INSTRUCTIONS.md` — manual chapter editing and custom assets (EN/RU).
 
 ## Experimental (test scripts, bugs possible)
