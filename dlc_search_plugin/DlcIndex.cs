@@ -10,28 +10,17 @@ namespace DlcRecursiveSearch;
 /// <summary>
 /// Index of external DLC files (dlc_*.png, dlc_*.wav, nsfw_dlc.dat) found
 /// anywhere under the game root. Shallowest path wins, ties break by
-/// ordinal order; duplicates are reported. Files copied into the root by
-/// the plugin are tracked in a state file so stale copies are removed and
-/// user-modified files are never touched.
+/// ordinal order; duplicates are reported. Read-only: nothing is ever
+/// written into the game root.
 /// </summary>
 internal static class DlcIndex
 {
-    private sealed class ManagedEntry
-    {
-        public string Source;
-        public long Size;
-        public long MtimeUtcTicks;
-    }
-
     private static readonly object Sync = new object();
     private static Dictionary<string, string> _byName =
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-    private static readonly Dictionary<string, ManagedEntry> Managed =
-        new Dictionary<string, ManagedEntry>(StringComparer.OrdinalIgnoreCase);
     private static FileSystemWatcher _watcher;
     private static Timer _debounce;
     private static string _root;
-    private static string _statePath;
     private static ManualLogSource _log;
 
     public static string Root => _root;
@@ -41,12 +30,11 @@ internal static class DlcIndex
         get { lock (Sync) { return _byName.Count; } }
     }
 
-    public static void Build(string gameRoot, string statePath, ManualLogSource log)
+    public static void Build(string gameRoot, ManualLogSource log)
     {
         _root = gameRoot;
-        _statePath = statePath;
         _log = log;
-        LoadState();
+        CleanupLegacyState(gameRoot);
         Rescan();
         try
         {
@@ -56,10 +44,10 @@ internal static class DlcIndex
                 NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
                                | NotifyFilters.DirectoryName
             };
-            _watcher.Created += (_, __) => ScheduleRescan();
-            _watcher.Deleted += (_, __) => ScheduleRescan();
-            _watcher.Renamed += (_, __) => ScheduleRescan();
-            _watcher.Changed += (_, __) => ScheduleRescan();
+            _watcher.Created += OnFsEvent;
+            _watcher.Deleted += OnFsEvent;
+            _watcher.Renamed += OnFsRenamed;
+            _watcher.Changed += OnFsEvent;
             _watcher.EnableRaisingEvents = true;
         }
         catch (Exception e)
@@ -68,12 +56,19 @@ internal static class DlcIndex
         }
     }
 
+    private static void OnFsEvent(object s, FileSystemEventArgs e) => ScheduleRescan();
+
+    private static void OnFsRenamed(object s, RenamedEventArgs e) => ScheduleRescan();
+
+    private static void OnTimer(object state) => Rescan();
+
     private static void ScheduleRescan()
     {
         lock (Sync)
         {
-            _debounce?.Dispose();
-            _debounce = new Timer(_ => Rescan(), null, 1500, Timeout.Infinite);
+            if (_debounce != null)
+                _debounce.Dispose();
+            _debounce = new Timer(OnTimer, null, 1500, Timeout.Infinite);
         }
     }
 
@@ -117,7 +112,6 @@ internal static class DlcIndex
             _byName = byName;
         }
         _log.LogInfo($"DLC index: {byName.Count} file(s) under '{_root}'");
-        ReconcileManaged();
     }
 
     public static bool IsIndexed(string fileName)
@@ -141,189 +135,26 @@ internal static class DlcIndex
     }
 
     /// <summary>
-    /// Make sure root/fileName exists and matches the index winner.
-    /// Returns the root path when usable, else null.
+    /// Remove the state file left by v1.0.x (root-copy tracker).
+    /// Root copies themselves are NOT deleted automatically: the user may
+    /// have put real files there. Duplicates are reported as warnings
+    /// by Rescan so they can be cleaned by hand.
     /// </summary>
-    public static string EnsureRootCopy(string fileName)
-    {
-        var root = _root;
-        if (root == null)
-            return null;
-        var dest = Path.Combine(root, fileName);
-        var source = Find(fileName);
-        lock (Sync)
-        {
-            if (source != null && SamePath(source, dest))
-                return dest; // winner already lives in root
-            if (source == null)
-            {
-                // No source anywhere: drop our stale copy if it is still ours.
-                if (Managed.TryGetValue(fileName, out var stale) && IsOurs(dest, stale))
-                    DeleteManaged(fileName, dest);
-                return File.Exists(dest) ? dest : null;
-            }
-            if (Managed.TryGetValue(fileName, out var entry))
-            {
-                if (!IsOurs(dest, entry))
-                {
-                    // User replaced our copy: hands off, their file wins.
-                    Managed.Remove(fileName);
-                    SaveState();
-                    _log.LogInfo($"'{fileName}' taken over by user, keeping their file");
-                    return dest;
-                }
-                if (SourceMatches(source, entry))
-                    return dest; // fresh already
-            }
-            else if (File.Exists(dest))
-            {
-                return dest; // user's own root file wins, don't overwrite
-            }
-            File.Copy(source, dest, true);
-            Managed[fileName] = Stat(source);
-            SaveState();
-            return dest;
-        }
-    }
-
-    private static void ReconcileManaged()
-    {
-        lock (Sync)
-        {
-            foreach (var name in Managed.Keys.ToArray())
-            {
-                var dest = Path.Combine(_root, name);
-                var entry = Managed[name];
-                if (!IsOurs(dest, entry))
-                {
-                    Managed.Remove(name); // taken over or deleted by user
-                    continue;
-                }
-                // Recorded source still exists but changed under us.
-                if (File.Exists(entry.Source) && !SourceMatches(entry.Source, entry))
-                {
-                    Refresh(name, dest, entry.Source);
-                    continue;
-                }
-                // A different source became the index winner.
-                var winner = _byName.TryGetValue(name, out var w) ? w : null;
-                if (winner != null && !SamePath(winner, dest) && !SourceMatches(winner, entry))
-                {
-                    Refresh(name, dest, winner);
-                    continue;
-                }
-                if (!File.Exists(entry.Source) && winner == null)
-                {
-                    // True orphan: our root copy is the only trace left.
-                    DeleteManaged(name, dest);
-                }
-                // Else: keep tracking (the root copy may itself be the winner).
-            }
-            SaveState();
-        }
-    }
-
-    private static void Refresh(string name, string dest, string source)
+    private static void CleanupLegacyState(string gameRoot)
     {
         try
         {
-            File.Copy(source, dest, true);
-            Managed[name] = Stat(source);
-            _log.LogInfo($"Refreshed '{name}' from '{source}'");
-        }
-        catch (Exception e)
-        {
-            _log.LogWarning($"Refresh of '{name}' failed: {e.Message}");
-        }
-    }
-
-    private static ManagedEntry Stat(string source)
-    {
-        var fi = new FileInfo(source);
-        return new ManagedEntry { Source = source, Size = fi.Length, MtimeUtcTicks = fi.LastWriteTimeUtc.Ticks };
-    }
-
-    private static bool SourceMatches(string source, ManagedEntry entry)
-    {
-        try
-        {
-            var fi = new FileInfo(source);
-            return entry.Source.Equals(source, StringComparison.OrdinalIgnoreCase)
-                   && entry.Size == fi.Length
-                   && entry.MtimeUtcTicks == fi.LastWriteTimeUtc.Ticks;
-        }
-        catch { return false; }
-    }
-
-    private static bool IsOurs(string dest, ManagedEntry entry)
-    {
-        try
-        {
-            var fi = new FileInfo(dest);
-            if (!fi.Exists)
-                return false;
-            return entry.Size == fi.Length && entry.MtimeUtcTicks == fi.LastWriteTimeUtc.Ticks;
-        }
-        catch { return false; }
-    }
-
-    private static void DeleteManaged(string name, string dest)
-    {
-        try
-        {
-            File.Delete(dest);
-            _log.LogInfo($"Removed stale '{name}' (source gone)");
-        }
-        catch (Exception e)
-        {
-            _log.LogWarning($"Could not remove stale '{name}': {e.Message}");
-        }
-        Managed.Remove(name);
-    }
-
-    private static bool SamePath(string a, string b)
-    {
-        return string.Equals(
-            Path.GetFullPath(a).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-            Path.GetFullPath(b).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-            StringComparison.OrdinalIgnoreCase);
-    }
-
-    private static void LoadState()
-    {
-        try
-        {
-            if (_statePath == null || !File.Exists(_statePath))
-                return;
-            foreach (var line in File.ReadAllLines(_statePath))
+            var cfgDir = Path.Combine(gameRoot, "BepInEx", "config");
+            var state = Path.Combine(cfgDir, "DlcRecursiveSearch.managed.txt");
+            if (File.Exists(state))
             {
-                var parts = line.Split('|');
-                if (parts.Length != 4)
-                    continue;
-                if (!long.TryParse(parts[2], out var size) || !long.TryParse(parts[3], out var ticks))
-                    continue;
-                Managed[parts[0]] = new ManagedEntry { Source = parts[1], Size = size, MtimeUtcTicks = ticks };
+                File.Delete(state);
+                _log.LogInfo("Removed legacy managed-copies state (v1.0.x); root is now read-only");
             }
         }
         catch (Exception e)
         {
-            _log.LogWarning($"State load failed: {e.Message}");
-        }
-    }
-
-    private static void SaveState()
-    {
-        try
-        {
-            if (_statePath == null)
-                return;
-            Directory.CreateDirectory(Path.GetDirectoryName(_statePath));
-            File.WriteAllLines(_statePath, Managed.Select(kv =>
-                $"{kv.Key}|{kv.Value.Source}|{kv.Value.Size}|{kv.Value.MtimeUtcTicks}"));
-        }
-        catch (Exception e)
-        {
-            _log.LogWarning($"State save failed: {e.Message}");
+            _log.LogWarning($"Legacy state cleanup failed: {e.Message}");
         }
     }
 }

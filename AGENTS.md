@@ -37,15 +37,28 @@ next to `LED HEARTS.exe`). Live game files are one level up.
   (`try { Start-Process ...; Start-Sleep ... } finally { Stop-Process -Name 'LED HEARTS' -Force }`);
   never leave the game running for the user to kill.
 
-## DlcRecursiveSearch plugin (`modmaker/dlc_search_plugin/`, net6.0)
+## DlcRecursiveSearch plugin (`modmaker/dlc_search_plugin/`, net6.0, v1.1.0)
 
 - Build (needs .NET SDK 8+, offline — project has only DLL refs to the
-  installed `BepInEx/core`, no NuGet restore needed):
+  installed `BepInEx/core` + `BepInEx/interop`, no NuGet restore needed):
   `dotnet build modmaker\dlc_search_plugin\DlcRecursiveSearch.csproj -c Release`;
   output DLL goes to `BepInEx\plugins\`. `bin/`/`obj/` are gitignored.
+- Direct load, NO root copies: Harmony prefixes (`__0` positional arg,
+  `__result`) build `Sprite` (`Texture2D.LoadImage` → `Sprite.Create`,
+  pivot 0.5) / `AudioClip` (built-in WAV parser → `Create` + `SetData`)
+  straight from the indexed subfolder path and skip the vanilla
+  root-only loader. Index is read-only; legacy v1.0.x
+  `DlcRecursiveSearch.managed.txt` is deleted on startup (root copies
+  themselves are left alone — may be user files).
 - Patch targets resolve at runtime by method name over `Assembly-CSharp`
   (`VNSceneSetup.LoadExternalDLCSprite/LoadExternalDLCAudio`,
-  `DialogueManager.IsNSFWDLCOwned`); no generated interop needed to build.
+  `DialogueManager.IsNSFWDLCOwned`); `PatchFirst` grabs the FIRST match,
+  so for common names (`Update`) resolve the exact type instead.
+- Build gotchas: UnityEngine refs (CoreModule/ImageConversion/AudioModule
+  + Il2CppInterop.Runtime + Il2Cppmscorlib) are required; interop DLLs
+  embed their own `NullableAttribute`, so NO lambdas in event/`Timer`
+  handlers (CS0656) — named methods only (`OnFsEvent`, `OnTimer`).
+  LINQ `Func<>` lambdas are fine.
 - Load markers in `BepInEx\LogOutput.log`: `DLC index: N file(s)`,
   `Patched ...`, `Patches applied: 3/3`.
 - BepInEx install layout in game root (create by unpacking BepInEx 6

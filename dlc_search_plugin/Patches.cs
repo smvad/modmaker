@@ -1,9 +1,9 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using BepInEx.Logging;
 using HarmonyLib;
+using UnityEngine;
 
 namespace DlcRecursiveSearch;
 
@@ -11,6 +11,11 @@ namespace DlcRecursiveSearch;
 /// Harmony patches. Targets are resolved by reflection over the game's
 /// Assembly-CSharp so the plugin survives namespace/refactoring drift
 /// as long as method names stay.
+///
+/// Sprite/audio prefixes load the indexed file directly from its subfolder
+/// and skip the vanilla root-only loader (return false). When we have
+/// nothing to offer, they return true so vanilla behaviour (including its
+/// warnings) is untouched. Nothing is ever written to the game root.
 /// </summary>
 internal static class Patches
 {
@@ -23,6 +28,7 @@ internal static class Patches
     {
         _log = log;
         _enabled = enabled;
+        DlcLoaders.Init(log);
 
         var gameAsm = AppDomain.CurrentDomain.GetAssemblies()
             .FirstOrDefault(a => a.GetName().Name.Equals("Assembly-CSharp", StringComparison.Ordinal));
@@ -41,7 +47,6 @@ internal static class Patches
         PatchFirst(harmony, gameAsm, "IsNSFWDLCOwned",
             typeof(Patches).GetMethod(nameof(NsfwPostfixInstance)),
             typeof(Patches).GetMethod(nameof(NsfwPostfixStatic)));
-
         log.LogInfo($"Patches applied: {Applied}/3 (sprite, audio, nsfw)");
     }
 
@@ -75,28 +80,81 @@ internal static class Patches
         _log.LogError($"Target not found: {methodName}");
     }
 
-    // ---- sprite: ensure root copy, let the original loader do its job ----
+    // ---- sprite: direct load from index, skip vanilla on success ----
+    // __0 = first string arg by position (param name may differ per build).
 
-    public static void SpritePrefixInstance(object __instance, string spriteName)
+    public static bool SpritePrefixInstance(object __instance, string __0, ref Sprite __result)
     {
-        EnsureRootCopy(spriteName, ".png");
+        return SpritePrefix(__0, ref __result);
     }
 
-    public static void SpritePrefixStatic(string spriteName)
+    public static bool SpritePrefixStatic(string __0, ref Sprite __result)
     {
-        EnsureRootCopy(spriteName, ".png");
+        return SpritePrefix(__0, ref __result);
     }
 
-    // ---- audio: same trick, original parses WAV itself ----
-
-    public static void AudioPrefixInstance(object __instance, string clipName)
+    private static bool SpritePrefix(string baseName, ref Sprite __result)
     {
-        EnsureRootCopy(clipName, ".wav");
+        try
+        {
+            if (!IsEnabled() || string.IsNullOrEmpty(baseName))
+                return true;
+            if (!baseName.StartsWith("dlc_", StringComparison.OrdinalIgnoreCase))
+                return true; // not ours: vanilla behaviour untouched
+            var path = DlcIndex.Find(baseName + ".png");
+            if (path == null)
+                return true; // let vanilla emit its warning
+            if (DlcLoaders.TryLoadSprite(path, out var sprite) && sprite != null)
+            {
+                __result = sprite;
+                _log.LogDebug($"'{baseName}.png' loaded directly from '{path}'");
+                return false; // skip vanilla loader
+            }
+            return true; // corrupt file: fall back to vanilla warning
+        }
+        catch (Exception e)
+        {
+            _log.LogWarning($"SpritePrefix failed: {e.Message}");
+            return true;
+        }
     }
 
-    public static void AudioPrefixStatic(string clipName)
+    // ---- audio: same trick, we parse the WAV ourselves ----
+
+    public static bool AudioPrefixInstance(object __instance, string __0, ref AudioClip __result)
     {
-        EnsureRootCopy(clipName, ".wav");
+        return AudioPrefix(__0, ref __result);
+    }
+
+    public static bool AudioPrefixStatic(string __0, ref AudioClip __result)
+    {
+        return AudioPrefix(__0, ref __result);
+    }
+
+    private static bool AudioPrefix(string baseName, ref AudioClip __result)
+    {
+        try
+        {
+            if (!IsEnabled() || string.IsNullOrEmpty(baseName))
+                return true;
+            if (!baseName.StartsWith("dlc_", StringComparison.OrdinalIgnoreCase))
+                return true;
+            var path = DlcIndex.Find(baseName + ".wav");
+            if (path == null)
+                return true;
+            if (DlcLoaders.TryLoadAudio(path, out var clip) && clip != null)
+            {
+                __result = clip;
+                _log.LogDebug($"'{baseName}.wav' loaded directly from '{path}'");
+                return false;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            _log.LogWarning($"AudioPrefix failed: {e.Message}");
+            return true;
+        }
     }
 
     // ---- nsfw flag: OR the original result with recursive search ----
@@ -126,23 +184,5 @@ internal static class Patches
     {
         try { return _enabled?.Invoke() ?? true; }
         catch { return true; }
-    }
-
-    internal static void EnsureRootCopy(string baseName, string extension)
-    {
-        try
-        {
-            if (!IsEnabled() || string.IsNullOrEmpty(baseName))
-                return;
-            if (!baseName.StartsWith("dlc_", StringComparison.OrdinalIgnoreCase))
-                return; // not ours: original behaviour untouched
-            var root = DlcIndex.EnsureRootCopy(baseName + extension);
-            if (root != null)
-                _log.LogDebug($"'{baseName + extension}' available at '{root}'");
-        }
-        catch (Exception e)
-        {
-            _log.LogWarning($"EnsureRootCopy failed: {e.Message}");
-        }
     }
 }
