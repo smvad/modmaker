@@ -12,7 +12,13 @@ m_Resource. UnityPy их не декодирует, поэтому скрипт:
 
 Один клип (falling, кодер другой версии) таблицей fsb5 не покрывается:
 для него скрипт пробует внешний vgmstream-cli (ищет в modmaker/tools
-и в PATH; без него клип пропускается с подсказкой).
+и в PATH; без него клип пропускается с подсказкой). vgmstream-cli
+нужен ПОЛНЫМ бандлом (exe + av*-vgmstream/libcelt/libg719/libmpg123/
+libspeex/libvorbis DLL рядом); один exe без DLL молча падает —
+скрипт это проверяет и прямо говорит, чего не хватает.
+Три клипа (milly_moan, milly_orgasm, sex_sound) лежат в банке как
+сырой PCM16 (SoundFormat=2, без Vorbis-чанков) — их скрипт пишет
+в WAV напрямую, без перекодирования.
 
 Использование (только из корня игры):
     .venv\\Scripts\\python.exe modmaker\\extract_audio.py
@@ -46,6 +52,19 @@ if not (GAME / "LED HEARTS_Data" / "resources.assets").exists():
 TOOLS = BASE / "tools"
 DLL_NAMES = {"vorbis": "libvorbis-0.dll", "vorbisenc": "libvorbisenc-2.dll",
              "ogg": "libogg-0.dll"}
+# DLL, без которых vgmstream-cli падает с 0xC0000135 (проверено:
+# вендорный exe в modmaker/tools лежал без них). Имена из его таблицы
+# импорта; libvorbis.dll (vgmstream) и libvorbis-0.dll (для fsb5)
+# сосуществуют — имена разные, конфликта нет.
+VGMSTREAM_DLLS = ("avcodec-vgmstream-59.dll", "avformat-vgmstream-59.dll",
+                  "avutil-vgmstream-57.dll", "libcelt-0061.dll",
+                  "libcelt-0110.dll", "libg719_decode.dll",
+                  "libmpg123-0.dll", "libspeex-1.dll", "libvorbis.dll",
+                  "swresample-vgmstream-4.dll")
+VGMSTREAM_URL = ("https://github.com/vgmstream/vgmstream-releases"
+                 "/releases/download/nightly/vgmstream-win64.zip")
+# SoundFormat.PCM16 из парсера fsb5 (через value — устойчиво и к Enum).
+PCM16_MODE = 2
 
 
 def ensure_vorbis_libs() -> None:
@@ -64,8 +83,11 @@ def ensure_vorbis_libs() -> None:
     fsb5.utils.load_lib = _load
 
 
-def decode_via_vgmstream(blob: bytes, wav_path: pathlib.Path) -> bool:
-    """Фолбэк для клипов, чьи кодовые книги fsb5 не знает. True если вышло."""
+def find_vgmstream() -> "tuple[str | None, list[str]]":
+    """Найти vgmstream-cli и проверить полноту его бандла.
+
+    Возвращает (путь к exe или None, список недостающих DLL рядом с exe).
+    """
     exe = shutil.which("vgmstream-cli") or shutil.which("vgmstream-cli.exe")
     if exe is None:
         for cand in (BASE / "tools" / "vgmstream-cli.exe", GAME / "tools" / "vgmstream-cli.exe"):
@@ -73,6 +95,21 @@ def decode_via_vgmstream(blob: bytes, wav_path: pathlib.Path) -> bool:
                 exe = str(cand)
                 break
     if exe is None:
+        return None, []
+    home = pathlib.Path(exe).parent
+    missing = [d for d in VGMSTREAM_DLLS if not (home / d).exists()]
+    return exe, missing
+
+
+def decode_via_vgmstream(blob: bytes, wav_path: pathlib.Path) -> bool:
+    """Фолбэк для клипов, чьи кодовые книги fsb5 не знает. True если вышло."""
+    exe, missing = find_vgmstream()
+    if exe is None:
+        return False
+    if missing:
+        print(f"  ! vgmstream-cli неполный (рядом с {exe} нет "
+              f"{', '.join(missing)}): скачайте {VGMSTREAM_URL} "
+              f"и доложите DLL к exe")
         return False
     with tempfile.TemporaryDirectory(prefix="led_fsb_") as tmp:
         fsb = pathlib.Path(tmp) / "clip.fsb"
@@ -159,10 +196,27 @@ def main() -> int:
             if blob[:4] != b"FSB5":
                 raise ValueError("нет сигнатуры FSB5 по смещению %d" % off)
             try:
-                samples = FSB5(blob).samples
-                if len(samples) != 1 or MetadataChunkType.VORBISDATA not in samples[0].metadata:
-                    raise ValueError("не Vorbis с одним сэмплом")
-                ogg = bytes(rebuild(samples[0]))
+                fsb = FSB5(blob)
+                samples = fsb.samples
+                if len(samples) != 1:
+                    raise ValueError("ожидался один сэмпл, их %d" % len(samples))
+                if getattr(fsb.header.mode, "value", fsb.header.mode) == PCM16_MODE:
+                    s = samples[0]
+                    n = s.samples * s.channels * 2
+                    pcm = s.data[:n]
+                    if len(pcm) != n:
+                        raise ValueError("обрезанный PCM16-блоб")
+                    with wave.open(str(wav_path), "wb") as w:
+                        w.setnchannels(s.channels)
+                        w.setsampwidth(2)
+                        w.setframerate(s.frequency)
+                        w.writeframes(pcm)
+                    print(f"  ~ {name}: PCM16 без перекодирования")
+                    ogg = None
+                else:
+                    if MetadataChunkType.VORBISDATA not in samples[0].metadata:
+                        raise ValueError("не Vorbis с одним сэмплом")
+                    ogg = bytes(rebuild(samples[0]))
             except ValueError as e:
                 if "header info" not in str(e) or not decode_via_vgmstream(blob, wav_path):
                     if "header info" in str(e):
