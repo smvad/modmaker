@@ -20,3 +20,6 @@ led_saves_backup.reg
 # Build outputs (BepInEx plugin: bin/obj, local only)
 [Bb]in/
 [Oo]bj/
+
+# Local/private mods — never publish
+mod_km.zip
