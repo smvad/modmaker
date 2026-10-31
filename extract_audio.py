@@ -168,7 +168,11 @@ def main() -> int:
     import UnityPy
     print(f"Загрузка: {inp} ...")
     env = UnityPy.load(str(inp))
-    bank = res.read_bytes()
+    # Оптимизация: используем mmap вместо read_bytes для экономии памяти
+    # (resources.resource может быть сотни MB). mmap поддерживает slicing.
+    import mmap
+    bank_file = open(res, "rb")
+    bank = mmap.mmap(bank_file.fileno(), 0, access=mmap.ACCESS_READ)
 
     clips = []
     for obj in env.objects:
@@ -249,6 +253,8 @@ def main() -> int:
             fail += 1
             print(f"  ! {name}: {e}")
     print(f"\nГотово: извлечено {ok}, пропущено (уже есть) {skip}, ошибок {fail}. Папка: {outdir}")
+    bank.close()
+    bank_file.close()
     return 1 if fail else 0
 
 
