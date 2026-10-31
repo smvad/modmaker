@@ -158,36 +158,48 @@ def main() -> int:
     env = UnityPy.load(str(inp))
 
     # индекс текущих TextAsset: path_id -> m_Name
+    # Оптимизация: используем peek_name() вместо полного read() для получения имени
+    # Кэшируем прочитанные объекты для повторного использования во втором цикле
     current = {}
+    parsed_cache = {}  # path_id -> parsed object
     for obj in env.objects:
         if obj.type.name != "TextAsset":
             continue
+        # Пробуем дешёвый peek_name() сначала
         try:
-            d = obj.read()
-        except Exception as e:
-            print(f"  ! пропуск path_id={obj.path_id}: не читается ({e})")
-            continue
-        current[obj.path_id] = d.m_Name
+            name = obj.peek_name() or ""
+        except Exception:
+            name = ""
+        # Fallback к полному read() если peek не сработал
+        if not name:
+            try:
+                d = obj.read()
+                name = d.m_Name
+                parsed_cache[obj.path_id] = d  # кэшируем для повторного использования
+            except Exception as e:
+                print(f"  ! пропуск path_id={obj.path_id}: не читается ({e})")
+                continue
+        current[obj.path_id] = name
         # файлы без префикса (chapter_01-fixed.json) -> найти path_id по имени
-        if obj.path_id not in by_path_id and d.m_Name in by_name:
-            by_path_id[obj.path_id] = by_name[d.m_Name]
+        if obj.path_id not in by_path_id and name in by_name:
+            by_path_id[obj.path_id] = by_name[name]
 
     print(f"Кандидатов из папки: {len(by_path_id)}, TextAsset в файле: {len(current)}")
 
     changed = 0
-    # Карта path_id -> объект один раз: вместо линейного fallback-поиска
-    # по env.objects для каждого заменяемого файла.
-    obj_by_id = {o.path_id: o for o in env.objects}
+    # env.file.objects уже dict по path_id (см. AGENTS.md), дополнительный
+    # obj_by_id не нужен.
     for path_id, src in sorted(by_path_id.items()):
         if path_id not in current:
             print(f"  ! {src.name}: path_id {path_id} нет в resources.assets — пропуск")
             continue
         kind, new_content = load_new_content(src)
-        obj = env.file.objects.get(path_id) or obj_by_id.get(path_id)
+        obj = env.file.objects.get(path_id)
         if obj is None:
             print(f"  ! path_id {path_id}: объект не найден — пропуск")
             continue
-        d = obj.read()
+        # Используем закэшированный parsed object если есть, иначе читаем заново
+        d = parsed_cache.get(path_id) or obj.read()
         old = d.m_Script
         old_raw = old if isinstance(old, bytes) else old.encode("utf-8")
         new_raw = new_content if isinstance(new_content, bytes) else new_content.encode("utf-8")

@@ -93,13 +93,18 @@ def main() -> int:
     print(f"Загрузка: {inp} ...")
     env = UnityPy.load(str(inp))
 
+    total = len(env.objects)
+    print(f"Объектов: {total}")
     index = []
     objects_summary = []
     saved = 0
     errors = 0
     made_dirs: set[str] = set()
+    progress_step = max(1, total // 20)  # ~5% прогресс
 
-    for obj in env.objects:
+    for i, obj in enumerate(env.objects, 1):
+        if i % progress_step == 0 or i == total:
+            print(f"  [{i}/{total}] {int(100*i/total)}%")
         otype = obj.type.name
         # Ранний пропуск для --only по peek_name без тяжёлого парсинга.
         # peek может вернуть "" или упасть — тогда идём по полному пути ниже.
