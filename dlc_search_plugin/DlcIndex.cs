@@ -80,17 +80,30 @@ internal static class DlcIndex
         var found = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
         try
         {
-            foreach (var file in Directory.EnumerateFiles(_root, "*", SearchOption.AllDirectories))
+            // Оптимизация: используем конкретные паттерны вместо "*" + фильтрация.
+            // Это уменьшает количество файлов, которые нужно проверять.
+            var patterns = new[] { "dlc_*.png", "dlc_*.wav", "nsfw_dlc.dat" };
+            foreach (var pattern in patterns)
             {
-                var name = Path.GetFileName(file);
-                if (!IsIndexed(name))
-                    continue;
-                if (!found.TryGetValue(name, out var list))
+                try
                 {
-                    list = new List<string>();
-                    found[name] = list;
+                    foreach (var file in Directory.EnumerateFiles(_root, pattern, SearchOption.AllDirectories))
+                    {
+                        var name = Path.GetFileName(file);
+                        if (!IsIndexed(name))
+                            continue;
+                        if (!found.TryGetValue(name, out var list))
+                        {
+                            list = new List<string>();
+                            found[name] = list;
+                        }
+                        list.Add(file);
+                    }
                 }
-                list.Add(file);
+                catch (Exception e) when (e is UnauthorizedAccessException || e is IOException)
+                {
+                    _log.LogWarning($"Scan cut short for pattern '{pattern}': {e.Message}");
+                }
             }
         }
         catch (Exception e) when (e is UnauthorizedAccessException || e is IOException)
