@@ -27,6 +27,12 @@ public class Plugin : BasePlugin
     // Клавиши-переключатели: у них младший бит GetAsyncKeyState — это
     // состояние (вкл/выкл, NumLock обычно включён), а не факт нажатия.
     private static readonly int[] ToggleKeys = { 0x14, 0x90, 0x91 };
+    // Кэш для FindHorror() чтобы избежать O(n) сканирования каждый кадр
+    private static GameObject _cachedHorror;
+    private static bool _horrorSearched;
+    // Счётчик кадров для throttling опроса клавиш (раз в 5 кадров = ~83мс при 60fps)
+    private static int _keyPollFrame;
+    private const int KeyPollInterval = 5;
 
     [DllImport("user32.dll")]
     private static extern short GetAsyncKeyState(int vKey);
@@ -151,10 +157,19 @@ public class Plugin : BasePlugin
             if (!captchaActive)
                 _captchaWas = false;
             if (!horrorActive)
+            {
                 _horrorWas = false;
+                // Сбрасываем кэш когда horror деактивирован (может быть уничтожен)
+                _horrorSearched = false;
+                _cachedHorror = null;
+            }
             if ((captchaActive && now - _captchaSince < GraceMs)
                 || (horrorActive && now - _horrorSince < GraceMs))
                 return; // буфер: даём экрану показаться
+            // Throttling: опрос клавиш раз в KeyPollInterval кадров (~83мс при 60fps)
+            _keyPollFrame++;
+            if (_keyPollFrame % KeyPollInterval != 0)
+                return;
             int vk = AnyKeyPressed();
             if (vk < 0)
                 return;
@@ -175,12 +190,23 @@ public class Plugin : BasePlugin
 
     private static GameObject FindHorror()
     {
+        // Возвращаем кэш если объект всё ещё жив (не был уничтожен Unity)
+        if (_cachedHorror != null)
+            return _cachedHorror;
+        // Если уже искали и не нашли, не ищем повторно в том же кадре
+        // (сбрасываем _horrorSearched когда horror был активен и стал неактивен)
+        if (_horrorSearched)
+            return null;
+        _horrorSearched = true;
         try
         {
             foreach (var go in UnityEngine.Object.FindObjectsOfType<GameObject>())
             {
                 if (go != null && go.name.Contains("Horror"))
+                {
+                    _cachedHorror = go;
                     return go;
+                }
             }
         }
         catch (Exception e)
