@@ -25,7 +25,17 @@ BASE = pathlib.Path(__file__).resolve().parent.parent  # modmaker/
 GAME = BASE.parent  # корень игры
 sys.path.insert(0, str(BASE))
 
-from common import collect_refs, load_scenario, validate_chapter, write_json  # noqa: E402
+from common import (  # noqa: E402
+    atomic_write_text,
+    backup_once,
+    collect_refs,
+    load_scenario,
+    make_choice,
+    make_line,
+    upsert_container,
+    validate_chapter,
+    write_json,
+)
 
 MOD_TEST = BASE / "mod_test.zip"
 MOD_KM = BASE / "mod_km.zip"
@@ -211,6 +221,88 @@ class TestHelpers(unittest.TestCase):
             with open(t, "w", encoding="utf-8", newline="") as f:
                 f.write("line1\r\nline2\r\n")
             self.assertNotIn(b"\r\r\n", t.read_bytes())
+
+    def test_make_line_defaults_and_overrides(self):
+        line = make_line("Милли", "Привет!", "Hello!")
+        self.assertEqual(line["characterName"], "Милли")
+        self.assertEqual(line["characterName_en"], "Милли")
+        self.assertEqual(line["text"], "Привет!")
+        self.assertEqual(line["text_en"], "Hello!")
+        self.assertEqual(line["overlayAlpha"], -1)
+        self.assertEqual(line["choices"], [])
+        # overrides
+        line2 = make_line("", "Описание", backgroundImage="room", sfxClip="knock:0.8")
+        self.assertEqual(line2["backgroundImage"], "room")
+        self.assertEqual(line2["sfxClip"], "knock:0.8")
+        # text_en fallback к text когда пустой
+        line3 = make_line("", "Только русский")
+        self.assertEqual(line3["text_en"], "Только русский")
+
+    def test_make_choice_defaults_and_overrides(self):
+        ch = make_choice("Довериться", "trust_node", "Trust", variable="mod_trust")
+        self.assertEqual(ch["choiceText"], "Довериться")
+        self.assertEqual(ch["targetNodeId"], "trust_node")
+        self.assertEqual(ch["setVariable"], "mod_trust")
+        self.assertEqual(ch["modifyValue"], 1)
+        # без переменной
+        ch2 = make_choice("Выйти", "exit")
+        self.assertEqual(ch2["setVariable"], "")
+        self.assertEqual(ch2["modifyValue"], 0)
+        # lockedText override
+        ch3 = make_choice("Locked", "x", lockedText="Нет доступа")
+        self.assertEqual(ch3["lockedText"], "Нет доступа")
+
+    def test_atomic_write_text_no_crlf_doubling(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = pathlib.Path(tmp) / "x.txt"
+            atomic_write_text(p, "a\nb\nc\n")
+            self.assertEqual(p.read_text(encoding="utf-8"), "a\nb\nc\n")
+            self.assertNotIn(b"\r\r\n", p.read_bytes())
+            # .tmp не остаётся
+            self.assertFalse((pathlib.Path(tmp) / "x.txt.tmp").exists())
+
+    def test_backup_once_custom_suffix(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src = pathlib.Path(tmp) / "data.txt"
+            src.write_text("orig", encoding="utf-8")
+            # дефолтный .bak
+            bak1 = backup_once(src, label="T1")
+            self.assertEqual(bak1.name, "data.txt.bak")
+            self.assertTrue(bak1.exists())
+            # кастомный суффикс
+            bak2 = backup_once(src, label="T2", suffix=".pre_demo.bak")
+            self.assertEqual(bak2.name, "data.txt.pre_demo.bak")
+            self.assertTrue(bak2.exists())
+            # повторный вызов не перезаписывает
+            bak1.write_text("touched", encoding="utf-8")
+            backup_once(src, label="T1")
+            self.assertEqual(bak1.read_text(encoding="utf-8"), "touched")
+
+    def test_upsert_container_insert_and_replace(self):
+        # мок rm_dict и rm_obj
+        class FakeRM:
+            def __init__(self):
+                self.saved = None
+            def save_typetree(self, tree):
+                self.saved = tree
+
+        rm_dict = {"m_Container": [
+            ("backgrounds/old", {"m_FileID": 4, "m_PathID": 100}),
+            ("other/key", {"m_FileID": 4, "m_PathID": 200}),
+        ]}
+        rm_obj = FakeRM()
+
+        # insert нового
+        upsert_container(rm_dict, rm_obj, "backgrounds/new", 300)
+        self.assertEqual(len(rm_dict["m_Container"]), 3)
+        self.assertEqual(rm_obj.saved, rm_dict)
+        # replace существующего по ckey
+        upsert_container(rm_dict, rm_obj, "backgrounds/old", 400)
+        # должно остаться 3 элемента (old заменён на новый path_id)
+        self.assertEqual(len(rm_dict["m_Container"]), 3)
+        olds = [e for e in rm_dict["m_Container"] if e[0] == "backgrounds/old"]
+        self.assertEqual(len(olds), 1)
+        self.assertEqual(olds[0][1]["m_PathID"], 400)
 
 
 class TestRepoState(unittest.TestCase):

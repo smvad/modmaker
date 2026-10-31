@@ -56,9 +56,14 @@ def write_json(path: pathlib.Path, value) -> None:
         json.dump(value, f, ensure_ascii=False, indent=2, default=repr)
 
 
-def backup_once(path: pathlib.Path, label: str = "Бэкап") -> pathlib.Path:
-    """Копия path в path.bak один раз (повторно не перезаписывает)."""
-    bak = path.with_name(path.name + ".bak")
+def backup_once(path: pathlib.Path, label: str = "Бэкап",
+                suffix: str = ".bak") -> pathlib.Path:
+    """Копия path в path<suffix> один раз (повторно не перезаписывает).
+
+    suffix: суффикс бэкапа (по умолчанию '.bak'). Позволяет создавать
+    разные бэкапы для разных этапов (напр. '.pre_demo_nodes.bak').
+    """
+    bak = path.with_name(path.name + suffix)
     if not bak.exists():
         shutil.copy2(path, bak)
         print(f"{label}: {bak}")
@@ -71,6 +76,20 @@ def atomic_write(path: pathlib.Path, data: bytes) -> None:
     """Запись через .tmp + move (без полуфайлов при обрыве)."""
     tmp = path.with_name(path.name + ".tmp")
     tmp.write_bytes(data)
+    shutil.move(str(tmp), str(path))
+
+
+def atomic_write_text(path: pathlib.Path, text: str,
+                      encoding: str = "utf-8", newline: str = "") -> None:
+    """Текстовая версия atomic_write (через .tmp + move).
+
+    newline='': по умолчанию отключает трансляцию \\n -> \
+\\n на Windows,
+    чтобы соответствовать соглашению проекта (см. write_json).
+    """
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", encoding=encoding, newline=newline) as f:
+        f.write(text)
     shutil.move(str(tmp), str(path))
 
 
@@ -144,3 +163,84 @@ def collect_refs(scenario: dict) -> tuple[set[str], set[str]]:
                 if v:
                     audios.add(v)
     return images, audios
+
+
+# ---------------------------------------------------------------------------
+# Helpers for mod scripts (node builders + container management)
+# ---------------------------------------------------------------------------
+
+def make_line(speaker: str, text: str, text_en: str = "", **overrides) -> dict:
+    """Построить строку реплики со всеми полями схемы DialogueLine.
+
+    text_en по умолчанию = text (чтобы не дублировать для моноязычных реплик).
+    overrides перекрывают значения по умолчанию (напр. backgroundImage='room').
+    """
+    line = {
+        "characterName": speaker,
+        "characterName_en": speaker,
+        "text": text,
+        "text_en": text_en or text,
+        "characterSprite": "",
+        "backgroundImage": "",
+        "voiceClip": "",
+        "musicClip": "",
+        "sfxClip": "",
+        "characterPosition": "center",
+        "emotion": "",
+        "overlayAlpha": -1,
+        "requiredVariables": "",
+        "choices": [],
+    }
+    line.update(overrides)
+    return line
+
+
+def make_choice(text: str, target: str, text_en: str = "", **overrides) -> dict:
+    """Построить объект выбора DialogueChoice.
+
+    text_en по умолчанию = text. variable=... устанавливает setVariable.
+    overrides перекрывают значения по умолчанию.
+    """
+    variable = overrides.pop("variable", "")
+    ch = {
+        "choiceText": text,
+        "choiceText_en": text_en or text,
+        "targetNodeId": target,
+        "setVariable": variable,
+        "modifyValue": 1 if variable else 0,
+        "requiredVariables": "",
+        "lockedText": "",
+        "lockedText_en": "",
+    }
+    ch.update(overrides)
+    return ch
+
+
+def get_resource_manager(env) -> "tuple[object, dict]":
+    """Найти ResourceManager в UnityPy env и вернуть (объект, typetree dict).
+
+    Raises ValueError с понятным сообщением, если ResourceManager отсутствует
+    (что не должно происходить в штатных ассетах игры).
+    """
+    for o in env.file.objects.values():
+        if o.type.name == "ResourceManager":
+            rm_obj = o
+            rm = o.parse_as_dict(check_read=False)
+            return rm_obj, rm
+    raise ValueError("Нет ResourceManager в globalgamemanagers")
+
+
+def upsert_container(rm_dict: dict, rm_obj, ckey: str, path_id: int,
+                     file_id: int = 4) -> None:
+    """Обновить запись в ResourceManager.m_Container: убрать старую (если была),
+    добавить новую {FileID, PathID}.
+
+    Модифицирует rm_dict и вызывает rm_obj.save_typetree(rm_dict) для фиксации
+    изменений. Используется add_texture/add_chapter/add_audio для регистрации
+    новых ассетов.
+    """
+    cont = [e for e in rm_dict["m_Container"]
+            if not (e[0] == ckey and e[1].get("m_FileID") == file_id)]
+    cont.append((ckey, {"m_FileID": file_id, "m_PathID": path_id}))
+    rm_dict["m_Container"] = cont
+    rm_obj.save_typetree(rm_dict)
