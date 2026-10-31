@@ -244,3 +244,107 @@ def upsert_container(rm_dict: dict, rm_obj, ckey: str, path_id: int,
     cont.append((ckey, {"m_FileID": file_id, "m_PathID": path_id}))
     rm_dict["m_Container"] = cont
     rm_obj.save_typetree(rm_dict)
+
+
+def apply_nodes_to_chapter(
+    assets_path: pathlib.Path,
+    chapter_path_id: int,
+    prefix: str,
+    new_nodes: list[dict],
+    orig_start: str = "start",
+    backup_suffix: str = ".bak",
+    title_suffix: str = "",
+    dry_run: bool = False,
+) -> tuple[bool, str]:
+    """Применить или удалить демо-узлы в главе (общий pipeline для mod_*_node.py).
+
+    Pipeline:
+    1. Создать бэкап assets (один раз, с кастомным суффиксом)
+    2. Загрузить resources.assets через UnityPy
+    3. Прочитать главу по chapter_path_id
+    4. Удалить старые узлы с nodeId, начинающимся на prefix
+    5. Если new_nodes непустой: добавить новые узлы, установить startingNodeId
+    6. Если new_nodes пустой (remove): восстановить startingNodeId на orig_start
+    7. Опционально добавить/убрать title_suffix
+    8. Валидировать главу через validate_chapter()
+    9. Сохранить и проверить пересборку
+    10. Записать через atomic_write (если не dry_run)
+
+    Args:
+        assets_path: путь к resources.assets
+        chapter_path_id: path_id главы (обычно 101 для chapter_01)
+        prefix: префикс demo-узлов (напр. "mod_demo_", "mod_nova_")
+        new_nodes: список новых узлов для вставки (пустой для --remove)
+        orig_start: имя оригинального стартового узла (обычно "start")
+        backup_suffix: суффикс бэкапа (напр. ".pre_demo_nodes.bak")
+        title_suffix: опциональный суффикс для chapterTitle (напр. " [MOD]")
+        dry_run: если True, не записывать изменения
+
+    Returns:
+        (success, message): True если успешно, False + сообщение об ошибке
+    """
+    import json as _json
+    UnityPy = require_unitypy()
+
+    # 1. Бэкап
+    if not dry_run:
+        backup_once(assets_path, suffix=backup_suffix)
+
+    # 2. Загрузка
+    env = UnityPy.load(str(assets_path))
+    ch_obj = env.file.objects.get(chapter_path_id)
+    if ch_obj is None:
+        return False, f"Нет объекта главы {chapter_path_id} в resources.assets"
+
+    # 3. Чтение главы
+    ch = ch_obj.read()
+    data = _json.loads(ch.m_Script)
+
+    # 4. Удаление старых demo-узлов
+    data["nodes"] = [n for n in data["nodes"]
+                     if not n.get("nodeId", "").startswith(prefix)]
+
+    # 5/6. Установка или удаление
+    remove = len(new_nodes) == 0
+    if remove:
+        if data.get("startingNodeId", "").startswith(prefix):
+            data["startingNodeId"] = orig_start
+        # Проверка что orig_start существует
+        if not any(n["nodeId"] == orig_start for n in data["nodes"]):
+            return False, f"Оригинальный старт '{orig_start}' не найден после удаления {prefix}* узлов"
+        if title_suffix:
+            data["chapterTitle"] = (data.get("chapterTitle") or "").replace(title_suffix, "")
+            data["chapterTitle_en"] = (data.get("chapterTitle_en") or "").replace(title_suffix, "")
+    else:
+        data["nodes"] = new_nodes + data["nodes"]
+        data["startingNodeId"] = prefix + "start"
+        if title_suffix and title_suffix not in (data.get("chapterTitle") or ""):
+            data["chapterTitle"] = (data.get("chapterTitle") or "") + title_suffix
+            data["chapterTitle_en"] = (data.get("chapterTitle_en") or "") + title_suffix
+
+    # 7. Валидация
+    problems = validate_chapter(data)
+    if problems:
+        return False, f"Валидация главы не прошла: {'; '.join(problems)}"
+
+    # 8. Сохранение
+    ch.m_Script = _json.dumps(data, ensure_ascii=False)
+    ch.save()
+    env.file.mark_changed()
+    new_bytes = env.file.save()
+
+    # 9. Проверка пересборки
+    env2 = UnityPy.load(new_bytes)
+    ch_obj2 = env2.file.objects.get(chapter_path_id)
+    if ch_obj2 is None:
+        return False, f"Проверка не удалась: нет объекта {chapter_path_id} в пересборке"
+    ch2 = _json.loads(ch_obj2.read().m_Script)
+    demo_ids = [n["nodeId"] for n in ch2["nodes"] if n["nodeId"].startswith(prefix)]
+
+    if dry_run:
+        return True, f"Dry-run: {'удалено' if remove else f'вставлено {len(new_nodes)}'} узлов {prefix}*, старт={ch2['startingNodeId']}"
+
+    # 10. Запись
+    atomic_write(assets_path, new_bytes)
+    action = "удалено" if remove else f"вставлено {len(new_nodes)}"
+    return True, f"{action} узлов {prefix}*, старт={ch2['startingNodeId']}, записано: {assets_path}"
