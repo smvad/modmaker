@@ -127,7 +127,7 @@ def to_markdown(chapter: dict, lang: str) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="JSON главы -> читаемый текст")
-    ap.add_argument("--input", default="chapter_01-resources.assets-61.json", help="входной JSON")
+    ap.add_argument("--input", required=True, help="входной JSON (напр. extracted/TextAsset/101_chapter_01.json)")
     ap.add_argument("--output", default="", help="выходной файл (по умолчанию chapter_01-readable.txt/md)")
     ap.add_argument("--lang", choices=["ru", "en", "both"], default="both", help="какой текст выводить")
     ap.add_argument("--format", choices=["txt", "md"], default="txt", help="формат вывода")

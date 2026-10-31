@@ -112,7 +112,8 @@ def main() -> int:
     if fresh:
         clip_id = max(f.objects.keys()) + 1
     bank = bank_p.read_bytes()
-    assert len(bank) % 16 == 0, "resources.resource не выровнен — странно"
+    if len(bank) % 16 != 0:
+        raise ValueError(f"resources.resource size {len(bank)} not 16-byte aligned")
 
     def already_in_place() -> bool:
         if fresh:

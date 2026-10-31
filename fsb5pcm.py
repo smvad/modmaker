@@ -54,7 +54,8 @@ def build_fsb5_pcm16(pcm: bytes, channels: int, rate: int, frames: int) -> bytes
     header = struct.pack("<4sIIIIII", b"FSB5", 1, 1, 8, 0, len(data), PCM16_MODE)
     header += b"\x00" * (8 + 16 + 8)
     blob = header + struct.pack("<Q", entry) + data
-    assert len(blob) % 16 == 0
+    if len(blob) % 16 != 0:
+        raise ValueError(f"FSB5 blob size {len(blob)} not 16-byte aligned")
     return blob
 
 
