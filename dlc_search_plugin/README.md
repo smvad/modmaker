@@ -90,19 +90,3 @@ dotnet build modmaker\dlc_search_plugin\DlcRecursiveSearch.csproj -c Release
 Старые проверки v1.0.x (копирование в корень) больше не применимы:
 прямого вызова загрузчиков из игры, state-файла, refresh/takeover/orphan
 (9/9) — логика удалена вместе с копиями.
-
-## Приложение: как BepInEx собран здесь без интернета
-
-Обычному пользователю это не нужно (ставь официальный архив, см.
-выше). Здесь скачивание сборок/фидов было недоступно, поэтому:
-BepInEx собран из исходников (master 01.09.2026), Cpp2IL — тоже из
-исходников (свежий, понимает метаданные v39 Unity 6),
-недостающие пакеты заменены локальными сборками (Disarm из исходников,
-`Il2CppInterop.ReferenceLibs` — сгенерированными `Il2Cpp*.dll`).
-Interop сгенерирован заранее в два этапа (Cpp2IL→dummy на
-AsmResolver 6.0.1, затем Il2CppInterop.Generator 1.5.3 на AsmResolver
-6.0.0-beta.5 — иначе конфликт абстрактного `ProbeAssemblyFilePath`),
-`unity-libs` взяты из `Managed/*.dll` dev-билда с тем же движком.
-В исходник BepInEx внесён минимальный патч: при наличии
-`BepInEx/interop/offline-generated.txt` регенерация и скачивание
-unity-libs при запуске пропускаются.
