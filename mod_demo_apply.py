@@ -89,8 +89,13 @@ def main() -> int:
 
     # проверка из памяти (без лока файла на Windows)
     env2 = UnityPy.load(new_bytes)
-    ok_tex = any(o.type.name == 'Texture2D' for o in env2.objects)
-    ok_ch = any(o.type.name == 'TextAsset' for o in env2.objects)
+    ok_tex = False
+    ok_ch = False
+    for o in env2.objects:
+        if o.path_id == BG_PATH_ID and o.type.name == "Texture2D":
+            ok_tex = o.read().m_Name == "room_night_wide"
+        if o.path_id == CHAPTER_PATH_ID and o.type.name == "TextAsset":
+            ok_ch = "[MOD]" in str(o.read().m_Script)
     print(f'Проверка пересборки: Texture2D={ok_tex}, TextAsset={ok_ch}, размер={len(new_bytes)}')
 
     atomic_write(ASSETS, new_bytes)

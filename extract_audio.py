@@ -188,9 +188,15 @@ def main() -> int:
     for d in clips:
         name, off, size = d.m_Name, d.m_Resource.m_Offset, d.m_Resource.m_Size
         wav_path = outdir / f"{safe_name(name)}.wav"
+        # Проверяем, что существующий WAV валиден (не partial), а не просто exists
         if wav_path.exists() and not args.force:
-            skip += 1
-            continue
+            try:
+                with wave.open(str(wav_path), "rb") as w:
+                    if w.getnframes() > 0 and w.getframerate() > 0:
+                        skip += 1
+                        continue
+            except Exception:
+                pass  # broken WAV — перезапишем
         try:
             blob = bank[off:off + size]
             if blob[:4] != b"FSB5":

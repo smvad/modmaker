@@ -62,13 +62,16 @@ internal static class DlcIndex
 
     private static void OnTimer(object state) => Rescan();
 
+    // Оптимизация: создаём таймер один раз и переиспользуем через Change()
+    // вместо Dispose+new на каждое событие FileSystemWatcher.
     private static void ScheduleRescan()
     {
         lock (Sync)
         {
-            if (_debounce != null)
-                _debounce.Dispose();
-            _debounce = new Timer(OnTimer, null, 1500, Timeout.Infinite);
+            if (_debounce == null)
+                _debounce = new Timer(OnTimer, null, 1500, Timeout.Infinite);
+            else
+                _debounce.Change(1500, Timeout.Infinite);
         }
     }
 

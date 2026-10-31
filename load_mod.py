@@ -320,6 +320,29 @@ def main() -> int:
         shutil.rmtree(tmpdir, ignore_errors=True)
         return 1
 
+    # --- копирование внешних файлов в корень игры (до записи resources.assets,
+    # чтобы при ошибке копирования ассеты не успели измениться) ---
+    copied = 0
+    for name in sorted(externals):
+        dst = game / name
+        if dst.exists():
+            try:
+                if dst.read_bytes() == externals[name].read_bytes():
+                    print(f"  = {name}: уже есть в корне игры, без изменений")
+                    continue
+            except OSError:
+                pass
+            print(f"  * {name}: перезаписываю в корне игры")
+        else:
+            print(f"  + {name}: копирую в корень игры")
+        try:
+            shutil.copy2(externals[name], dst)
+            copied += 1
+        except (OSError, shutil.Error) as e:
+            print(f"ОШИБКА: не удалось скопировать {name}: {e}", file=sys.stderr)
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            return 1
+
     # --- применение глав ---
     changed = 0
     for target in sorted(matched):
@@ -359,23 +382,6 @@ def main() -> int:
         print(f"Глав заменено: {changed}. Записано: {inp} ({len(new_bytes)} байт)")
     else:
         print("Главы без изменений — resources.assets не трогаю.")
-
-    # --- копирование внешних файлов в корень игры ---
-    copied = 0
-    for name in sorted(externals):
-        dst = game / name
-        if dst.exists():
-            try:
-                if dst.read_bytes() == externals[name].read_bytes():
-                    print(f"  = {name}: уже есть в корне игры, без изменений")
-                    continue
-            except OSError:
-                pass
-            print(f"  * {name}: перезаписываю в корне игры")
-        else:
-            print(f"  + {name}: копирую в корень игры")
-        shutil.copy2(externals[name], dst)
-        copied += 1
 
     shutil.rmtree(tmpdir, ignore_errors=True)
     print(f"\nГотово: глав применено: {changed}, файлов в корне игры: {copied}.")
